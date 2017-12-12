@@ -73,10 +73,6 @@ namespace Maria
                 { "bunny", new Animation(Content.Load<Texture2D>("Player/bunny"), 4) }
             };
 
-
-
-
-
             spriteManager.AddSprite(new Sprite(animations, 10f)
                 {
 
@@ -88,6 +84,11 @@ namespace Maria
                         Left = Keys.A,
                         Right = Keys.D,
                     },
+            });
+
+            
+            spriteManager.AddSprite(new Sprite(Content.Load<Texture2D>("tiled/blocks")) {
+                Position = new Vector2(0, 100)
             });
             player = spriteManager.List[0];
             // TODO: use this.Content to load your game content here

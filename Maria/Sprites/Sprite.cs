@@ -57,6 +57,9 @@ namespace Maria.Sprites
         {
             get
             {
+                if (_animations != null)
+                    return new Rectangle((int)Position.X, (int)Position.Y, _animations.ElementAt(0).Value.Texture.Width / _animations.ElementAt(0).Value.FrameCount, _animations.ElementAt(0).Value.Texture.Height / _animations.ElementAt(0).Value.FrameCount);
+
                 return new Rectangle((int)Position.X, (int)Position.Y, _texture.Width, _texture.Height);
             }
         }
@@ -70,7 +73,7 @@ namespace Maria.Sprites
 
         public virtual void Draw(SpriteBatch spriteBatch)
         {
-            if (_texture != null)
+            if (_texture != null && _animationManager == null)
                 spriteBatch.Draw(_texture, Position, Color);
             else if (_animationManager != null)
                 _animationManager.Draw(spriteBatch);
@@ -84,6 +87,7 @@ namespace Maria.Sprites
 
         protected virtual void SetAnimation()
         {
+            if (_animations != null)
             _animationManager.Play(_animations["bunny"]);
         }
 
@@ -103,22 +107,32 @@ namespace Maria.Sprites
         public Sprite(Texture2D texture)
         {
             _texture = texture;
-
+            gravity = 0;
         }
 
         public virtual void Update(GameTime gameTime, List<Sprite> sprites)
         {
-            Move();
+            //Move();
 
             SetAnimation();
-
+            if (_animations != null)
             _animationManager.Update(gameTime);
 
             Position += Velocity;
 
             // Gravity
-            if (gravity != 0 || !IsTouchingBottom(this))
-                Velocity.Y += gravity / 60;
+            if (gravity != 0)
+            {
+                foreach (var sprite in sprites)
+                {
+                    if (sprite != this)
+                    {
+                        if (!IsTouchingTop(sprite))
+                            Velocity.Y += gravity / 60;
+                        else Velocity.Y = 0;
+                    }
+                }
+            }
 
             //Velocity = Vector2.Zero;
         }
@@ -145,10 +159,12 @@ namespace Maria.Sprites
 
         protected bool IsTouchingTop(Sprite sprite)
         {
+            Console.WriteLine(this.Rectangle  + " | " + sprite.Rectangle);
+
             return this.Rectangle.Bottom + this.Velocity.Y < sprite.Rectangle.Top &&
-                    this.Rectangle.Top < sprite.Rectangle.Top &&
-                    this.Rectangle.Right > sprite.Rectangle.Left &&
-                    this.Rectangle.Left < sprite.Rectangle.Right;
+                    this.Rectangle.Top < sprite.Rectangle.Top;// &&
+                  //  this.Rectangle.Right > sprite.Rectangle.Left &&
+                  //  this.Rectangle.Left < sprite.Rectangle.Right;
         }
 
         protected bool IsTouchingBottom(Sprite sprite)
