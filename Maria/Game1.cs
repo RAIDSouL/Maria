@@ -70,11 +70,6 @@ namespace Maria
                 { "bunny", new Animation(Content.Load<Texture2D>("Player/bunny"), 4) }
             };
 
-            
-
-
-            
-
             _sprites = new List<Sprite>()
             {
                 // Bunny

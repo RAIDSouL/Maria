@@ -14,7 +14,7 @@ namespace Maria
         Viewport view;
         Vector2 centre;
 
-        float zoom = 1;
+        float zoom = 2;
 
         public Camera(Viewport newView)
         {
