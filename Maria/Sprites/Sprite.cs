@@ -24,6 +24,8 @@ namespace Maria.Sprites
 
         public Texture2D Texture { get { return _texture; } }
 
+        public EPhysics physicsType;
+
         #endregion
 
         #region Propoties
