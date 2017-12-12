@@ -113,8 +113,11 @@ namespace Maria.Sprites
             _animationManager.Update(gameTime);
 
             Position += Velocity;
-            if (gravity != 0 /*|| bunny =! onbox*/ )
+
+            // Gravity
+            if (gravity != 0 || !IsTouchingBottom(this))
                 Velocity.Y += gravity / 60;
+
             //Velocity = Vector2.Zero;
         }
 
