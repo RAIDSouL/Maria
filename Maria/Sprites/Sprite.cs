@@ -132,7 +132,7 @@ namespace Maria.Sprites
             Position += Velocity;
 
             // Gravity
-            if (gravity != 0)
+            if (physicsType == EPhysics.Dynamic)
             {
                 if (grounded)
                     Velocity.Y = 0;
@@ -140,13 +140,11 @@ namespace Maria.Sprites
                 grounded = false;                    
                 foreach (var sprite in sprites)
                 {
-                    if (sprite != this)
+                    if (sprite != this) // Not check self
                     {
                         if (IsTouchingTop(sprite))
                         {
                             grounded = true;
-                            //if ()
-                            //this.Position = new Vector2(this.Position.X, sprite.Rectangle.Top - sprite.Rectangle.Height - this.Rectangle.Height);
                         }
                     }
                 }

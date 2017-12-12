@@ -1,8 +1,5 @@
-﻿using System;
+﻿using Microsoft.Xna.Framework;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Maria
 {
@@ -13,6 +10,16 @@ namespace Maria
         public static void Add (GameObject gameObject)
         {
             list.Add(gameObject);
+        }
+
+        public void Update ()
+        {
+
+        }
+
+        public void Draw (GameTime gameTime)
+        {
+
         }
     }
 }
