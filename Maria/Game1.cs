@@ -84,10 +84,7 @@ namespace Maria
                     Position = new Vector2(0,0),
                     Input = new Input()
                     {
-                        Up = Keys.W,
-                        Down = Keys.S,
-                        Left = Keys.A,
-                        Right = Keys.D,
+                        Jump = Keys.X,
                     },
                 },
             };
