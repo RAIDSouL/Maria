@@ -24,6 +24,8 @@ namespace Maria.Sprites
 
         public Texture2D Texture { get { return _texture; } }
 
+        public EPhysics physicsType;
+
         #endregion
 
         #region Propoties
@@ -113,8 +115,11 @@ namespace Maria.Sprites
             _animationManager.Update(gameTime);
 
             Position += Velocity;
-           // if (gravity != 0 /*|| bunny =! onbox*/ )
-            //    Velocity.Y += gravity / 60;
+
+            // Gravity
+            if (gravity != 0 || !IsTouchingBottom(this))
+                Velocity.Y += gravity / 60;
+
             //Velocity = Vector2.Zero;
         }
 
