@@ -2,7 +2,6 @@
 using Maria.Models;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using Microsoft.Xna.Framework.Input;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -44,6 +43,14 @@ namespace Maria.Sprites
             }
         }
 
+        public float Speed = 1f;
+
+        public Vector2 Velocity;
+
+        public float gravity;
+
+        public Color Color = Color.White;
+
         public Rectangle Rectangle
         {
             get
@@ -52,11 +59,7 @@ namespace Maria.Sprites
             }
         }
 
-        public float Speed = 1f;
-
-        public Vector2 Velocity;
-
-        public float gravity;
+       
 
 
         #endregion
@@ -66,7 +69,7 @@ namespace Maria.Sprites
         public virtual void Draw(SpriteBatch spriteBatch)
         {
             if (_texture != null)
-                spriteBatch.Draw(_texture, Position, Color.White);
+                spriteBatch.Draw(_texture, Position, Color);
             else if (_animationManager != null)
                 _animationManager.Draw(spriteBatch);
             else throw new Exception("This ain't right...");
