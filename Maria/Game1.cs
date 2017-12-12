@@ -93,6 +93,8 @@ namespace Maria
             player = spriteManager.List[0];
             // TODO: use this.Content to load your game content here
             LoadMap("level1");
+
+            map.SetupSprite(new Rectangle(0, 0, GraphicsDevice.Viewport.Width, GraphicsDevice.Viewport.Height), viewportPosition);
         }
 
         /// <summary>
@@ -156,7 +158,7 @@ namespace Maria
                 );
             // Render map
             
-            map.Draw(spriteBatch, new Rectangle(0, 0, GraphicsDevice.Viewport.Width, GraphicsDevice.Viewport.Height), viewportPosition);
+            //map.Draw(spriteBatch, new Rectangle(0, 0, GraphicsDevice.Viewport.Width, GraphicsDevice.Viewport.Height), viewportPosition);
             //map.Draw(spriteBatch, new Rectangle(0, 0, 200, 100), viewportPosition);
             // Render sprite
 

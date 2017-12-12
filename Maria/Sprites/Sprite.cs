@@ -22,9 +22,14 @@ namespace Maria.Sprites
 
         public Texture2D _texture;
 
+        public Rectangle cropTexture;
+        public bool crop;
+
         public Texture2D Texture { get { return _texture; } }
 
         public EPhysics physicsType;
+
+        public bool grounded;
 
         #endregion
 
@@ -76,7 +81,11 @@ namespace Maria.Sprites
         public virtual void Draw(SpriteBatch spriteBatch)
         {
             if (_texture != null && _animationManager == null)
-                spriteBatch.Draw(_texture, Position, Color);
+            {
+                if (crop == false)
+                    spriteBatch.Draw(_texture, Position, Color);
+                else spriteBatch.Draw(_texture, Position, cropTexture, Color);
+            }
             else if (_animationManager != null)
                 _animationManager.Draw(spriteBatch);
             else throw new Exception("This ain't right...");
@@ -125,17 +134,19 @@ namespace Maria.Sprites
             // Gravity
             if (gravity != 0)
             {
+                if (grounded)
+                    Velocity.Y = 0;
+                else Velocity.Y += gravity / 60;
+                grounded = false;                    
                 foreach (var sprite in sprites)
                 {
                     if (sprite != this)
                     {
-                        if (!IsTouchingTop(sprite))
-                            Velocity.Y += gravity / 60;
-                        else
+                        if (IsTouchingTop(sprite))
                         {
+                            grounded = true;
                             //if ()
                             //this.Position = new Vector2(this.Position.X, sprite.Rectangle.Top - sprite.Rectangle.Height - this.Rectangle.Height);
-                            Velocity.Y = 0;
                         }
                     }
                 }
