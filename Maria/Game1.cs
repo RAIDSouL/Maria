@@ -129,7 +129,14 @@ namespace Maria
             spriteRectangle = new Rectangle((int)player.Position.X, (int)player.Position.Y,
                 player.Texture.Width, player.Texture.Height);
 
-            camera.Update(gameTime, this);
+            // Test moving
+            if (Keyboard.GetState().IsKeyDown(Keys.Right))
+                player.Velocity.X += 0.1f;
+            else if (Keyboard.GetState().IsKeyUp(Keys.Right))
+                player.Velocity.X = 0;
+                camera.Update(gameTime, this);
+            // End Test
+
             base.Update(gameTime);
         }
 
