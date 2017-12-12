@@ -6,6 +6,7 @@ using Squared.Tiled;
 using System.IO;
 using Maria.Sprites;
 using Maria.Models;
+using Maria.Managers;
 
 namespace Maria
 {
@@ -29,7 +30,8 @@ namespace Maria
 
         #endregion
 
-        private List<Sprite> _sprites;
+        public SpriteManager spriteManager;
+
 
         public Game1()
         {
@@ -52,6 +54,7 @@ namespace Maria
         {
             // TODO: Add your initialization logic here
             camera = new Camera(GraphicsDevice.Viewport);
+            spriteManager = new SpriteManager();
 
             base.Initialize();
         }
@@ -70,18 +73,14 @@ namespace Maria
                 { "bunny", new Animation(Content.Load<Texture2D>("Player/bunny"), 4) }
             };
 
-            
 
 
-            
 
-            _sprites = new List<Sprite>()
-            {
-                // Bunny
-                new Sprite(animations, 10f)
+
+            spriteManager.AddSprite(new Sprite(animations, 10f)
                 {
-                     
-                    Position = new Vector2(0,0),
+
+                    Position = new Vector2(0, 0),
                     Input = new Input()
                     {
                         Up = Keys.W,
@@ -89,9 +88,8 @@ namespace Maria
                         Left = Keys.A,
                         Right = Keys.D,
                     },
-                },
-            };
-            player = _sprites[0];
+            });
+            player = spriteManager.List[0];
             // TODO: use this.Content to load your game content here
             LoadMap("level1");
         }
@@ -121,11 +119,10 @@ namespace Maria
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();
 
-            
+
 
             // TODO: Add your update logic here
-            foreach(var sprite in _sprites)
-                sprite.Update(gameTime, _sprites);
+            spriteManager.Update(gameTime);
 
             if (player.Texture != null)
             spriteRectangle = new Rectangle((int)player.Position.X, (int)player.Position.Y,
@@ -154,10 +151,9 @@ namespace Maria
             map.Draw(spriteBatch, new Rectangle(0, 0, GraphicsDevice.Viewport.Width, GraphicsDevice.Viewport.Height), viewportPosition);
             //map.Draw(spriteBatch, new Rectangle(0, 0, 200, 100), viewportPosition);
             // Render sprite
-            foreach (var sprite in _sprites)
-            {
-                sprite.Draw(spriteBatch);
-            }
+
+            spriteManager.Draw(gameTime, spriteBatch);
+            
 
             spriteBatch.End();
 
