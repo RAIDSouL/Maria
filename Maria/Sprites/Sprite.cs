@@ -56,12 +56,14 @@ namespace Maria.Sprites
         public Rectangle Rectangle
         {
             get
-            {
+            { 
                 if (_animations != null)
                     return new Rectangle((int)Position.X, (int)Position.Y, _animations.ElementAt(0).Value.Texture.Width / _animations.ElementAt(0).Value.FrameCount, _animations.ElementAt(0).Value.Texture.Height / _animations.ElementAt(0).Value.FrameCount);
-
                 return new Rectangle((int)Position.X, (int)Position.Y, _texture.Width, _texture.Height);
+                
+
             }
+
         }
 
        
@@ -129,7 +131,12 @@ namespace Maria.Sprites
                     {
                         if (!IsTouchingTop(sprite))
                             Velocity.Y += gravity / 60;
-                        else Velocity.Y = 0;
+                        else
+                        {
+                            //if ()
+                            //this.Position = new Vector2(this.Position.X, sprite.Rectangle.Top - sprite.Rectangle.Height - this.Rectangle.Height);
+                            Velocity.Y = 0;
+                        }
                     }
                 }
             }
@@ -161,10 +168,10 @@ namespace Maria.Sprites
         {
             Console.WriteLine(this.Rectangle  + " | " + sprite.Rectangle);
 
-            return this.Rectangle.Bottom + this.Velocity.Y < sprite.Rectangle.Top &&
-                    this.Rectangle.Top < sprite.Rectangle.Top;// &&
-                  //  this.Rectangle.Right > sprite.Rectangle.Left &&
-                  //  this.Rectangle.Left < sprite.Rectangle.Right;
+            return this.Rectangle.Bottom + this.Velocity.Y > sprite.Rectangle.Top - sprite.Rectangle.Height &&
+                   this.Rectangle.Top < sprite.Rectangle.Top &&
+                   this.Rectangle.Right > sprite.Rectangle.Left &&
+                   this.Rectangle.Left < sprite.Rectangle.Right;
         }
 
         protected bool IsTouchingBottom(Sprite sprite)
