@@ -127,7 +127,8 @@ namespace Maria.Sprites
             if (animations != null)
                 animationManager.Update(gameTime);
 
-            Position += Velocity + translation;
+            Velocity += translation;
+            Position += Velocity;
 
             // Gravity
             if (physicsType == EPhysics.Dynamic)
