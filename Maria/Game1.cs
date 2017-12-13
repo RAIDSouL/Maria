@@ -8,6 +8,7 @@ using Maria.Sprites;
 using Maria.Models;
 using Maria.Managers;
 using Microsoft.Xna.Framework.Media;
+using Microsoft.Xna.Framework.Audio;
 
 namespace Maria
 {
@@ -21,6 +22,7 @@ namespace Maria
         Map map;
         Vector2 viewportPosition;
         Song song;
+        List<SoundEffect> soundeffects;
 
         public Sprite player;
 
@@ -43,6 +45,8 @@ namespace Maria
             graphics.PreferredBackBufferWidth = 320*2;
             graphics.PreferredBackBufferHeight = 240*2;
             graphics.ApplyChanges();
+
+            soundeffects = new List<SoundEffect>();
 
         }
 
@@ -92,6 +96,8 @@ namespace Maria
             });
             player = spriteManager.List[0];
             // TODO: use this.Content to load your game content here
+            LoadSfx("jump");
+
             LoadMap("level1");
             LoadSong("bbsong");
             MediaPlayer.Play(song);
@@ -117,6 +123,11 @@ namespace Maria
         {
             song = Content.Load<Song>(Path.Combine("Music/" + songName));
         }
+
+        public void LoadSfx(string sfxName)
+        {
+            soundeffects.Add(Content.Load<SoundEffect>(Path.Combine("sfx/" + sfxName)));
+        }
     
 
         /// <summary>
@@ -130,13 +141,17 @@ namespace Maria
                 Exit();
 
             spriteManager.Update(gameTime);
-
+            
             if (player.Texture != null)
                 spriteRectangle = new Rectangle((int)player.Position.X, (int)player.Position.Y,
-
-            player.Texture.Width, player.Texture.Height);
+                                   player.Texture.Width, player.Texture.Height);
 
             camera.Update(gameTime, this);
+
+            if (Keyboard.GetState().IsKeyDown(Keys.X))
+            {
+                soundeffects[0].Play();
+            }
 
 
             base.Update(gameTime);
