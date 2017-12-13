@@ -62,6 +62,7 @@ using System.IO.Compression;
 using System.Globalization;
 using Maria;
 using Maria.Sprites;
+using Maria.Managers;
 
 namespace Squared.Tiled
 {
@@ -498,11 +499,121 @@ namespace Squared.Tiled
                     int index = Tiles[i] - 1;
                     if ((index >= 0) && (index < _TileInfoCache.Length))
                     {
-                        Sprite sprite = new Sprite(info.Texture);
                         info = _TileInfoCache[index];
                         batch.Draw(info.Texture, destPos - viewPos, info.Rectangle,
                                    Color.White * this.Opacity, rotation, new Vector2(tileWidth / 2f, tileHeight / 2f),
                                    1f, flipEffect, 0);
+                    }
+
+                    destPos.X += tileWidth;
+                }
+
+                destPos.Y += tileHeight;
+            }
+        }
+
+        public void SetupPhysics(SpriteBatch batch, IList<Tileset> tilesets, Rectangle rectangle, Vector2 viewportPosition, int tileWidth, int tileHeight)
+        {
+            int i = 0;
+            Vector2 destPos = new Vector2(rectangle.Left, rectangle.Top);
+            Vector2 viewPos = viewportPosition;
+
+            int minX = (int)Math.Floor(viewportPosition.X / tileWidth);
+            int minY = (int)Math.Floor(viewportPosition.Y / tileHeight);
+            int maxX = (int)Math.Ceiling((rectangle.Width + viewportPosition.X) / tileWidth);
+            int maxY = (int)Math.Ceiling((rectangle.Height + viewportPosition.Y) / tileHeight);
+
+            if (minX < 0)
+                minX = 0;
+            if (minY < 0)
+                minY = 0;
+            if (maxX >= Width)
+                maxX = Width - 1;
+            if (maxY >= Height)
+                maxY = Height - 1;
+
+            if (viewPos.X > 0)
+            {
+                viewPos.X = ((int)Math.Floor(viewPos.X)) % tileWidth;
+            }
+            else
+            {
+                viewPos.X = (float)Math.Floor(viewPos.X);
+            }
+
+            if (viewPos.Y > 0)
+            {
+                viewPos.Y = ((int)Math.Floor(viewPos.Y)) % tileHeight;
+            }
+            else
+            {
+                viewPos.Y = (float)Math.Floor(viewPos.Y);
+            }
+
+            TileInfo info = new TileInfo();
+            if (_TileInfoCache == null)
+                BuildTileInfoCache(tilesets);
+
+            // We're drawing at the center of the tile, so adjust our y offset
+            destPos.Y += tileHeight / 2f;
+
+            for (int y = minY; y <= maxY; y++)
+            {
+                // We're drawing at the center of the tile, so adjust the x offset
+                destPos.X = rectangle.Left + tileWidth / 2f;
+
+                for (int x = minX; x <= maxX; x++)
+                {
+                    i = (y * Width) + x;
+
+                    byte flipAndRotate = FlipAndRotate[i];
+                    SpriteEffects flipEffect = SpriteEffects.None;
+                    float rotation = 0f;
+
+                    if ((flipAndRotate & Layer.HorizontalFlipDrawFlag) != 0)
+                    {
+                        flipEffect |= SpriteEffects.FlipHorizontally;
+                    }
+                    if ((flipAndRotate & Layer.VerticalFlipDrawFlag) != 0)
+                    {
+                        flipEffect |= SpriteEffects.FlipVertically;
+                    }
+                    if ((flipAndRotate & Layer.DiagonallyFlipDrawFlag) != 0)
+                    {
+                        if ((flipAndRotate & Layer.HorizontalFlipDrawFlag) != 0 &&
+                             (flipAndRotate & Layer.VerticalFlipDrawFlag) != 0)
+                        {
+                            rotation = (float)(Math.PI / 2);
+                            flipEffect ^= SpriteEffects.FlipVertically;
+                        }
+                        else if ((flipAndRotate & Layer.HorizontalFlipDrawFlag) != 0)
+                        {
+                            rotation = (float)-(Math.PI / 2);
+                            flipEffect ^= SpriteEffects.FlipVertically;
+                        }
+                        else if ((flipAndRotate & Layer.VerticalFlipDrawFlag) != 0)
+                        {
+                            rotation = (float)(Math.PI / 2);
+                            flipEffect ^= SpriteEffects.FlipHorizontally;
+                        }
+                        else
+                        {
+                            rotation = -(float)(Math.PI / 2);
+                            flipEffect ^= SpriteEffects.FlipHorizontally;
+                        }
+                    }
+
+                    int index = Tiles[i] - 1;
+                    if ((index >= 0) && (index < _TileInfoCache.Length))
+                    {
+                        info = _TileInfoCache[index];
+                        Sprite block = new Sprite(info.Texture);
+                        SpriteManager.Instance.AddSprite(block);
+                        /*
+                        batch.Draw(info.Texture, destPos - viewPos, info.Rectangle,
+                                   Color.White * this.Opacity, rotation, new Vector2(tileWidth / 2f, tileHeight / 2f),
+                                   1f, flipEffect, 0);
+                                   */
                     }
 
                     destPos.X += tileWidth;
@@ -748,6 +859,7 @@ namespace Squared.Tiled
             XmlReaderSettings settings = new XmlReaderSettings();
             settings.ProhibitDtd = false;
 
+
             using (var stream = System.IO.File.OpenText(filename))
             using (var reader = XmlReader.Create(stream, settings))
                 while (reader.Read())
@@ -864,6 +976,8 @@ namespace Squared.Tiled
                     }
                 }
             }
+
+     
 
             return result;
         }
