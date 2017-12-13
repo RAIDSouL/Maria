@@ -133,8 +133,15 @@ namespace Maria
                 player.Velocity.X += 0.1f;
             else if (Keyboard.GetState().IsKeyUp(Keys.Right))
                 player.Velocity.X = 0;
-                camera.Update(gameTime, this);
+
+            if (Keyboard.GetState().IsKeyDown(Keys.X))
+                player.Velocity.Y += 0.1f;
+            else if (Keyboard.GetState().IsKeyUp(Keys.X))
+                player.Velocity.Y = 0;
+
+            camera.Update(gameTime, this);
             // End Test
+
 
             base.Update(gameTime);
         }
