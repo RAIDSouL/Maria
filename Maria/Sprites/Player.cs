@@ -41,6 +41,8 @@ namespace Maria.Sprites
             else translation.X = 0;*/
 
             translation.X = Speed;
+            if (ishit)
+                Speed = 0f;
 
             if (Keyboard.GetState().IsKeyDown(Input.Jump) && grounded)
                 jumpForce = 1f;

@@ -37,6 +37,8 @@ namespace Maria.Sprites
 
         public bool grounded;
 
+        public bool ishit;
+
         #endregion
 
         #region Propoties
@@ -155,7 +157,8 @@ namespace Maria.Sprites
                     if (jumpForce <= 0)
                         gravityVelocity.Y += gravity / 60;
                 }
-                grounded = false;                    
+                grounded = false;
+                ishit = false;
                 foreach (var sprite in sprites)
                 {
                     if (sprite != this) // Not check self
@@ -163,6 +166,10 @@ namespace Maria.Sprites
                         if (IsTouchingTop(sprite))
                         {
                             grounded = true;
+                        }
+                        if (IsTouchingLeft(sprite))
+                        {
+                            ishit = true;
                         }
                     }
                 }
