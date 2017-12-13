@@ -27,6 +27,12 @@ namespace Maria.Sprites
 
         public Texture2D Texture { get { return _texture; } }
 
+        public float jumpForce;
+
+        private float jumpVelocity;
+
+        private Vector2 gravityVelocity = new Vector2(0, 0);
+
         public EPhysics physicsType;
 
         public bool grounded;
@@ -127,14 +133,28 @@ namespace Maria.Sprites
             if (animations != null)
                 animationManager.Update(gameTime);
 
-            Position += Velocity + translation;
+            Position += Velocity + gravityVelocity + translation;
 
             // Gravity
             if (physicsType == EPhysics.Dynamic)
             {
-                if (grounded)
-                    Velocity.Y = 0;
-                else Velocity.Y += gravity / 60;
+                if (jumpForce > 0)
+                {
+                    gravityVelocity.Y -= jumpForce;
+                    jumpForce -= gravity / 60;
+                }
+
+                if (grounded && jumpForce <= 0)
+                {
+                    if (Velocity.Y > 0)
+                        Velocity.Y = 0;
+                    gravityVelocity.Y = 0;
+                }
+                else
+                {
+                    if (jumpForce <= 0)
+                        gravityVelocity.Y += gravity / 60;
+                }
                 grounded = false;                    
                 foreach (var sprite in sprites)
                 {
@@ -172,7 +192,7 @@ namespace Maria.Sprites
 
         protected bool IsTouchingTop(Sprite sprite)
         {
-            return this.Rectangle.Bottom + this.Velocity.Y > sprite.Rectangle.Top - sprite.Rectangle.Height &&
+            return this.Rectangle.Bottom + this.Velocity.Y + this.gravityVelocity.Y > sprite.Rectangle.Top - sprite.Rectangle.Height &&
                    this.Rectangle.Top < sprite.Rectangle.Top &&
                    this.Rectangle.Right > sprite.Rectangle.Left &&
                    this.Rectangle.Left < sprite.Rectangle.Right;
