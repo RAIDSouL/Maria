@@ -73,7 +73,7 @@ namespace Maria
                 { "bunny", new Animation(Content.Load<Texture2D>("Player/bunny"), 4) }
             };
 
-            spriteManager.AddSprite(new Sprite(animations, 10f)
+            spriteManager.AddSprite(new Player(animations, 10f)
                 {
 
                     Position = new Vector2(0, 0),
@@ -85,7 +85,6 @@ namespace Maria
                         Right = Keys.D,
                     },
             });
-
             
             spriteManager.AddSprite(new Sprite(Content.Load<Texture2D>("tiled/blocks")) {
                 Position = new Vector2(0, 100)

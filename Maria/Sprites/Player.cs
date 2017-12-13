@@ -35,13 +35,9 @@ namespace Maria.Sprites
             base.Update(gameTime, sprites);
 
             if (Keyboard.GetState().IsKeyDown(Input.Right))
-            {
-                Velocity.X += 1f;   
-            }
-            else if (Keyboard.GetState().IsKeyUp(Input.Right))
-                Velocity.X = 0;
-            if (Keyboard.GetState().IsKeyDown(Input.Left)) Velocity.X -= 1f;
-            else Velocity.X = 0;
+                translation.X += Speed;   
+            else if (Keyboard.GetState().IsKeyDown(Input.Left)) translation.X -= Speed;
+            else translation.X = 0;
 
             foreach (var sprite in sprites)
             {
