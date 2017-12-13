@@ -57,7 +57,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="Camera.cs" />
-    <Compile Include="Enum\enum.cs" />
+    <Compile Include="Enum\EPhysics.cs" />
     <Compile Include="Game1.cs" />
     <Compile Include="Managers\AnimationManager.cs" />
     <Compile Include="Managers\SpriteManager.cs" />
