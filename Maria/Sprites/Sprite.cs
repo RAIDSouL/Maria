@@ -127,8 +127,7 @@ namespace Maria.Sprites
             if (animations != null)
                 animationManager.Update(gameTime);
 
-            Velocity += translation;
-            Position += Velocity;
+            Position += Velocity + translation;
 
             // Gravity
             if (physicsType == EPhysics.Dynamic)
@@ -173,8 +172,6 @@ namespace Maria.Sprites
 
         protected bool IsTouchingTop(Sprite sprite)
         {
-            Console.WriteLine(this.Rectangle  + " | " + sprite.Rectangle);
-
             return this.Rectangle.Bottom + this.Velocity.Y > sprite.Rectangle.Top - sprite.Rectangle.Height &&
                    this.Rectangle.Top < sprite.Rectangle.Top &&
                    this.Rectangle.Right > sprite.Rectangle.Left &&
