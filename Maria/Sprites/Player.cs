@@ -36,11 +36,15 @@ namespace Maria.Sprites
 
             
             if (Keyboard.GetState().IsKeyDown(Input.Right))
-                translation.X += Speed;   
-            else if (Keyboard.GetState().IsKeyDown(Input.Left)) translation.X -= Speed;
+                translation.X = Speed;   
+            else if (Keyboard.GetState().IsKeyDown(Input.Left)) translation.X = -Speed;
             else translation.X = 0;
 
-            translation.X = Speed;
+            // translation.X = Speed;
+            if (ishit)
+            {
+                translation.X = -Speed;
+            }
 
             if (Keyboard.GetState().IsKeyDown(Input.Jump) && grounded)
                 jumpForce = 1f;

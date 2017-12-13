@@ -7,6 +7,7 @@ using System.IO;
 using Maria.Sprites;
 using Maria.Models;
 using Maria.Managers;
+using Microsoft.Xna.Framework.Media;
 
 namespace Maria
 {
@@ -19,6 +20,7 @@ namespace Maria
         SpriteBatch spriteBatch;
         Map map;
         Vector2 viewportPosition;
+        Song song;
 
         public Sprite player;
 
@@ -76,12 +78,14 @@ namespace Maria
             };
 
             spriteManager.AddSprite(new Player(animations, 10f)
-                {
+            {
 
-                    Position = new Vector2(0, 0),
-                    Input = new Input()
-                    {
-                        Jump = Keys.X,
+                Position = new Vector2(0, 0),
+                Input = new Input()
+                {
+                    Jump = Keys.X,
+                    Left = Keys.A,
+                    Right = Keys.D,
                     },
             });
             
@@ -91,6 +95,8 @@ namespace Maria
             player = spriteManager.List[0];
             // TODO: use this.Content to load your game content here
             LoadMap("level1");
+            LoadSong("bbsong");
+            MediaPlayer.Play(song);
 
             map.SetupSprite(new Rectangle(0, 0, GraphicsDevice.Viewport.Width, GraphicsDevice.Viewport.Height), viewportPosition);
         }
@@ -107,6 +113,11 @@ namespace Maria
         public void LoadMap (string mapName)
         {
             map = Map.Load(Path.Combine(Content.RootDirectory, "maps/" + mapName + ".tmx"), Content);
+        }
+        
+        public void LoadSong (string songName)
+        {
+            song = Content.Load<Song>(Path.Combine("Music/" + songName));
         }
     
 
