@@ -1,4 +1,5 @@
 ﻿public enum EPhysics
 {
-    Dynamic
+    Dynamic,
+    Static
 }

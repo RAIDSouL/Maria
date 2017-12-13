@@ -14,9 +14,9 @@ namespace Maria.Sprites
     {
         #region Fields;
 
-        protected AnimationManager _animationManager;
+        protected AnimationManager animationManager;
 
-        protected Dictionary<string, Animation> _animations;
+        protected Dictionary<string, Animation> animations;
 
         protected Vector2 _position;
 
@@ -44,14 +44,15 @@ namespace Maria.Sprites
             {
                 _position = value;
 
-                if (_animationManager != null)
-                    _animationManager.Position = _position;
+                if (animationManager != null)
+                    animationManager.Position = _position;
 
             }
         }
 
         public float Speed = 1f;
 
+        public Vector2 translation;
         public Vector2 Velocity;
 
         public float gravity;
@@ -62,8 +63,8 @@ namespace Maria.Sprites
         {
             get
             { 
-                if (_animations != null)
-                    return new Rectangle((int)Position.X, (int)Position.Y, _animations.ElementAt(0).Value.Texture.Width / _animations.ElementAt(0).Value.FrameCount, _animations.ElementAt(0).Value.Texture.Height / _animations.ElementAt(0).Value.FrameCount);
+                if (animations != null)
+                    return new Rectangle((int)Position.X, (int)Position.Y, animations.ElementAt(0).Value.Texture.Width / animations.ElementAt(0).Value.FrameCount, animations.ElementAt(0).Value.Texture.Height / animations.ElementAt(0).Value.FrameCount);
                 return new Rectangle((int)Position.X, (int)Position.Y, _texture.Width, _texture.Height);
                 
 
@@ -71,23 +72,20 @@ namespace Maria.Sprites
 
         }
 
-       
-
-
         #endregion
 
         #region Method
 
         public virtual void Draw(SpriteBatch spriteBatch)
         {
-            if (_texture != null && _animationManager == null)
+            if (_texture != null && animationManager == null)
             {
                 if (crop == false)
                     spriteBatch.Draw(_texture, Position, Color);
                 else spriteBatch.Draw(_texture, Position, cropTexture, Color);
             }
-            else if (_animationManager != null)
-                _animationManager.Draw(spriteBatch);
+            else if (animationManager != null)
+                animationManager.Draw(spriteBatch);
             else throw new Exception("This ain't right...");
         }
 
@@ -98,20 +96,20 @@ namespace Maria.Sprites
 
         protected virtual void SetAnimation()
         {
-            if (_animations != null)
-            _animationManager.Play(_animations["bunny"]);
+            if (animations != null)
+                animationManager.Play(animations["bunny"]);
         }
 
         public Sprite(Dictionary<string, Animation> animation)
         {
-            _animations = animation;
-            _animationManager = new AnimationManager(_animations.First().Value);
+            animations = animation;
+            animationManager = new AnimationManager(animations.First().Value);
         }
 
-        public Sprite(Dictionary<string, Animation> animation, float _gravity)
+        public Sprite(Dictionary<string, Animation> _animation, float _gravity)
         {
-            _animations = animation;
-            _animationManager = new AnimationManager(_animations.First().Value);
+            animations = _animation;
+            animationManager = new AnimationManager(animations.First().Value);
             gravity = _gravity;
         }
 
@@ -126,10 +124,10 @@ namespace Maria.Sprites
             //Move();
 
             SetAnimation();
-            if (_animations != null)
-            _animationManager.Update(gameTime);
+            if (animations != null)
+                animationManager.Update(gameTime);
 
-            Position += Velocity;
+            Position += Velocity + translation;
 
             // Gravity
             if (physicsType == EPhysics.Dynamic)
@@ -150,7 +148,6 @@ namespace Maria.Sprites
                 }
             }
 
-            //Velocity = Vector2.Zero;
         }
 
         #endregion
@@ -175,8 +172,6 @@ namespace Maria.Sprites
 
         protected bool IsTouchingTop(Sprite sprite)
         {
-            Console.WriteLine(this.Rectangle  + " | " + sprite.Rectangle);
-
             return this.Rectangle.Bottom + this.Velocity.Y > sprite.Rectangle.Top - sprite.Rectangle.Height &&
                    this.Rectangle.Top < sprite.Rectangle.Top &&
                    this.Rectangle.Right > sprite.Rectangle.Left &&

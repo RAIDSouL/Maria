@@ -611,7 +611,8 @@ namespace Squared.Tiled
                         {
                             Position = destPos - viewPos,
                             cropTexture = info.Rectangle,
-                            crop = true
+                            crop = true,
+                            physicsType = EPhysics.Static
                         };
                         SpriteManager.Instance.AddSprite(block);
                         /*

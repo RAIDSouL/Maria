@@ -54,7 +54,7 @@ namespace Maria
         {
             // TODO: Add your initialization logic here
             camera = new Camera(GraphicsDevice.Viewport);
-            spriteManager = new SpriteManager();
+            spriteManager = new SpriteManager();    
 
             base.Initialize();
         }
@@ -73,7 +73,7 @@ namespace Maria
                 { "bunny", new Animation(Content.Load<Texture2D>("Player/bunny"), 4) }
             };
 
-            spriteManager.AddSprite(new Sprite(animations, 10f)
+            spriteManager.AddSprite(new Player(animations, 10f)
                 {
 
                     Position = new Vector2(0, 0),
@@ -82,7 +82,6 @@ namespace Maria
                         Jump = Keys.X,
                     },
             });
-
             
             spriteManager.AddSprite(new Sprite(Content.Load<Texture2D>("tiled/blocks")) {
                 Position = new Vector2(0, 100)
@@ -119,28 +118,14 @@ namespace Maria
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();
 
-
-
-            // TODO: Add your update logic here
             spriteManager.Update(gameTime);
 
             if (player.Texture != null)
-            spriteRectangle = new Rectangle((int)player.Position.X, (int)player.Position.Y,
-                player.Texture.Width, player.Texture.Height);
+                spriteRectangle = new Rectangle((int)player.Position.X, (int)player.Position.Y,
 
-            // Test moving
-            if (Keyboard.GetState().IsKeyDown(Keys.Right))
-                player.Velocity.X += 0.1f;
-            else if (Keyboard.GetState().IsKeyUp(Keys.Right))
-                player.Velocity.X = 0;
-
-            if (Keyboard.GetState().IsKeyDown(Keys.X))
-                player.Velocity.Y += 0.1f;
-            else if (Keyboard.GetState().IsKeyUp(Keys.X))
-                player.Velocity.Y = 0;
+            player.Texture.Width, player.Texture.Height);
 
             camera.Update(gameTime, this);
-            // End Test
 
 
             base.Update(gameTime);
