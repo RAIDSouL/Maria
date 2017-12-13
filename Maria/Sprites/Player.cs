@@ -45,10 +45,6 @@ namespace Maria.Sprites
 
             foreach (var sprite in sprites)
             {
-                if(Keyboard.GetState().IsKeyDown(Input.Jump))
-                {
-                    Velocity.Y = -10;
-                }
 
                 if (sprite == this)
                     continue;
