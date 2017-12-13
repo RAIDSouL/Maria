@@ -171,6 +171,7 @@ namespace Maria.Sprites
                         {
                             ishit = true;
                         }
+                        
                     }
                 }
             }

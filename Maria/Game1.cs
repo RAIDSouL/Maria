@@ -74,12 +74,14 @@ namespace Maria
             };
 
             spriteManager.AddSprite(new Player(animations, 10f)
-                {
+            {
 
-                    Position = new Vector2(0, 0),
-                    Input = new Input()
-                    {
-                        Jump = Keys.X,
+                Position = new Vector2(0, 0),
+                Input = new Input()
+                {
+                    Jump = Keys.X,
+                    Left = Keys.A,
+                    Right = Keys.D,
                     },
             });
             
