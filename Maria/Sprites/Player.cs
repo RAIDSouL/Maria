@@ -34,11 +34,11 @@ namespace Maria.Sprites
 
             base.Update(gameTime, sprites);
 
-            /*
+            
             if (Keyboard.GetState().IsKeyDown(Input.Right))
                 translation.X += Speed;   
             else if (Keyboard.GetState().IsKeyDown(Input.Left)) translation.X -= Speed;
-            else translation.X = 0;*/
+            else translation.X = 0;
 
             translation.X = Speed;
 
