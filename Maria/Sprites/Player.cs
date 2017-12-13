@@ -39,6 +39,10 @@ namespace Maria.Sprites
             else if (Keyboard.GetState().IsKeyDown(Input.Left)) translation.X -= Speed;
             else translation.X = 0;
 
+            if (Keyboard.GetState().IsKeyDown(Input.Up) && grounded)
+                jumpForce = 1f;
+            Console.WriteLine(jumpForce);
+
             foreach (var sprite in sprites)
             {
                 if(Keyboard.GetState().IsKeyDown(Input.Jump))
