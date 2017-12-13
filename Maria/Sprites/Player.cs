@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Maria.Models;
+using Maria.Managers;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
 
@@ -17,7 +18,9 @@ namespace Maria.Sprites
         public Player(Dictionary<string, Animation> _animation, float _gravity)
            : base(_animation, _gravity)
         {
-
+            animations = _animation;
+            animationManager = new AnimationManager(animations.First().Value);
+            gravity = _gravity;
         }
 
         public Player(Texture2D texture)
@@ -28,15 +31,16 @@ namespace Maria.Sprites
 
         public override void Update(GameTime gameTime, List<Sprite> sprites)
         {
-            if (Keyboard.GetState().IsKeyDown(Keys.Right))
-            {
-                Velocity.X += 0.1f;
-                Console.WriteLine("Press");
-            }
-            else if (Keyboard.GetState().IsKeyUp(Keys.Right))
-                Velocity.X = 0;
 
-            if (Keyboard.GetState().IsKeyDown(Keys.Left)) Velocity.X -= Speed;
+            base.Update(gameTime, sprites);
+
+            if (Keyboard.GetState().IsKeyDown(Input.Right))
+            {
+                Velocity.X += 1f;   
+            }
+            else if (Keyboard.GetState().IsKeyUp(Input.Right))
+                Velocity.X = 0;
+            if (Keyboard.GetState().IsKeyDown(Input.Left)) Velocity.X -= 1f;
             else Velocity.X = 0;
 
             foreach (var sprite in sprites)

@@ -54,7 +54,7 @@ namespace Maria
         {
             // TODO: Add your initialization logic here
             camera = new Camera(GraphicsDevice.Viewport);
-            spriteManager = new SpriteManager();
+            spriteManager = new SpriteManager();    
 
             base.Initialize();
         }
@@ -73,7 +73,7 @@ namespace Maria
                 { "bunny", new Animation(Content.Load<Texture2D>("Player/bunny"), 4) }
             };
 
-            spriteManager.AddSprite(new Player(animations, 10f)
+            spriteManager.AddSprite(new Sprite(animations, 10f)
                 {
 
                     Position = new Vector2(0, 0),

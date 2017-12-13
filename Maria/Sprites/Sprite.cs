@@ -52,6 +52,7 @@ namespace Maria.Sprites
 
         public float Speed = 1f;
 
+        public Vector2 translation;
         public Vector2 Velocity;
 
         public float gravity;
@@ -126,7 +127,7 @@ namespace Maria.Sprites
             if (animations != null)
                 animationManager.Update(gameTime);
 
-            Position += Velocity;
+            Position += Velocity + movingVelocity;
 
             // Gravity
             if (physicsType == EPhysics.Dynamic)
