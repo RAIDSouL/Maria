@@ -73,10 +73,6 @@ namespace Maria
                 { "bunny", new Animation(Content.Load<Texture2D>("Player/bunny"), 4) }
             };
 
-
-
-
-
             spriteManager.AddSprite(new Sprite(animations, 10f)
                 {
 
@@ -86,9 +82,16 @@ namespace Maria
                         Jump = Keys.X,
                     },
             });
+
+            
+            spriteManager.AddSprite(new Sprite(Content.Load<Texture2D>("tiled/blocks")) {
+                Position = new Vector2(0, 100)
+            });
             player = spriteManager.List[0];
             // TODO: use this.Content to load your game content here
             LoadMap("level1");
+
+            map.SetupSprite(new Rectangle(0, 0, GraphicsDevice.Viewport.Width, GraphicsDevice.Viewport.Height), viewportPosition);
         }
 
         /// <summary>
@@ -125,7 +128,14 @@ namespace Maria
             spriteRectangle = new Rectangle((int)player.Position.X, (int)player.Position.Y,
                 player.Texture.Width, player.Texture.Height);
 
-            camera.Update(gameTime, this);
+            // Test moving
+            if (Keyboard.GetState().IsKeyDown(Keys.Right))
+                player.Velocity.X += 0.1f;
+            else if (Keyboard.GetState().IsKeyUp(Keys.Right))
+                player.Velocity.X = 0;
+                camera.Update(gameTime, this);
+            // End Test
+
             base.Update(gameTime);
         }
 
@@ -145,7 +155,7 @@ namespace Maria
                 );
             // Render map
             
-            map.Draw(spriteBatch, new Rectangle(0, 0, GraphicsDevice.Viewport.Width, GraphicsDevice.Viewport.Height), viewportPosition);
+            //map.Draw(spriteBatch, new Rectangle(0, 0, GraphicsDevice.Viewport.Width, GraphicsDevice.Viewport.Height), viewportPosition);
             //map.Draw(spriteBatch, new Rectangle(0, 0, 200, 100), viewportPosition);
             // Render sprite
 

@@ -512,7 +512,7 @@ namespace Squared.Tiled
             }
         }
 
-        public void SetupPhysics(SpriteBatch batch, IList<Tileset> tilesets, Rectangle rectangle, Vector2 viewportPosition, int tileWidth, int tileHeight)
+        public void SetupPhysics(IList<Tileset> tilesets, Rectangle rectangle, Vector2 viewportPosition, int tileWidth, int tileHeight)
         {
             int i = 0;
             Vector2 destPos = new Vector2(rectangle.Left, rectangle.Top);
@@ -607,7 +607,12 @@ namespace Squared.Tiled
                     if ((index >= 0) && (index < _TileInfoCache.Length))
                     {
                         info = _TileInfoCache[index];
-                        Sprite block = new Sprite(info.Texture);
+                        Sprite block = new Sprite(info.Texture)
+                        {
+                            Position = destPos - viewPos,
+                            cropTexture = info.Rectangle,
+                            crop = true
+                        };
                         SpriteManager.Instance.AddSprite(block);
                         /*
                         batch.Draw(info.Texture, destPos - viewPos, info.Rectangle,
@@ -982,7 +987,15 @@ namespace Squared.Tiled
             return result;
         }
 
-        public void Draw(SpriteBatch batch, Rectangle rectangle, Vector2 viewportPosition)
+        public void SetupSprite(Rectangle rectangle, Vector2 viewportPosition)
+        {
+            foreach (Layer layers in Layers.Values)
+            {
+                layers.SetupPhysics(Tilesets.Values, rectangle, viewportPosition, TileWidth, TileHeight);
+            }
+        }
+
+            public void Draw(SpriteBatch batch, Rectangle rectangle, Vector2 viewportPosition)
         {
             foreach (Layer layers in Layers.Values)
             {

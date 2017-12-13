@@ -22,9 +22,14 @@ namespace Maria.Sprites
 
         public Texture2D _texture;
 
+        public Rectangle cropTexture;
+        public bool crop;
+
         public Texture2D Texture { get { return _texture; } }
 
         public EPhysics physicsType;
+
+        public bool grounded;
 
         #endregion
 
@@ -56,9 +61,14 @@ namespace Maria.Sprites
         public Rectangle Rectangle
         {
             get
-            {
+            { 
+                if (_animations != null)
+                    return new Rectangle((int)Position.X, (int)Position.Y, _animations.ElementAt(0).Value.Texture.Width / _animations.ElementAt(0).Value.FrameCount, _animations.ElementAt(0).Value.Texture.Height / _animations.ElementAt(0).Value.FrameCount);
                 return new Rectangle((int)Position.X, (int)Position.Y, _texture.Width, _texture.Height);
+                
+
             }
+
         }
 
        
@@ -70,8 +80,12 @@ namespace Maria.Sprites
 
         public virtual void Draw(SpriteBatch spriteBatch)
         {
-            if (_texture != null)
-                spriteBatch.Draw(_texture, Position, Color);
+            if (_texture != null && _animationManager == null)
+            {
+                if (crop == false)
+                    spriteBatch.Draw(_texture, Position, Color);
+                else spriteBatch.Draw(_texture, Position, cropTexture, Color);
+            }
             else if (_animationManager != null)
                 _animationManager.Draw(spriteBatch);
             else throw new Exception("This ain't right...");
@@ -84,6 +98,7 @@ namespace Maria.Sprites
 
         protected virtual void SetAnimation()
         {
+            if (_animations != null)
             _animationManager.Play(_animations["bunny"]);
         }
 
@@ -103,22 +118,37 @@ namespace Maria.Sprites
         public Sprite(Texture2D texture)
         {
             _texture = texture;
-
+            gravity = 0;
         }
 
         public virtual void Update(GameTime gameTime, List<Sprite> sprites)
         {
-            Move();
+            //Move();
 
             SetAnimation();
-
+            if (_animations != null)
             _animationManager.Update(gameTime);
 
             Position += Velocity;
 
             // Gravity
-            if (gravity != 0 || !IsTouchingBottom(this))
-                Velocity.Y += gravity / 60;
+            if (physicsType == EPhysics.Dynamic)
+            {
+                if (grounded)
+                    Velocity.Y = 0;
+                else Velocity.Y += gravity / 60;
+                grounded = false;                    
+                foreach (var sprite in sprites)
+                {
+                    if (sprite != this) // Not check self
+                    {
+                        if (IsTouchingTop(sprite))
+                        {
+                            grounded = true;
+                        }
+                    }
+                }
+            }
 
             //Velocity = Vector2.Zero;
         }
@@ -145,10 +175,12 @@ namespace Maria.Sprites
 
         protected bool IsTouchingTop(Sprite sprite)
         {
-            return this.Rectangle.Bottom + this.Velocity.Y < sprite.Rectangle.Top &&
-                    this.Rectangle.Top < sprite.Rectangle.Top &&
-                    this.Rectangle.Right > sprite.Rectangle.Left &&
-                    this.Rectangle.Left < sprite.Rectangle.Right;
+            Console.WriteLine(this.Rectangle  + " | " + sprite.Rectangle);
+
+            return this.Rectangle.Bottom + this.Velocity.Y > sprite.Rectangle.Top - sprite.Rectangle.Height &&
+                   this.Rectangle.Top < sprite.Rectangle.Top &&
+                   this.Rectangle.Right > sprite.Rectangle.Left &&
+                   this.Rectangle.Left < sprite.Rectangle.Right;
         }
 
         protected bool IsTouchingBottom(Sprite sprite)
