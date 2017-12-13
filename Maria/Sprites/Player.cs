@@ -47,7 +47,7 @@ namespace Maria.Sprites
             {
                 if(Keyboard.GetState().IsKeyDown(Input.Jump))
                 {
-                    Velocity.Y = 10;
+                    Velocity.Y = -10;
                 }
 
                 if (sprite == this)
