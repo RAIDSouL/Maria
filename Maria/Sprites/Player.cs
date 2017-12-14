@@ -44,13 +44,11 @@ namespace Maria.Sprites
             if (ishit)
             {
                 translation.X = -Speed;
-                Position = Vector2.Zero;
             }
 
             if (Keyboard.GetState().IsKeyDown(Input.Jump) && grounded)
             {
                 jumpForce = 1f;
-
             }
 
             Console.WriteLine(jumpForce);
