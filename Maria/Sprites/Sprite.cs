@@ -147,7 +147,8 @@ namespace Maria.Sprites
                 // On ground remove gravity
                 if (grounded)
                 {
-
+                    if (jumpForce <= 0)
+                        gravityVelocity.Y = 0;
                 }
                 else
                 {
@@ -192,13 +193,14 @@ namespace Maria.Sprites
 
         public void Jump(float force)
         {
+            Console.WriteLine(jumpForce);
             if (force < jumpForce || jumpForce > 0) return;
             if (grounded)
             {
                 if (jumpForce <= 0)
                     Game1.Instance.soundeffects[0].Play();
                 jumpForce = force;
-                
+                grounded = false;
             }
         }
 
