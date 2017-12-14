@@ -99,8 +99,11 @@ namespace Maria
             LoadSfx("jump");
 
             LoadMap("level1");
+
             LoadSong("bbsong");
+            MediaPlayer.IsRepeating = true;
             MediaPlayer.Play(song);
+
 
             map.SetupSprite(new Rectangle(0, 0, GraphicsDevice.Viewport.Width, GraphicsDevice.Viewport.Height), viewportPosition);
         }
