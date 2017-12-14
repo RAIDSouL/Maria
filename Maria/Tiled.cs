@@ -615,6 +615,8 @@ namespace Squared.Tiled
                             physicsType = EPhysics.Static
                         };
                         SpriteManager.Instance.AddSprite(block);
+
+                        Console.WriteLine(info.Rectangle);
                         /*
                         batch.Draw(info.Texture, destPos - viewPos, info.Rectangle,
                                    Color.White * this.Opacity, rotation, new Vector2(tileWidth / 2f, tileHeight / 2f),

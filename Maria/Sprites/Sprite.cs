@@ -78,7 +78,7 @@ namespace Maria.Sprites
             if (animations != null)
               return new Rectangle((int)Position.X, (int)Position.Y, animations.ElementAt(0).Value.Texture.Width / animations.ElementAt(0).Value.FrameCount, animations.ElementAt(0).Value.Texture.Height / animations.ElementAt(0).Value.FrameCount);
             if (crop)
-             return new Rectangle((int)Position.X, (int)Position.Y, cropTexture.Width - cropTexture.X, cropTexture.Height - cropTexture.Y);
+             return new Rectangle((int)Position.X, (int)Position.Y, cropTexture.Width, cropTexture.Height);
              
             return new Rectangle((int)Position.X, (int)Position.Y, _texture.Width, _texture.Height);
         }
