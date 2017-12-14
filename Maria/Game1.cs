@@ -8,6 +8,7 @@ using Maria.Sprites;
 using Maria.Models;
 using Maria.Managers;
 using Microsoft.Xna.Framework.Media;
+using Microsoft.Xna.Framework.Audio;
 
 namespace Maria
 {
@@ -23,7 +24,8 @@ namespace Maria
         Map map;
         Vector2 viewportPosition;
         Song song;
-
+        List<SoundEffect> soundeffects;
+        public static Game1 Instance;
         public Sprite player;
 
         #region Camera
@@ -46,6 +48,8 @@ namespace Maria
             graphics.PreferredBackBufferWidth = 320*2;
             graphics.PreferredBackBufferHeight = 240*2;
             graphics.ApplyChanges();
+            Instance = this;
+            soundeffects = new List<SoundEffect>();
 
         }
 
@@ -95,9 +99,15 @@ namespace Maria
             });
             player = spriteManager.List[0];
             // TODO: use this.Content to load your game content here
+            LoadSfx("jump");
+            LoadSfx("hit");
+
             LoadMap("level1");
+
             LoadSong("bbsong");
+            MediaPlayer.IsRepeating = true;
             MediaPlayer.Play(song);
+
 
             map.SetupSprite(new Rectangle(0, 0, GraphicsDevice.Viewport.Width, GraphicsDevice.Viewport.Height), viewportPosition);
         }
@@ -121,7 +131,12 @@ namespace Maria
             System.Console.WriteLine(Path.Combine("Music/" + songName));
             song = Content.Load<Song>(Path.Combine("Music/" + songName));
         }
-    
+
+        public void LoadSfx(string sfxName)
+        {
+            soundeffects.Add(Content.Load<SoundEffect>(Path.Combine("sfx/" + sfxName)));
+        }
+        
 
         /// <summary>
         /// Allows the game to run logic such as updating the world,
@@ -134,13 +149,17 @@ namespace Maria
                 Exit();
 
             spriteManager.Update(gameTime);
-
+            
             if (player.Texture != null)
                 spriteRectangle = new Rectangle((int)player.Position.X, (int)player.Position.Y,
-
-            player.Texture.Width, player.Texture.Height);
+                                   player.Texture.Width, player.Texture.Height);
 
             camera.Update(gameTime, this);
+
+            if (Keyboard.GetState().IsKeyDown(Keys.X))
+            {
+                soundeffects[0].Play();
+            }
 
 
             base.Update(gameTime);

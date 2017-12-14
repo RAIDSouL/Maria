@@ -62,6 +62,7 @@
     <Compile Include="Managers\AnimationManager.cs" />
     <Compile Include="Managers\SpriteManager.cs" />
     <Compile Include="Models\Animation.cs" />
+    <Compile Include="Models\BgAnimation.cs" />
     <Compile Include="Models\Input.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

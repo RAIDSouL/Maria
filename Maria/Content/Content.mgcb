@@ -74,3 +74,33 @@
 /processorParam:Quality=Best
 /build:Music/bbsong.mp3
 
+#begin sfx/changeblock.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:sfx/changeblock.wav
+
+#begin sfx/crystal.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:sfx/crystal.wav
+
+#begin sfx/hit.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:sfx/hit.wav
+
+#begin sfx/jump.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:sfx/jump.wav
+
+#begin sfx/levelselect.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:sfx/levelselect.wav
+

@@ -44,10 +44,14 @@ namespace Maria.Sprites
             if (ishit)
             {
                 translation.X = -Speed;
+                Position = Vector2.Zero;
             }
 
             if (Keyboard.GetState().IsKeyDown(Input.Jump) && grounded)
+            {
                 jumpForce = 1f;
+            }
+
             Console.WriteLine(jumpForce);
 
             foreach (var sprite in sprites)
@@ -56,13 +60,13 @@ namespace Maria.Sprites
                 if (sprite == this)
                     continue;
                 //collide with box
-
+                /*
                 if (this.Velocity.X > 0 && this.IsTouchingLeft(sprite) || this.Velocity.X > 0 && this.IsTouchingRight(sprite))
                     this.Velocity.X = 0;
 
                 if (this.Velocity.Y > 0 && this.IsTouchingTop(sprite) || this.Velocity.Y > 0 && this.IsTouchingBottom(sprite))
                     this.Velocity.Y = 0;
-                    
+                    */
             }
             Position += Velocity;
             Velocity = Vector2.Zero;
