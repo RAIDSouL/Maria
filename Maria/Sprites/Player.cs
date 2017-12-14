@@ -48,9 +48,7 @@ namespace Maria.Sprites
             }
 
             if (Keyboard.GetState().IsKeyDown(Input.Jump) && grounded)
-            {
-                jumpForce = 1f;
-            }
+                Jump(1f);
 
             Console.WriteLine(jumpForce);
 
