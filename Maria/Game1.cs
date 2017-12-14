@@ -79,7 +79,7 @@ namespace Maria
 
             var animations = new Dictionary<string, Animation>()
             {
-                { "bunny", new Animation(Content.Load<Texture2D>("Player/bunny"), 4) }
+                { "bunny", new Animation(Content.Load<Texture2D>("Player/bunny"), 4) },
             };
 
             spriteManager.AddSprite(new Player(animations, 10f)
@@ -135,12 +135,16 @@ namespace Maria
         
         public void LoadObj()
         {
+            //sfx
             LoadSfx("jump");
             LoadSfx("hit");
             LoadSfx("crystal");
             LoadSfx("changeblock");
+
+            //map
             LoadMap("level1");
 
+            //song
             LoadSong("bbsong");
         }
 
