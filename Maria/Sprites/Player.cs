@@ -43,7 +43,6 @@ namespace Maria.Sprites
             // translation.X = Speed;
             if (ishit)
             {
-                translation.X = -Speed;
                 Game1.Instance.soundeffects[1].Play();
                 Position = Vector2.Zero;
 
