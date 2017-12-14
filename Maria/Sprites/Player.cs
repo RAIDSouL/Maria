@@ -49,7 +49,7 @@ namespace Maria.Sprites
             }
 
             if (Keyboard.GetState().IsKeyDown(Input.Jump) && grounded)
-                Jump(1.2f);
+                Jump(1.4f);
 
             foreach (var sprite in sprites)
             {

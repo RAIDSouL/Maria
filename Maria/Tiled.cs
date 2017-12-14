@@ -619,7 +619,7 @@ namespace Squared.Tiled
                         batch.Draw(info.Texture, destPos - viewPos, info.Rectangle,
                                    Color.White * this.Opacity, rotation, new Vector2(tileWidth / 2f, tileHeight / 2f),
                                    1f, flipEffect, 0);
-                                   */
+                          */         
                     }
 
                     destPos.X += tileWidth;
@@ -992,7 +992,7 @@ namespace Squared.Tiled
         {
             foreach (Layer layers in Layers.Values)
             {
-                layers.SetupPhysics(Tilesets.Values, rectangle, viewportPosition, TileWidth, TileHeight);
+                layers.SetupPhysics(Tilesets.Values, new Rectangle(0, 0, layers.Width * TileWidth, layers.Height * TileHeight), new Vector2(layers.Width, layers.Height), TileWidth, TileHeight);
             }
         }
 
