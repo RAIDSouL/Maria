@@ -169,7 +169,7 @@ namespace Maria.Sprites
                             if (this.Position.Y + this.Velocity.Y + this.gravityVelocity.Y > sprite.Rectangle.Top - sprite.Rectangle.Height)
                                 this.Position = new Vector2(this.Position.X, sprite.Rectangle.Top - sprite.Rectangle.Height);
                         }
-                        if (IsTouchingLeft(sprite))
+                        if (IsTouchingLeft(sprite) || Position.Y > 500)
                         {
                             ishit = true;
                         }
