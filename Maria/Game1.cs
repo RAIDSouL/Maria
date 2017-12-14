@@ -16,6 +16,8 @@ namespace Maria
     /// </summary>
     public class Game1 : Game
     {
+        public static Game1 Instance { get; private set; }
+
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
         Map map;
@@ -37,6 +39,7 @@ namespace Maria
 
         public Game1()
         {
+            Instance = this;
             graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
             Window.Title = "Maria Jumpu";
@@ -115,6 +118,7 @@ namespace Maria
         
         public void LoadSong (string songName)
         {
+            System.Console.WriteLine(Path.Combine("Music/" + songName));
             song = Content.Load<Song>(Path.Combine("Music/" + songName));
         }
     
