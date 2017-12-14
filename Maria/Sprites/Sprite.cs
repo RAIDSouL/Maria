@@ -192,7 +192,7 @@ namespace Maria.Sprites
             if (grounded)
             {
                 jumpForce = force;
-
+                Game1.Instance.soundeffects[0].Play();
             }
         }
 

@@ -24,7 +24,7 @@ namespace Maria
         Map map;
         Vector2 viewportPosition;
         Song song;
-        List<SoundEffect> soundeffects;
+        public List<SoundEffect> soundeffects;
 
         public Sprite player;
 
@@ -155,11 +155,6 @@ namespace Maria
                                    player.Texture.Width, player.Texture.Height);
 
             camera.Update(gameTime, this);
-
-            if (Keyboard.GetState().IsKeyDown(Keys.X))
-            {
-                soundeffects[0].Play();
-            }
 
 
             base.Update(gameTime);
