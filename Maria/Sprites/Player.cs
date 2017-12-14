@@ -50,8 +50,6 @@ namespace Maria.Sprites
             if (Keyboard.GetState().IsKeyDown(Input.Jump) && grounded)
                 Jump(1f);
 
-            Console.WriteLine(jumpForce);
-
             foreach (var sprite in sprites)
             {
 

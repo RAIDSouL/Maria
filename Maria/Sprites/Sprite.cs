@@ -176,7 +176,11 @@ namespace Maria.Sprites
                         
                     }
                 }
-                grounded = (groundCount > 0) ? true : false;
+                if (groundCount > 0)
+                {
+                    grounded = true;
+                }
+                else grounded = false;
             }
 
         }
@@ -191,8 +195,10 @@ namespace Maria.Sprites
             if (force < jumpForce || jumpForce > 0) return;
             if (grounded)
             {
+                if (jumpForce <= 0)
+                    Game1.Instance.soundeffects[0].Play();
                 jumpForce = force;
-                Game1.Instance.soundeffects[0].Play();
+                
             }
         }
 
