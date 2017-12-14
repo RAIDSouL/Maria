@@ -25,7 +25,7 @@ namespace Maria
         Vector2 viewportPosition;
         Song song;
         List<SoundEffect> soundeffects;
-        public static Game1 Instance;
+
         public Sprite player;
 
         #region Camera
