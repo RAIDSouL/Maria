@@ -23,7 +23,7 @@ namespace Maria
         Vector2 viewportPosition;
         Song song;
         List<SoundEffect> soundeffects;
-
+        public static Game1 Instance;
         public Sprite player;
 
         #region Camera
@@ -45,7 +45,7 @@ namespace Maria
             graphics.PreferredBackBufferWidth = 320*2;
             graphics.PreferredBackBufferHeight = 240*2;
             graphics.ApplyChanges();
-
+            Instance = this;
             soundeffects = new List<SoundEffect>();
 
         }
