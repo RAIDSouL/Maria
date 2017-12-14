@@ -607,7 +607,7 @@ namespace Squared.Tiled
                     if ((index >= 0) && (index < _TileInfoCache.Length))
                     {
                         info = _TileInfoCache[index];
-                        Sprite block = new Sprite(info.Texture)
+                        Block block = new Block(info.Texture)
                         {
                             Position = destPos - viewPos,
                             cropTexture = info.Rectangle,

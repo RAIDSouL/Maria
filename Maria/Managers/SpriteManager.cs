@@ -44,5 +44,19 @@ namespace Maria.Managers
             }
         }
 
+        public void DestroyAllBlock ()
+        {
+            for (int i = List.Count - 1; i >= 0; i--)
+            {
+                Sprite sprite = List[i];
+                if (sprite.GetType() == typeof(Block))
+                {
+                    sprite = null;
+                    List.RemoveAt(i);
+                    i = List.Count - 1;
+                }
+            }
+        }
+
     }
 }
