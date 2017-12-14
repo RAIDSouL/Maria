@@ -48,7 +48,6 @@ namespace Maria
             graphics.PreferredBackBufferWidth = 320*2;
             graphics.PreferredBackBufferHeight = 240*2;
             graphics.ApplyChanges();
-            Instance = this;
             soundeffects = new List<SoundEffect>();
 
         }
