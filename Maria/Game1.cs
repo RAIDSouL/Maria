@@ -48,7 +48,6 @@ namespace Maria
             graphics.PreferredBackBufferWidth = 320*2;
             graphics.PreferredBackBufferHeight = 240*2;
             graphics.ApplyChanges();
-            Instance = this;
             soundeffects = new List<SoundEffect>();
 
         }
@@ -63,7 +62,8 @@ namespace Maria
         {
             // TODO: Add your initialization logic here
             camera = new Camera(GraphicsDevice.Viewport);
-            spriteManager = new SpriteManager();    
+            spriteManager = new SpriteManager();
+            
 
             base.Initialize();
         }
@@ -99,15 +99,11 @@ namespace Maria
             });
             player = spriteManager.List[0];
             // TODO: use this.Content to load your game content here
-            LoadSfx("jump");
-            LoadSfx("hit");
+            
+            LoadObj();
 
-            LoadMap("level1");
-
-            LoadSong("bbsong");
             MediaPlayer.IsRepeating = true;
             MediaPlayer.Play(song);
-
 
             map.SetupSprite(new Rectangle(0, 0, GraphicsDevice.Viewport.Width, GraphicsDevice.Viewport.Height), viewportPosition);
         }
@@ -137,6 +133,16 @@ namespace Maria
             soundeffects.Add(Content.Load<SoundEffect>(Path.Combine("sfx/" + sfxName)));
         }
         
+        public void LoadObj()
+        {
+            LoadSfx("jump");
+            LoadSfx("hit");
+            LoadSfx("crystal");
+            LoadSfx("changeblock");
+            LoadMap("level1");
+
+            LoadSong("bbsong");
+        }
 
         /// <summary>
         /// Allows the game to run logic such as updating the world,
