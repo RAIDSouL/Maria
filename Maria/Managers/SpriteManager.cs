@@ -13,7 +13,9 @@ namespace Maria.Managers
     {
         public static SpriteManager Instance;
 
-        public List<Sprite> List { get; private set; }       
+        public List<Sprite> List { get; private set; }
+
+        public List<Texture2D> DebugBox = new List<Texture2D>();
         
         public SpriteManager ()
         {
@@ -37,6 +39,8 @@ namespace Maria.Managers
             foreach (var sprite in List)
             {
                 sprite.Draw(spriteBatch);
+
+                spriteBatch.Draw(DebugBox[0], sprite.Rectangle(), Color.White);
             }
         }
 

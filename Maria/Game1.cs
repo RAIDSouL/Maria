@@ -93,6 +93,8 @@ namespace Maria
                     Right = Keys.D,
                     },
             });
+
+            spriteManager.DebugBox.Add(Content.Load<Texture2D>("debugbox"));
             
             spriteManager.AddSprite(new Sprite(Content.Load<Texture2D>("tiled/blocks")) {
                 Position = new Vector2(0, 100)
