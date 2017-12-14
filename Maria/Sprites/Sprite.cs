@@ -166,8 +166,8 @@ namespace Maria.Sprites
                         {
                             groundCount++;
                             // FIX: sprite fall into the block
-                            if (this.Position.Y + this.Velocity.Y + this.gravityVelocity.Y > sprite.Rectangle().Top - sprite.Rectangle().Height)
-                                this.Position = new Vector2(this.Position.X, sprite.Rectangle().Top - sprite.Rectangle().Height);
+                            if (this.Position.Y + this.Velocity.Y + this.gravityVelocity.Y > sprite.Rectangle().Top - 2)
+                                this.Position = new Vector2(this.Position.X, sprite.Rectangle().Top - 2);
                         }
                         if (IsTouchingLeft(sprite) || Position.Y > 1000)
                         {
@@ -226,7 +226,7 @@ namespace Maria.Sprites
 
         protected bool IsTouchingTop(Sprite sprite)
         {
-            return this.Rectangle().Bottom + this.Velocity.Y + this.gravityVelocity.Y > sprite.Rectangle().Top - sprite.Rectangle().Height &&
+            return this.Rectangle().Bottom + this.Velocity.Y + this.gravityVelocity.Y > sprite.Rectangle().Top - 2 &&
                    this.Rectangle().Top < sprite.Rectangle().Top &&
                    this.Rectangle().Right > sprite.Rectangle().Left &&
                    this.Rectangle().Left < sprite.Rectangle().Right;

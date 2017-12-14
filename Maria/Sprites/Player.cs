@@ -17,7 +17,7 @@ namespace Maria.Sprites
 
         public override Rectangle Rectangle()
         {
-            return new Rectangle((int)Position.X + 4, (int)Position.Y, (animations.ElementAt(0).Value.Texture.Width / animations.ElementAt(0).Value.FrameCount) - 4, animations.ElementAt(0).Value.Texture.Height / animations.ElementAt(0).Value.FrameCount);
+            return new Rectangle((int)Position.X + 4, (int)Position.Y, (animations.ElementAt(0).Value.Texture.Width / animations.ElementAt(0).Value.FrameCount) - 4, animations.ElementAt(0).Value.Texture.Height);
         }
 
         public Player(Dictionary<string, Animation> _animation, float _gravity)
