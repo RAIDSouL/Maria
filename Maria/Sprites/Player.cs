@@ -15,6 +15,11 @@ namespace Maria.Sprites
     {
         public float Speed = 1f;
 
+        public override Rectangle Rectangle()
+        {
+            return new Rectangle((int)Position.X + 4, (int)Position.Y, (animations.ElementAt(0).Value.Texture.Width / animations.ElementAt(0).Value.FrameCount) - 4, animations.ElementAt(0).Value.Texture.Height / animations.ElementAt(0).Value.FrameCount);
+        }
+
         public Player(Dictionary<string, Animation> _animation, float _gravity)
            : base(_animation, _gravity)
         {
@@ -33,7 +38,6 @@ namespace Maria.Sprites
         {
 
             base.Update(gameTime, sprites);
-
             
             if (Keyboard.GetState().IsKeyDown(Input.Right))
                 translation.X = Speed;   
