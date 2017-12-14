@@ -97,6 +97,7 @@ namespace Maria
             player = spriteManager.List[0];
             // TODO: use this.Content to load your game content here
             LoadSfx("jump");
+            LoadSfx("hit");
 
             LoadMap("level1");
 
@@ -131,7 +132,7 @@ namespace Maria
         {
             soundeffects.Add(Content.Load<SoundEffect>(Path.Combine("sfx/" + sfxName)));
         }
-    
+        
 
         /// <summary>
         /// Allows the game to run logic such as updating the world,
