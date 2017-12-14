@@ -85,7 +85,7 @@ namespace Maria
             spriteManager.AddSprite(new Player(animations, 10f)
             {
 
-                Position = new Vector2(0, 0),
+                Position = new Vector2(0, 100),
                 Input = new Input()
                 {
                     Jump = Keys.X,
@@ -156,7 +156,6 @@ namespace Maria
 
             camera.Update(gameTime, this);
 
-
             base.Update(gameTime);
         }
 
@@ -175,7 +174,7 @@ namespace Maria
                 camera.tranform
                 );
             // Render map
-            
+                        
             //map.Draw(spriteBatch, new Rectangle(0, 0, GraphicsDevice.Viewport.Width, GraphicsDevice.Viewport.Height), viewportPosition);
             //map.Draw(spriteBatch, new Rectangle(0, 0, 200, 100), viewportPosition);
             // Render sprite
