@@ -44,7 +44,9 @@ namespace Maria.Sprites
             if (ishit)
             {
                 translation.X = -Speed;
+                Game1.Instance.soundeffects[1].Play();
                 Position = Vector2.Zero;
+
             }
 
             if (Keyboard.GetState().IsKeyDown(Input.Jump) && grounded)
