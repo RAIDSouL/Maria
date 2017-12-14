@@ -97,6 +97,7 @@ namespace Maria
             player = spriteManager.List[0];
             // TODO: use this.Content to load your game content here
             LoadSfx("jump");
+            LoadSfx("hit");
 
             LoadMap("level1");
 
