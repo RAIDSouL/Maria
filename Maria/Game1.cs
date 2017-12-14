@@ -132,7 +132,7 @@ namespace Maria
         {
             soundeffects.Add(Content.Load<SoundEffect>(Path.Combine("sfx/" + sfxName)));
         }
-    
+        
 
         /// <summary>
         /// Allows the game to run logic such as updating the world,
