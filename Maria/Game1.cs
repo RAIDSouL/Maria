@@ -7,7 +7,7 @@ using System.IO;
 using Maria.Sprites;
 using Maria.Models;
 using Maria.Managers;
-using System;
+using Microsoft.Xna.Framework.Media;
 
 namespace Maria
 {
@@ -16,14 +16,11 @@ namespace Maria
     /// </summary>
     public class Game1 : Game
     {
-        public static Game1 Instance;
-
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
         Map map;
         Vector2 viewportPosition;
-
-        List<Texture2D> textureList = new List<Texture2D>();
+        Song song;
 
         public Sprite player;
 
@@ -40,7 +37,6 @@ namespace Maria
 
         public Game1()
         {
-            Instance = this;
             graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
             Window.Title = "Maria Jumpu";
@@ -80,16 +76,14 @@ namespace Maria
             };
 
             spriteManager.AddSprite(new Player(animations, 10f)
-                {
+            {
 
-                    Position = new Vector2(0, -100),
-                    Input = new Input()
-                    {
-                        Up = Keys.W,
-                        Jump = Keys.X,
-                        Down = Keys.S,
-                        Left = Keys.A,
-                        Right = Keys.D,
+                Position = new Vector2(0, 0),
+                Input = new Input()
+                {
+                    Jump = Keys.X,
+                    Left = Keys.A,
+                    Right = Keys.D,
                     },
             });
             
@@ -99,6 +93,8 @@ namespace Maria
             player = spriteManager.List[0];
             // TODO: use this.Content to load your game content here
             LoadMap("level1");
+            LoadSong("bbsong");
+            MediaPlayer.Play(song);
 
             map.SetupSprite(new Rectangle(0, 0, GraphicsDevice.Viewport.Width, GraphicsDevice.Viewport.Height), viewportPosition);
         }
@@ -115,6 +111,11 @@ namespace Maria
         public void LoadMap (string mapName)
         {
             map = Map.Load(Path.Combine(Content.RootDirectory, "maps/" + mapName + ".tmx"), Content);
+        }
+        
+        public void LoadSong (string songName)
+        {
+            song = Content.Load<Song>(Path.Combine("Music/" + songName));
         }
     
 
@@ -167,29 +168,6 @@ namespace Maria
             spriteBatch.End();
 
             base.Draw(gameTime);
-        }
-
-        public void DrawLine(SpriteBatch sb, Vector2 start, Vector2 end, Texture2D texture
-            )
-        {
-            Vector2 edge = end - start;
-            // calculate angle to rotate line
-            float angle =
-                (float)Math.Atan2(edge.Y, edge.X);
-
-            sb.Draw(texture,
-                new Rectangle(// rectangle defines shape of line and position of start of line
-                    (int)start.X,
-                    (int)start.Y,
-                    (int)edge.Length(), //sb will strech the texture to fill this rectangle
-                    1), //width of line, change this to make thicker line
-                null,
-                Color.White, //colour of line
-                angle,     //angle of line (calulated above)
-                new Vector2(0, 0), // point in line about which to rotate
-                SpriteEffects.None,
-                0);
-
         }
     }
 }

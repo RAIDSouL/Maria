@@ -37,6 +37,8 @@ namespace Maria.Sprites
 
         public bool grounded;
 
+        public bool ishit;
+
         #endregion
 
         #region Propoties
@@ -133,9 +135,9 @@ namespace Maria.Sprites
             if (animations != null)
                 animationManager.Update(gameTime);
 
-            
+            Position += Velocity + gravityVelocity + translation;
 
-            // Physics
+            // Gravity
             if (physicsType == EPhysics.Dynamic)
             {
                 if (jumpForce > 0)
@@ -144,56 +146,42 @@ namespace Maria.Sprites
                     jumpForce -= gravity / 60;
                 }
 
-                // On ground remove gravity
-                if (grounded)
+                if (grounded && jumpForce <= 0)
                 {
-
+                    if (Velocity.Y > 0)
+                        Velocity.Y = 0;
+                    gravityVelocity.Y = 0;
                 }
                 else
                 {
-                   gravityVelocity.Y += gravity / 60;
+                    if (jumpForce <= 0)
+                        gravityVelocity.Y += gravity / 60;
                 }
-
-                Position += Velocity + gravityVelocity + translation;
-
-                int groundCount = 0;
+                grounded = false;
+                ishit = false;
                 foreach (var sprite in sprites)
                 {
                     if (sprite != this) // Not check self
                     {
                         if (IsTouchingTop(sprite))
                         {
-                            groundCount++;
-                            // FIX: sprite fall into the block
-                            if (this.Position.Y + this.Velocity.Y + this.gravityVelocity.Y > sprite.Rectangle.Top - sprite.Rectangle.Height)
-                                this.Position = new Vector2(this.Position.X, sprite.Rectangle.Top - sprite.Rectangle.Height);
+                            grounded = true;
                         }
+                        if (IsTouchingLeft(sprite))
+                        {
+                            ishit = true;
+                        }
+                        
                     }
                 }
-
-                grounded = (groundCount > 0)? true: false;
             }
 
         }
 
-        public void Jump ()
-        {
-            Jump(jumpForce);
-        }
-
-        public void Jump (float force)
-        {
-            if (force < jumpForce || jumpForce > 0) return;
-            if (grounded)
-            jumpForce = force;
-        }
-
-       
-
         #endregion
 
         #region Collision
-
+        
         protected bool IsTouchingLeft(Sprite sprite)
         {
             return  this.Rectangle.Right + this.Velocity.X > sprite.Rectangle.Left &&

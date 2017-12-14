@@ -68,3 +68,9 @@
 /processorParam:TextureFormat=Color
 /build:bg/bgs.png
 
+#begin Music/bbsong.mp3
+/importer:Mp3Importer
+/processor:SongProcessor
+/processorParam:Quality=Best
+/build:Music/bbsong.mp3
+
