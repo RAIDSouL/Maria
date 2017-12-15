@@ -14,7 +14,9 @@ namespace Maria.Sprites
 {
     public class Player : Sprite
     {
-        
+
+        public int score;
+
         public float Speed = 1f;
         public EBlock blockType;
 
@@ -66,6 +68,7 @@ namespace Maria.Sprites
             blockType = EBlock.A;
             gravityVelocity = Vector2.Zero;
             jumpForce = 0;
+            score = 0;
         }
 
         public void Changeblock()
@@ -97,6 +100,7 @@ namespace Maria.Sprites
         {
             Game1.Instance.soundeffects[1].Play();
             Position = Vector2.Zero;
+            blockType = EBlock.A;
         }
 
         /**
