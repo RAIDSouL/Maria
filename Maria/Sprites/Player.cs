@@ -15,6 +15,7 @@ namespace Maria.Sprites
     {
         public float Speed = 1f;
 
+
         public override Rectangle Rectangle()
         {
             return new Rectangle((int)Position.X + 4, (int)Position.Y, (animations.ElementAt(0).Value.Texture.Width / animations.ElementAt(0).Value.FrameCount) - 4, animations.ElementAt(0).Value.Texture.Height);
@@ -36,6 +37,7 @@ namespace Maria.Sprites
 
         public override void Update(GameTime gameTime, List<Sprite> sprites)
         {
+            translation.X = Speed;
 
             base.Update(gameTime, sprites);
             

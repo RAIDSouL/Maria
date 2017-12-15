@@ -128,7 +128,7 @@ namespace Maria
         
         public void LoadSong (string songName)
         {
-            //song = Content.Load<Song>(Path.Combine("Music/" + songName));
+            song = Content.Load<Song>(Path.Combine("Music/" + songName));
         }
 
         public void LoadSfx(string sfxName)
@@ -148,7 +148,7 @@ namespace Maria
             LoadMap("level1");
 
             //song
-            LoadSong("bbsong");
+            LoadSong("0");
         }
 
         /// <summary>
@@ -178,6 +178,7 @@ namespace Maria
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Draw(GameTime gameTime)
         {
+               
             GraphicsDevice.Clear(Color.CornflowerBlue);
 
             // TODO: Add your drawing code here
