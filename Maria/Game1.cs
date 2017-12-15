@@ -94,6 +94,7 @@ namespace Maria
                     Jump = Keys.X,
                     Left = Keys.A,
                     Right = Keys.D,
+                    ChangeBlock = Keys.Z,
                 },
             });
 
