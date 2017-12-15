@@ -32,7 +32,7 @@ namespace Maria.Mainmenu
             for (int i = 0; i < LevelList.list.Length; i++)
             {
                 spriteBatch.Draw(button, new Rectangle(20 + 100 * column, 20 + 100 * row, 100, 100), Color.White);
-                spriteBatch.DrawString(Game1.Instance.File, LevelList.list[i].map, new Vector2(20 + 100 * column, 20 + 100 * row), Color.Black);
+                spriteBatch.DrawString(Game1.Instance.File, LevelList.list[i].map, new Vector2(20 + 100 * column, 20 + 100 * row), Color.Black,0, new Vector2(0,0),1.5f,0,0);
                 column++;
                 if (column >= 5)
                 {

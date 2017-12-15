@@ -31,6 +31,7 @@ namespace Maria
         public List<Texture2D> bg;
         Texture2D block;
 
+
         public Player player;
 
         public Vector2 spawnPoint;
@@ -54,13 +55,14 @@ namespace Maria
             Instance = this;
             graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
-            Window.Title = "Maria Jumpu";
             graphics.PreferredBackBufferWidth = 320*2;
             graphics.PreferredBackBufferHeight = 240*2;
             graphics.ApplyChanges();
             soundeffects = new List<SoundEffect>();
             mainmenu = new MainMenu();
             bg = new List<Texture2D>();
+            this.Activated += (sender, args) => { this.Window.Title = "Maria Jumpu"; };
+            this.Deactivated += (sender, args) => { this.Window.Title = "Maria Jumpu (unactive)"; };
         }
 
         /// <summary>
@@ -192,30 +194,33 @@ namespace Maria
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Update(GameTime gameTime)
         {
-            if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
+            if (IsActive)
             {
-                if (!mainmenu.Active)
-                { 
-                    mainmenu.Active = true;
-                    mainmenu.ChangeStage(2);
+                if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
+                {
+                    if (!mainmenu.Active)
+                    {
+                        mainmenu.Active = true;
+                        mainmenu.ChangeStage(2);
+                    }
                 }
-            }
 
-            if (mainmenu.Active)
-            {
-                mainmenu.Update(gameTime);
-            }
-            else
-            {
-                spriteManager.Update(gameTime);
-            
-                if (player.Texture != null)
-                    spriteRectangle = new Rectangle((int)player.Position.X, (int)player.Position.Y,
-                                   player.Texture.Width, player.Texture.Height);
-                camera.Update(gameTime, this);
-            }
+                if (mainmenu.Active)
+                {
+                    mainmenu.Update(gameTime);
+                }
+                else
+                {
+                    spriteManager.Update(gameTime);
 
-            base.Update(gameTime);
+                    if (player.Texture != null)
+                        spriteRectangle = new Rectangle((int)player.Position.X, (int)player.Position.Y,
+                                       player.Texture.Width, player.Texture.Height);
+                    camera.Update(gameTime, this);
+                }
+
+                base.Update(gameTime);
+            }
         }
 
         /// <summary>
@@ -226,7 +231,8 @@ namespace Maria
         {
 
             GraphicsDevice.Clear(Color.CornflowerBlue);
-
+            /*var fps = 1 / gameTime.ElapsedGameTime.TotalSeconds;
+            Window.Title += fps.ToString();*/
             // TODO: Add your drawing code here
             // Render map
 
@@ -261,7 +267,7 @@ namespace Maria
 
                 spriteBatch.Begin();
 
-                spriteBatch.DrawString(File, "Score: " + player.score, new Vector2(550, 10), Color.Black);
+                spriteBatch.DrawString(File, "Score: " + player.score, new Vector2(520, 20), Color.Black, 0, new Vector2(0, 0), 1.5f, 0, 0);
                 spriteBatch.Draw(block, new Rectangle(10, 10, 50, 50), 
                     new Rectangle( (int)player.blockType * block.Height, 0, block.Height, block.Height), Color.White);
                 
