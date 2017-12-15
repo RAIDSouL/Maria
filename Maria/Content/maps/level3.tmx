@@ -24,43 +24,6 @@
    H4sIAAAAAAAAC2NgGByAGQ0PFzDU/IIeD/jwKBh5YDClheGUBoeTX5ABAHo0zCtgBgAA
   </data>
  </layer>
- <objectgroup name="crystals">
-  <object id="1" x="593" y="82">
-   <ellipse/>
-  </object>
-  <object id="2" x="754" y="143">
-   <ellipse/>
-  </object>
-  <object id="3" x="786" y="143">
-   <ellipse/>
-  </object>
-  <object id="4" x="1009" y="176">
-   <ellipse/>
-  </object>
-  <object id="5" x="1136" y="49">
-   <ellipse/>
-  </object>
- </objectgroup>
- <objectgroup name="spikes" visible="0">
-  <object id="6" x="242" y="144">
-   <ellipse/>
-  </object>
-  <object id="7" x="402" y="144">
-   <ellipse/>
-  </object>
-  <object id="8" x="433" y="144">
-   <ellipse/>
-  </object>
-  <object id="9" x="593" y="145">
-   <ellipse/>
-  </object>
-  <object id="10" x="592" y="113">
-   <ellipse/>
-  </object>
-  <object id="11" x="1584" y="145">
-   <ellipse/>
-  </object>
- </objectgroup>
  <layer name="bomb" width="51" height="8">
   <data encoding="base64" compression="gzip">
    H4sIAAAAAAAAC2NgGAXDGfAMtAOoCAa7X7C5jweP+CgYBcMdAAAdOzaNYAYAAA==
