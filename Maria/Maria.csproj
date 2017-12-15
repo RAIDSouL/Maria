@@ -57,9 +57,12 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="Camera.cs" />
+    <Compile Include="Enum\EBlock.cs" />
     <Compile Include="Enum\EPhysics.cs" />
     <Compile Include="Game1.cs" />
     <Compile Include="Lib\DebugDraw.cs" />
+    <Compile Include="MainMenu.cs" />
+    <Compile Include="Mainmenu\TitleScene.cs" />
     <Compile Include="Managers\AnimationManager.cs" />
     <Compile Include="Managers\SpriteManager.cs" />
     <Compile Include="Models\Animation.cs" />

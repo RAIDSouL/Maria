@@ -32,6 +32,9 @@ namespace Maria
         // Camera
         Camera camera;
 
+        // Mainmenu
+        MainMenu mainmenu;
+
         public Rectangle spriteRectangle;
 
         #endregion
@@ -49,7 +52,7 @@ namespace Maria
             graphics.PreferredBackBufferHeight = 240*2;
             graphics.ApplyChanges();
             soundeffects = new List<SoundEffect>();
-
+            mainmenu = new MainMenu();
         }
 
         /// <summary>
@@ -185,13 +188,17 @@ namespace Maria
                 camera.tranform
                 );
             // Render map
-                        
+
             //map.Draw(spriteBatch, new Rectangle(0, 0, GraphicsDevice.Viewport.Width, GraphicsDevice.Viewport.Height), viewportPosition);
             //map.Draw(spriteBatch, new Rectangle(0, 0, 200, 100), viewportPosition);
             // Render sprite
 
-            spriteManager.Draw(gameTime, spriteBatch);
-            
+            if (mainmenu.Active)
+            {
+                mainmenu.Draw(gameTime, spriteBatch);
+            } else { 
+                spriteManager.Draw(gameTime, spriteBatch);
+            }
 
             spriteBatch.End();
 
