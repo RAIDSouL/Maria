@@ -19,6 +19,11 @@ namespace Maria.Models
         
         public Keys Jump { get; set; }
         
-        public Keys ChangeBlock { get; set; }
+        public Keys ChangeBlockA { get; set; }
+
+        public Keys ChangeBlockB { get; set; }
+
+        public Keys ChangeBlockC { get; set; }
+
     }
 }
