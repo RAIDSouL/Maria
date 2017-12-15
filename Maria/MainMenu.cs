@@ -12,6 +12,8 @@ namespace Maria
 {
     public class MainMenu
     {
+        public static MainMenu Instance { get; private set; }
+
         public bool Active { get; private set; }
 
         ContentManager content;
@@ -22,13 +24,17 @@ namespace Maria
 
         public MainMenu ()
         {
-            Active = false;
+            Instance = this;
+            Active = true;
             titleScene = new TitleScene();
         }
 
         public void Update (GameTime gameTime)
         {
-
+            if (stage == 0)
+            {
+                titleScene.Update(gameTime);
+            }
         }
 
         public void LoadContent ()

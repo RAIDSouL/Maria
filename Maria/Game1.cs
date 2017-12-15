@@ -162,13 +162,19 @@ namespace Maria
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();
 
-            spriteManager.Update(gameTime);
+            if (mainmenu.Active)
+            {
+                mainmenu.Update(gameTime);
+            }
+            else
+            {
+                spriteManager.Update(gameTime);
             
-            if (player.Texture != null)
-                spriteRectangle = new Rectangle((int)player.Position.X, (int)player.Position.Y,
+                if (player.Texture != null)
+                    spriteRectangle = new Rectangle((int)player.Position.X, (int)player.Position.Y,
                                    player.Texture.Width, player.Texture.Height);
-
                 camera.Update(gameTime, this);
+            }
 
             base.Update(gameTime);
         }
@@ -182,11 +188,6 @@ namespace Maria
             GraphicsDevice.Clear(Color.CornflowerBlue);
 
             // TODO: Add your drawing code here
-            spriteBatch.Begin(SpriteSortMode.Deferred,
-                BlendState.AlphaBlend,
-                null, null, null, null,
-                camera.tranform
-                );
             // Render map
 
             //map.Draw(spriteBatch, new Rectangle(0, 0, GraphicsDevice.Viewport.Width, GraphicsDevice.Viewport.Height), viewportPosition);
@@ -195,12 +196,20 @@ namespace Maria
 
             if (mainmenu.Active)
             {
-                mainmenu.Draw(gameTime, spriteBatch);
-            } else { 
+
+                spriteBatch.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend);
+                    mainmenu.Draw(gameTime, spriteBatch);
+                spriteBatch.End();
+            } else {
+                spriteBatch.Begin(SpriteSortMode.Deferred,
+                    BlendState.AlphaBlend,
+                    null, null, null, null,
+                    camera.tranform
+                    );
                 spriteManager.Draw(gameTime, spriteBatch);
+                spriteBatch.End();
             }
 
-            spriteBatch.End();
 
             base.Draw(gameTime);
         }
