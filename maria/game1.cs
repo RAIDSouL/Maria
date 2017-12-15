@@ -31,6 +31,8 @@ namespace Maria
 
         public Player player;
 
+        public Vector2 spawnPoint;
+
         #region Camera
         // Camera
         Camera camera;
@@ -161,7 +163,8 @@ namespace Maria
 
         public void PlayLevel (int index)
         {
-            LoadMap(LevelList.list[index].map);
+            player.Reset();
+            LoadMap(LevelList.list[index].map);            
         }
 
         /// <summary>
@@ -233,7 +236,8 @@ namespace Maria
                 spriteBatch.End();
                 spriteBatch.Begin();
 
-                spriteBatch.DrawString(File, "score", new Vector2(550, 0), Color.Black);
+                spriteBatch.DrawString(File, "Score: " + player.score, new Vector2(550, 0), Color.Black);
+
                 spriteBatch.End();
 
             }
