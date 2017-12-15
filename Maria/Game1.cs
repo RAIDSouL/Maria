@@ -146,10 +146,15 @@ namespace Maria
             LoadSfx("changeblock");
 
             //map
-            LoadMap("level1");
+            //LoadMap("level1");
 
             //song
             LoadSong("0");
+        }
+
+        public void PlayLevel (int index)
+        {
+            LoadMap(LevelList.list[index].map);
         }
 
         /// <summary>

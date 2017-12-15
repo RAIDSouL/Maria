@@ -34,7 +34,7 @@ namespace Maria.Mainmenu
             mouseB = new Rectangle(Mouse.GetState().X, Mouse.GetState().Y, 30, 30);
             if (mouseB.Intersects(nextb) && Mouse.GetState().LeftButton == ButtonState.Pressed)
             {
-                MainMenu.Instance.ChangeStage(5); // Play
+                MainMenu.Instance.ChangeStage(2);
             }
         }
 

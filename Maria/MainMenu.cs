@@ -22,6 +22,7 @@ namespace Maria
 
         private TitleScene titleScene;
         private HowToPlay howto;
+        private LevelSelect levelSelect;
 
         public MainMenu ()
         {
@@ -29,6 +30,7 @@ namespace Maria
             Active = true;
             titleScene = new TitleScene();
             howto = new HowToPlay();
+            levelSelect = new LevelSelect();
         }
 
         public void Update (GameTime gameTime)
@@ -37,6 +39,8 @@ namespace Maria
                 titleScene.Update(gameTime);
             else if (stage == 1)
                 howto.Update(gameTime);
+            else if (stage == 2)
+                levelSelect.Update(gameTime);
         }
 
         public void Draw (GameTime gameTime, SpriteBatch spriteBatch)
@@ -45,6 +49,8 @@ namespace Maria
                 titleScene.Draw(gameTime, spriteBatch);
             else if (stage == 1)
                 howto.Draw(gameTime, spriteBatch);
+            else if (stage == 2)
+                levelSelect.Draw(gameTime, spriteBatch);
         }
 
         public void ChangeStage (int _stage)
@@ -52,6 +58,12 @@ namespace Maria
             stage = _stage;
             if (_stage == 5)
                 Active = false;
+        }
+
+        public void Play (int level)
+        {
+            ChangeStage(5);
+            Game1.Instance.PlayLevel(level);
         }
 
     }
