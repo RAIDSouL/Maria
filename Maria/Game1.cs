@@ -29,7 +29,7 @@ namespace Maria
         Song song;
         public List<SoundEffect> soundeffects;
         public List<Texture2D> bg;
-        Texture2D block;
+        Texture2D block,nblock;
         
 
 
@@ -174,6 +174,8 @@ namespace Maria
 
             //block
             block = Content.Load<Texture2D>(Path.Combine("tiled/blocks"));
+            nblock = Content.Load<Texture2D>("tiled/sad");
+
 
             //bg
             LoadBg("bg0");
@@ -277,7 +279,8 @@ namespace Maria
                 spriteBatch.Begin();
 
                 spriteBatch.DrawString(File, "Score: " + player.score, new Vector2(520, 20), Color.Black, 0, new Vector2(0, 0), 1.5f, 0, 0);
-                spriteBatch.Draw(block, new Rectangle(10, 10, 50, 50), 
+                spriteBatch.Draw(nblock, new Rectangle(10, 10, 60, 60), Color.White);
+                spriteBatch.Draw(block, new Rectangle(20, 20, 40, 40), 
                     new Rectangle( (int)player.blockType * block.Height, 0, block.Height, block.Height), Color.White);
                 
                 spriteBatch.End();
