@@ -10,13 +10,15 @@ using Maria.Managers;
 using Microsoft.Xna.Framework.Media;
 using Microsoft.Xna.Framework.Audio;
 
+
 namespace Maria
 {
     /// <summary>
     /// This is the main type for your game.
     /// </summary>
     public class Game1 : Game
-    {
+    {   
+        
         public static Game1 Instance { get; private set; }
 
         GraphicsDeviceManager graphics;
@@ -193,7 +195,8 @@ namespace Maria
         protected override void Draw(GameTime gameTime)
             
         {
-            
+     
+
 
             
             GraphicsDevice.Clear(Color.CornflowerBlue);
