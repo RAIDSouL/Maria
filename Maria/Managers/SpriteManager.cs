@@ -46,16 +46,16 @@ namespace Maria.Managers
                 {
                     sprite.Draw(spriteBatch);
 
-                    spriteBatch.Draw(DebugBox[0], sprite.Rectangle(), Color.White);
+                    //spriteBatch.Draw(DebugBox[0], sprite.Rectangle(), Color.White);
                 }
             }
 
+
+            // Render player alone
             if (Game1.Instance.player.visible)
             {
                 Game1.Instance.player.Draw(spriteBatch);
-
-                spriteBatch.Draw(DebugBox[0], Game1.Instance.player.Rectangle(), Color.White);
-
+                //spriteBatch.Draw(DebugBox[0], Game1.Instance.player.Rectangle(), Color.White);
             }
         }
 

@@ -18,7 +18,7 @@ namespace Maria.Sprites
 
         public override Rectangle Rectangle()
         {
-            return new Rectangle((int)Position.X, (int)Position.Y, _texture.Width / 4, _texture.Height);
+            return new Rectangle((int)Position.X + 5, (int)Position.Y + 5, (_texture.Width / 4) - 10, (_texture.Height) - 10);
         }
 
     }
