@@ -10,7 +10,7 @@ namespace Maria.Sprites
 {
     public class Coin : Sprite
     {
-        public Coin (Texture2D _texture) : base(new Dictionary<string, Animation>() { { "bunny", new Animation(_texture, 7) }, })
+        public Coin (Texture2D _texture) : base(new Dictionary<string, Animation>() { { "coin", new Animation(_texture, 7) }, })
         {
 
         }
