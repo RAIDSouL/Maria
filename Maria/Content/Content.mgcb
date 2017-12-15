@@ -179,3 +179,15 @@
 /processorParam:TextureFormat=Color
 /build:Player/bunnyjung.png
 
+#begin maps/level2.tmx
+/copy:maps/level2.tmx
+
+#begin maps/level3.tmx
+/copy:maps/level3.tmx
+
+#begin maps/level4.tmx
+/copy:maps/level4.tmx
+
+#begin maps/level5.tmx
+/copy:maps/level5.tmx
+
