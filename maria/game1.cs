@@ -198,6 +198,8 @@ namespace Maria
         {
             if (IsActive)
             {
+                if (LevelList.list[0].map != "level1")
+                    LevelList.list[0].play1 = false;
                 if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
                 {
                     if (!mainmenu.Active)
@@ -249,12 +251,14 @@ namespace Maria
             } else {
                 spriteBatch.Begin();
                 {
-                    spriteBatch.Draw(bg[1], new Rectangle(0, 0, 640, 480), Color.White);
-                    /*
-                    spriteBatch.Draw(bg[2], new Rectangle(0, 0, 640, 480), Color.White);
-                    spriteBatch.Draw(bg[3], new Rectangle(0, 0, 640, 480), Color.White);
-                    spriteBatch.Draw(bg[4], new Rectangle(0, 0, 640, 480), Color.White);
-                    */
+                    if (LevelList.list[0].play1)
+                        spriteBatch.Draw(bg[1], new Rectangle(0, 0, 640, 480), Color.White);
+                    if (LevelList.list[0].play2)
+                        spriteBatch.Draw(bg[2], new Rectangle(0, 0, 640, 480), Color.White);
+                    if (LevelList.list[0].play3)
+                        spriteBatch.Draw(bg[3], new Rectangle(0, 0, 640, 480), Color.White);
+                    if (LevelList.list[0].play4)
+                        spriteBatch.Draw(bg[4], new Rectangle(0, 0, 640, 480), Color.White);
                 }
                 spriteBatch.End();
                 
