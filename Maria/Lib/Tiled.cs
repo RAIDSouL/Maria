@@ -512,7 +512,7 @@ namespace Squared.Tiled
             }
         }
 
-        public void SetupPhysics(IList<Tileset> tilesets, Rectangle rectangle, Vector2 viewportPosition, int tileWidth, int tileHeight)
+        public void SetupPhysics(Layer _layer, IList<Tileset> tilesets, Rectangle rectangle, Vector2 viewportPosition, int tileWidth, int tileHeight)
         {
             int i = 0;
             Vector2 destPos = new Vector2(rectangle.Left, rectangle.Top);
@@ -608,17 +608,25 @@ namespace Squared.Tiled
                     int index = Tiles[i] - 1;
                     if ((index >= 0) && (index < _TileInfoCache.Length))
                     {
-                        info = _TileInfoCache[index]; 
-                        Block block = new Block(info.Texture, index)
+                        info = _TileInfoCache[index];
+                        if (_layer.Name == "coin")
                         {
-                            Position = destPos - viewPos,
-                            cropTexture = info.Rectangle,
-                            crop = true,
-                            physicsType = EPhysics.Static
-                        };
-                        SpriteManager.Instance.AddSprite(block);
-
-                        Console.WriteLine(info.Rectangle);
+                            Coin coin = new Coin(info.Texture)
+                            {
+                                Position = destPos - viewPos,
+                                physicsType = EPhysics.Static
+                            };
+                            SpriteManager.Instance.AddSprite(coin);
+                        } else { 
+                            Block block = new Block(info.Texture, index)
+                            {
+                                Position = destPos - viewPos,
+                                cropTexture = info.Rectangle,
+                                crop = true,
+                                physicsType = EPhysics.Static
+                            };
+                            SpriteManager.Instance.AddSprite(block);
+                        }
                         /*
                         batch.Draw(info.Texture, destPos - viewPos, info.Rectangle,
                                    Color.White * this.Opacity, rotation, new Vector2(tileWidth / 2f, tileHeight / 2f),
@@ -994,7 +1002,7 @@ namespace Squared.Tiled
         {
             foreach (Layer layers in Layers.Values)
             {
-                layers.SetupPhysics(Tilesets.Values, new Rectangle(0, 0, layers.Width * TileWidth, layers.Height * TileHeight), new Vector2(layers.Width, layers.Height), TileWidth, TileHeight);
+                layers.SetupPhysics(layers, Tilesets.Values, new Rectangle(0, 0, layers.Width * TileWidth, layers.Height * TileHeight), new Vector2(layers.Width, layers.Height), TileWidth, TileHeight);
             }            
         }
 

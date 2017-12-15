@@ -47,6 +47,19 @@ namespace Maria.Managers
             }
         }
 
+        public void DestroyMap ()
+        {
+            DestroyAllBlock();
+            for (int i = List.Count - 1; i >= 0; i--)
+            {
+                Sprite sprite = List[i];
+                if (sprite.GetType() == typeof(Player)) continue;
+                   
+                List[i] = null;
+                List.RemoveAt(i);
+            }
+        }
+
         public void DestroyAllBlock ()
         {
             for (int i = List.Count - 1; i >= 0; i--)
@@ -58,7 +71,6 @@ namespace Maria.Managers
                     List.RemoveAt(i);
                 }
             }
-            Console.WriteLine("Count: " + List.Count);
         }
 
     }

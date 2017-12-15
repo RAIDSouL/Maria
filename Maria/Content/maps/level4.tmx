@@ -3,19 +3,40 @@
  <tileset firstgid="1" name="blocks" tilewidth="32" tileheight="32" tilecount="3" columns="3">
   <image source="../tiled/blocks.png" width="96" height="32"/>
  </tileset>
+ <tileset firstgid="4" name="coin" tilewidth="32" tileheight="32" tilecount="7" columns="7">
+  <image source="../tiled/coins.png" width="224" height="32"/>
+ </tileset>
+ <tileset firstgid="11" name="bomb" tilewidth="32" tileheight="32" tilecount="4" columns="4">
+  <image source="../tiled/spikes.png" width="128" height="32"/>
+ </tileset>
  <layer name="red" width="65" height="8">
-  <data encoding="base64" compression="zlib">
-   eJxjYBgFo2AUjILhARiheBRQBzAykBemjFgwsepG42/wAAAm9AAR
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAAC2NgGJyAdaAdgAfQw22saPQoGFgw0PGBz150t43kNMMIxdQEtA5PVjrYQS5gZCAvTBmxYGLVUTv+RgH5AAAAzDG3IAgAAA==
+  </data>
+ </layer>
+ <layer name="bomb" width="65" height="8">
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAAC2NgoBxwU8GMoQi4cbBHKiA2DAZbWPFAMTXAUA2DUTAKhiLgIRGPAtIAAOs6gg0gCAAA
+  </data>
+ </layer>
+ <layer name="bat" width="65" height="8">
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAAC2NgGAWjYBSMglEwCkbBKEAFAHVv4YEgCAAA
+  </data>
+ </layer>
+ <layer name="coin" width="65" height="8">
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAAC2NgGAWjYBSMglEwCkbBKEAFAHVv4YEgCAAA
   </data>
  </layer>
  <layer name="green" width="65" height="8">
-  <data encoding="base64" compression="zlib">
-   eJxjYBgFo4B0wISER8EoIAbQMq2gp8WhnDbxuXs0340CegIAYPAAGQ==
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAAC2NgGAWjgHTAhIRHwSggBtAyraCnxaGcNvG5ezTfjQJ6AgBAyMaVIAgAAA==
   </data>
  </layer>
  <layer name="blue" width="65" height="8">
-  <data encoding="base64" compression="zlib">
-   eJxjYBgFo2DkAWYkPNgAPdxGjtnUdBe1/EauewZjvNMTjFT/D+Z8PxgBAMi8ADc=
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAAC2NgGAWjYOQBZiQ82AA93EaO2dR0F7X8Rq57BmO80xOMVP8P5nw/GAEAMSQQNyAIAAA=
   </data>
  </layer>
  <objectgroup name="crystals">

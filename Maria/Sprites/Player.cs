@@ -53,16 +53,19 @@ namespace Maria.Sprites
             else translation.X = 0;
 
             Changeblock();
-            // translation.X = Speed;
-            if (ishit)
-            {
-                Game1.Instance.soundeffects[1].Play();
-                Position = Vector2.Zero;
-            }
+            translation.X = Speed;
 
             if (Keyboard.GetState().IsKeyDown(Input.Jump) && grounded)
                 Jump(1.4f);
-         
+            if (Position.Y > 1000)
+                Die();
+        }
+
+        public void Reset ()
+        {
+            blockType = EBlock.A;
+            gravityVelocity = Vector2.Zero;
+            jumpForce = 0;
         }
 
         public void Changeblock()
@@ -83,6 +86,28 @@ namespace Maria.Sprites
                 Game1.Instance.soundeffects[3].Play();
             }
             
+        }
+
+        public void Die ()
+        {
+            Game1.Instance.soundeffects[1].Play();
+            Position = Vector2.Zero;
+        }
+
+        /**
+         *  When It toching sprite from that direction
+         */
+        public override void OnTouchingLeft(Sprite sprite) {
+            if (sprite.GetType() == typeof(Block) && ((Block)sprite).blockType == blockType) Die();
+        }
+        public override void OnTouchingRight(Sprite sprite) {
+            if (sprite.GetType() == typeof(Block) && ((Block)sprite).blockType == blockType) Die();
+        }
+        public override void OnTouchingTop(Sprite sprite) {
+            if (sprite.GetType() == typeof(Block) && ((Block)sprite).blockType == blockType) Die();
+        }
+        public override void OnTouchingBottom(Sprite sprite) {
+
         }
 
         protected virtual bool IsTouchingLeft(Sprite sprite)

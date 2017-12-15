@@ -19,6 +19,7 @@ namespace Maria.Sprites
             gravity = 0;
             physicsType = EPhysics.Static;
             blockType = (EBlock)_blockType;
+            isSolid = true;
         }
 
     }
