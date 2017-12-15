@@ -1,4 +1,5 @@
 ﻿using Maria.Enum;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System;
 using System.Collections.Generic;
@@ -19,5 +20,6 @@ namespace Maria.Sprites
             physicsType = EPhysics.Static;
             blockType = (EBlock)_blockType;
         }
+
     }
 }

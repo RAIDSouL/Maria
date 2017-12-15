@@ -60,9 +60,12 @@
     <Compile Include="Enum\EBlock.cs" />
     <Compile Include="Enum\EPhysics.cs" />
     <Compile Include="Game1.cs" />
+    <Compile Include="Interface\IMenu.cs" />
+    <Compile Include="Level.cs" />
     <Compile Include="Lib\DebugDraw.cs" />
     <Compile Include="MainMenu.cs" />
     <Compile Include="Mainmenu\HowToPlay.cs" />
+    <Compile Include="Mainmenu\LevelSelect.cs" />
     <Compile Include="Mainmenu\TitleScene.cs" />
     <Compile Include="Managers\AnimationManager.cs" />
     <Compile Include="Managers\SpriteManager.cs" />
@@ -72,6 +75,7 @@
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Sprites\Block.cs" />
+    <Compile Include="Sprites\Endblock.cs" />
     <Compile Include="Sprites\Player.cs" />
     <Compile Include="Sprites\Sprite.cs" />
     <Compile Include="Lib\Tiled.cs" />

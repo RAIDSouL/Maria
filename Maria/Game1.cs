@@ -130,7 +130,6 @@ namespace Maria
         public void LoadSong (string songName)
         {
             song = Content.Load<Song>(Path.Combine("Music/" + songName));
-            System.Console.WriteLine(song);
         }
 
         public void LoadSfx(string sfxName)
@@ -145,12 +144,18 @@ namespace Maria
             LoadSfx("hit");
             LoadSfx("crystal");
             LoadSfx("changeblock");
+            LoadSfx("levelselect");
 
             //map
-            LoadMap("level1");
+            //LoadMap("level1");
 
             //song
             LoadSong("0");
+        }
+
+        public void PlayLevel (int index)
+        {
+            LoadMap(LevelList.list[index].map);
         }
 
         /// <summary>
