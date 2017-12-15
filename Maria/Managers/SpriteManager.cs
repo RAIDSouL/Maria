@@ -38,9 +38,12 @@ namespace Maria.Managers
         {
             foreach (var sprite in List)
             {
-                sprite.Draw(spriteBatch);
+                if (sprite.visible)
+                {
+                    sprite.Draw(spriteBatch);
 
-                spriteBatch.Draw(DebugBox[0], sprite.Rectangle(), Color.White);
+                    spriteBatch.Draw(DebugBox[0], sprite.Rectangle(), Color.White);
+                }
             }
         }
 

@@ -91,7 +91,7 @@ namespace Maria
                     Jump = Keys.X,
                     Left = Keys.A,
                     Right = Keys.D,
-                    },
+                },
             });
 
             spriteManager.DebugBox.Add(Content.Load<Texture2D>("debugbox"));

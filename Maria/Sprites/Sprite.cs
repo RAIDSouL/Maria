@@ -39,6 +39,8 @@ namespace Maria.Sprites
 
         public bool ishit;
 
+        public bool visible = true; 
+
         #endregion
 
         #region Propoties
