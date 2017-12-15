@@ -241,7 +241,8 @@ namespace Maria
                 spriteBatch.Begin();
 
                 spriteBatch.DrawString(File, "Score: " + player.score, new Vector2(550, 0), Color.Black);
-                spriteBatch.Draw(block, new Rectangle(10, 10, block.Width, block.Height), Color.White);
+                spriteBatch.Draw(block, new Rectangle(10, 10, 100, 100), 
+                    new Rectangle( (int)player.blockType * block.Height, 0, block.Height, block.Height), Color.White);
                 spriteBatch.End();
 
             }
