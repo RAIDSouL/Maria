@@ -71,6 +71,30 @@ namespace Maria.Sprites
 
         #endregion
 
+        #region Overload
+
+        public Sprite(Texture2D texture)
+        {
+            _texture = texture;
+            gravity = 0;
+        }
+
+        public Sprite(Dictionary<string, Animation> animation)
+        {
+            animations = animation;
+            animationManager = new AnimationManager(animations.First().Value);
+        }
+
+        public Sprite(Dictionary<string, Animation> _animation, float _gravity)
+        {
+            animations = _animation;
+            animationManager = new AnimationManager(animations.First().Value);
+            gravity = _gravity;
+        }
+
+
+        #endregion
+
         #region Method
 
         public virtual Rectangle Rectangle ()
@@ -107,24 +131,6 @@ namespace Maria.Sprites
                 animationManager.Play(animations["bunny"]);
         }
 
-        public Sprite(Dictionary<string, Animation> animation)
-        {
-            animations = animation;
-            animationManager = new AnimationManager(animations.First().Value);
-        }
-
-        public Sprite(Dictionary<string, Animation> _animation, float _gravity)
-        {
-            animations = _animation;
-            animationManager = new AnimationManager(animations.First().Value);
-            gravity = _gravity;
-        }
-
-        public Sprite(Texture2D texture)
-        {
-            _texture = texture;
-            gravity = 0;
-        }
 
         public virtual void Update(GameTime gameTime, List<Sprite> sprites)
         {
@@ -134,7 +140,13 @@ namespace Maria.Sprites
             if (animations != null)
                 animationManager.Update(gameTime);
 
-            // Gravity
+            // Physics
+            Physics(sprites);
+
+        }
+
+        public virtual void Physics (List<Sprite> sprites)
+        {
             if (physicsType == EPhysics.Dynamic)
             {
                 if (jumpForce > 0)
@@ -173,7 +185,7 @@ namespace Maria.Sprites
                         {
                             ishit = true;
                         }
-                        
+
                     }
                 }
                 if (groundCount > 0)
@@ -182,15 +194,14 @@ namespace Maria.Sprites
                 }
                 else grounded = false;
             }
-
         }
 
-        public void Jump()
+        public virtual void Jump()
         {
             Jump(jumpForce);
         }
 
-        public void Jump(float force)
+        public virtual void Jump(float force)
         {
             Console.WriteLine(jumpForce);
             if (force < jumpForce || jumpForce > 0) return;
