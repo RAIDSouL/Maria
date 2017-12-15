@@ -608,8 +608,8 @@ namespace Squared.Tiled
                     int index = Tiles[i] - 1;
                     if ((index >= 0) && (index < _TileInfoCache.Length))
                     {
-                        info = _TileInfoCache[index];
-                        Block block = new Block(info.Texture)
+                        info = _TileInfoCache[index]; 
+                        Block block = new Block(info.Texture, index)
                         {
                             Position = destPos - viewPos,
                             cropTexture = info.Rectangle,
