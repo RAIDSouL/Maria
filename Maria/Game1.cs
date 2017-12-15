@@ -146,7 +146,7 @@ namespace Maria
             LoadSfx("changeblock");
 
             //map
-            LoadMap("test1");
+            LoadMap("level1");
 
             //song
             LoadSong("bbsong");
