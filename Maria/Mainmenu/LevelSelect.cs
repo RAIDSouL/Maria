@@ -26,7 +26,7 @@ namespace Maria.Mainmenu
 
         public void Draw(GameTime gameTime, SpriteBatch spriteBatch)
         {
-
+            spriteBatch.Draw(Game1.Instance.bg[0], new Rectangle(0, 0, 640, 480), Color.White);
             int row = 0;
             int column = 0;
             for (int i = 0; i < LevelList.list.Length; i++)
@@ -39,8 +39,9 @@ namespace Maria.Mainmenu
                     column = 0;
                 }
             }
-            
+           
             spriteBatch.Draw(mouse, mouseB, Color.White);
+            
         }
 
         public void Update(GameTime gameTime)
