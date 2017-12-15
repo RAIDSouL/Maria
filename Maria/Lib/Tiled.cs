@@ -1006,6 +1006,15 @@ namespace Squared.Tiled
                 {
                     Game1.Instance.player.Position = new Vector2(ObjectGroups["point"].Objects["start"].X, ObjectGroups["point"].Objects["start"].Y);
                 }
+                if (ObjectGroups["point"].Objects.ContainsKey("end"))
+                {
+                    /*
+                    SpriteManager.Instance.AddSprite(new Endblock(null)
+                    {
+                        area = new Rectangle()
+                    });
+                    */
+                }
             }
         }
 

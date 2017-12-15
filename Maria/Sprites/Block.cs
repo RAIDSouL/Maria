@@ -1,4 +1,5 @@
 ﻿using Maria.Enum;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System;
 using System.Collections.Generic;
@@ -12,12 +13,19 @@ namespace Maria.Sprites
     {
         public EBlock blockType;
 
+        public Rectangle area;
+
         public Block(Texture2D texture, int _blockType) : base(texture)
         {
             _texture = texture;
             gravity = 0;
             physicsType = EPhysics.Static;
             blockType = (EBlock)_blockType;
+        }
+
+        public override Rectangle Rectangle()
+        {
+            return 
         }
     }
 }
