@@ -7,18 +7,18 @@
   <image source="../tiled/coins.png" width="224" height="32"/>
  </tileset>
  <layer name="red" width="69" height="8">
-  <data encoding="base64" compression="zlib">
-   eJxjYBgFo2AUjIJRgAwYoXioAlxuH8p+GuqAkQqYVDuGOgAAKqAAGg==
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAAC2NgGAWjYBSMglGADBiheKgCXG4fyn4a6oCRCphUO4Y6AAAweIUYoAgAAA==
   </data>
  </layer>
  <layer name="green" width="69" height="8">
-  <data encoding="base64" compression="zlib">
-   eJxjYBgFo2AUjATARII6YtUONkCqu4eqP2kJBluYMKHh4W7vKEAAAFPIAB0=
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAAC2NgGAWjYBSMBMBEgjpi1Q42QKq7h6o/aQkGW5gwoeHhbu8oQAAAIBV7wqAIAAA=
   </data>
  </layer>
  <layer name="blue" width="69" height="8">
-  <data encoding="base64" compression="zlib">
-   eJxjYBi5gHmgHTAIwWiYYIKRHibMOPAoGNpguMYhrdLpaPqnPwAAwhAANw==
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAAC2NgGLmAeaAdMAjBaJhggpEeJsw48CgY2mC4xiGt0ulo+qc/AAAY02lboAgAAA==
   </data>
  </layer>
  <objectgroup name="point">
@@ -26,13 +26,13 @@
   <object id="19" name="end" x="2176" y="1" width="31" height="190"/>
  </objectgroup>
  <layer name="coin" width="69" height="8">
-  <data encoding="base64" compression="zlib">
-   eJxjYBgFo4CBgQWKRwqgxL8DHU7o9g8299BKD7XNGOhwgwFS0uJIy6ejYGQDABfPAD0=
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAAC2NgGAWjgIGBBYpHCqDEvwMdTuj2Dzb30EoPtc0Y6HCDAVLS4kjLp6NgZAMAK5svEaAIAAA=
   </data>
  </layer>
  <layer name="spike" width="69" height="8">
-  <data encoding="base64" compression="zlib">
-   eJxjYBgFo2AUjIJRMApGwSgYXAAACKAAAQ==
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAAC2NgGAWjYBSMglEwCkbBKBhcAABNh8k4oAgAAA==
   </data>
  </layer>
 </map>
