@@ -25,7 +25,7 @@ namespace Maria
         SpriteBatch spriteBatch;
         public SpriteFont File;
         Map map;
-       // Vector2 viewportPosition;
+        Vector2 viewportPosition;
         Song song;
         public List<SoundEffect> soundeffects;
         public List<Texture2D> bg;
@@ -142,7 +142,7 @@ namespace Maria
         
         public void LoadSong (string songName)
         {
-            //song = Content.Load<Song>(Path.Combine("Music/" + songName));
+            song = Content.Load<Song>(Path.Combine("Music/" + songName));
         }
 
         public void LoadSfx(string sfxName)
@@ -172,7 +172,7 @@ namespace Maria
             block = Content.Load<Texture2D>(Path.Combine("tiled/blocks"));
 
             //bg
-            LoadBg("bg");
+            LoadBg("bg0");
             LoadBg("bg1");
             LoadBg("bg2");
             LoadBg("bg3");
@@ -261,8 +261,8 @@ namespace Maria
 
                 spriteBatch.Begin();
 
-                spriteBatch.DrawString(File, "Score: " + player.score, new Vector2(550, 0), Color.Black);
-                spriteBatch.Draw(block, new Rectangle(10, 10, 100, 100), 
+                spriteBatch.DrawString(File, "Score: " + player.score, new Vector2(550, 10), Color.Black);
+                spriteBatch.Draw(block, new Rectangle(10, 10, 50, 50), 
                     new Rectangle( (int)player.blockType * block.Height, 0, block.Height, block.Height), Color.White);
                 
                 spriteBatch.End();
