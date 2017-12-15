@@ -37,8 +37,6 @@ namespace Maria.Sprites
 
         public bool grounded;
 
-        public bool ishit;
-
         public bool visible = true; 
 
         #endregion
@@ -66,6 +64,8 @@ namespace Maria.Sprites
         public Vector2 Velocity;
 
         public float gravity;
+
+        public bool isSolid;
 
         public Color Color = Color.White;
 
@@ -171,29 +171,27 @@ namespace Maria.Sprites
                 Position += Velocity + gravityVelocity + translation;
 
                 int groundCount = 0;
-                int hitCount = 0;
                 foreach (var sprite in sprites)
                 {
                     if (sprite != this) // Not check self
                     {
                         if (IsTouchingTop(sprite))
                         {
-                            groundCount++;
-                            // FIX: sprite fall into the block
-                            if (Position.Y + Velocity.Y + gravityVelocity.Y > sprite.Rectangle().Top - 2)
-                                Position = new Vector2(Position.X, sprite.Rectangle().Top - 2);
+                            if (sprite.isSolid)
+                            {
+                                groundCount++;
+                                // FIX: sprite fall into the block
+                                if (Position.Y + Velocity.Y + gravityVelocity.Y > sprite.Rectangle().Top - 2)
+                                    Position = new Vector2(Position.X, sprite.Rectangle().Top - 2);
+                            }
+                            OnTouchingBottom(sprite);
                         }
-                        if (IsTouchingLeft(sprite))
-                        {
-                            hitCount++;
-                        }
+                        if (IsTouchingLeft(sprite)) OnTouchingRight(sprite);
+                        if (IsTouchingRight(sprite)) OnTouchingLeft(sprite);
                     }
                 }
                 if (groundCount > 0) grounded = true;
                 else grounded = false;
-
-                if (hitCount > 0 || Position.Y > 1000) ishit = true;
-                else ishit = false;
             }
         }
 
@@ -215,10 +213,10 @@ namespace Maria.Sprites
             }
         }
 
-        public virtual void OnTouchingOther (Sprite sprite)
-        {
-
-        }
+        public virtual void OnTouchingLeft (Sprite sprite) { }
+        public virtual void OnTouchingRight(Sprite sprite) { }
+        public virtual void OnTouchingTop(Sprite sprite) { }
+        public virtual void OnTouchingBottom(Sprite sprite) { }
 
 
         #endregion
