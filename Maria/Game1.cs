@@ -31,6 +31,8 @@ namespace Maria
 
         public Player player;
 
+        public Vector2 spawnPoint;
+
         #region Camera
         // Camera
         Camera camera;
