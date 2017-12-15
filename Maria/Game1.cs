@@ -8,6 +8,7 @@ using Maria.Sprites;
 using Maria.Models;
 using Maria.Managers;
 using Microsoft.Xna.Framework.Media;
+using Microsoft.Xna.Framework.Audio;
 
 namespace Maria
 {
@@ -16,11 +17,14 @@ namespace Maria
     /// </summary>
     public class Game1 : Game
     {
+        public static Game1 Instance { get; private set; }
+
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
         Map map;
         Vector2 viewportPosition;
         Song song;
+        public List<SoundEffect> soundeffects;
 
         public Sprite player;
 
@@ -33,16 +37,18 @@ namespace Maria
         #endregion
 
         public SpriteManager spriteManager;
-
+        private float timer = 0;
 
         public Game1()
         {
+            Instance = this;
             graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
             Window.Title = "Maria Jumpu";
             graphics.PreferredBackBufferWidth = 320*2;
             graphics.PreferredBackBufferHeight = 240*2;
             graphics.ApplyChanges();
+            soundeffects = new List<SoundEffect>();
 
         }
 
@@ -56,7 +62,8 @@ namespace Maria
         {
             // TODO: Add your initialization logic here
             camera = new Camera(GraphicsDevice.Viewport);
-            spriteManager = new SpriteManager();    
+            spriteManager = new SpriteManager();
+            
 
             base.Initialize();
         }
@@ -74,31 +81,32 @@ namespace Maria
 
             var animations = new Dictionary<string, Animation>()
             {
-                { "bunny", new Animation(Content.Load<Texture2D>("Player/bunny"), 4) }
+                { "bunny", new Animation(Content.Load<Texture2D>("Player/bunnyjung"), 3) },
             };
 
             spriteManager.AddSprite(new Player(animations, 10f)
             {
 
-                Position = new Vector2(0, 0),
+                Position = new Vector2(0, 100),
                 Input = new Input()
                 {
                     Jump = Keys.X,
                     Left = Keys.A,
                     Right = Keys.D,
-                    },
+                },
             });
+
+            spriteManager.DebugBox.Add(Content.Load<Texture2D>("debugbox"));
             
-            spriteManager.AddSprite(new Sprite(Content.Load<Texture2D>("tiled/blocks")) {
-                Position = new Vector2(0, 100)
-            });
             player = spriteManager.List[0];
             // TODO: use this.Content to load your game content here
-            LoadMap("level1");
-            LoadSong("bbsong");
+            
+            LoadObj();
+
+            MediaPlayer.IsRepeating = true;
             MediaPlayer.Play(song);
 
-            map.SetupSprite(new Rectangle(0, 0, GraphicsDevice.Viewport.Width, GraphicsDevice.Viewport.Height), viewportPosition);
+            
         }
 
         /// <summary>
@@ -112,14 +120,36 @@ namespace Maria
 
         public void LoadMap (string mapName)
         {
+            SpriteManager.Instance.DestroyAllBlock();
             map = Map.Load(Path.Combine(Content.RootDirectory, "maps/" + mapName + ".tmx"), Content);
+            map.SetupSprite();
+            map.SetPlayerLocation();
         }
         
         public void LoadSong (string songName)
         {
-            song = Content.Load<Song>(Path.Combine("Music/" + songName));
+            //song = Content.Load<Song>(Path.Combine("Music/" + songName));
         }
-    
+
+        public void LoadSfx(string sfxName)
+        {
+            soundeffects.Add(Content.Load<SoundEffect>(Path.Combine("sfx/" + sfxName)));
+        }
+        
+        public void LoadObj()
+        {
+            //sfx
+            LoadSfx("jump");
+            LoadSfx("hit");
+            LoadSfx("crystal");
+            LoadSfx("changeblock");
+
+            //map
+            LoadMap("level1");
+
+            //song
+            LoadSong("bbsong");
+        }
 
         /// <summary>
         /// Allows the game to run logic such as updating the world,
@@ -132,14 +162,12 @@ namespace Maria
                 Exit();
 
             spriteManager.Update(gameTime);
-
+            
             if (player.Texture != null)
                 spriteRectangle = new Rectangle((int)player.Position.X, (int)player.Position.Y,
+                                   player.Texture.Width, player.Texture.Height);
 
-            player.Texture.Width, player.Texture.Height);
-
-            camera.Update(gameTime, this);
-
+                camera.Update(gameTime, this);
 
             base.Update(gameTime);
         }
@@ -159,7 +187,7 @@ namespace Maria
                 camera.tranform
                 );
             // Render map
-            
+                        
             //map.Draw(spriteBatch, new Rectangle(0, 0, GraphicsDevice.Viewport.Width, GraphicsDevice.Viewport.Height), viewportPosition);
             //map.Draw(spriteBatch, new Rectangle(0, 0, 200, 100), viewportPosition);
             // Render sprite

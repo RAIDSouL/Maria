@@ -13,7 +13,9 @@ namespace Maria.Managers
     {
         public static SpriteManager Instance;
 
-        public List<Sprite> List { get; private set; }       
+        public List<Sprite> List { get; private set; }
+
+        public List<Texture2D> DebugBox = new List<Texture2D>();
         
         public SpriteManager ()
         {
@@ -36,8 +38,27 @@ namespace Maria.Managers
         {
             foreach (var sprite in List)
             {
-                sprite.Draw(spriteBatch);
+                if (sprite.visible)
+                {
+                    sprite.Draw(spriteBatch);
+
+                    spriteBatch.Draw(DebugBox[0], sprite.Rectangle(), Color.White);
+                }
             }
+        }
+
+        public void DestroyAllBlock ()
+        {
+            for (int i = List.Count - 1; i >= 0; i--)
+            {
+                Sprite sprite = List[i];
+                if (sprite.GetType() == typeof(Block))
+                {
+                    List[i] = null;
+                    List.RemoveAt(i);
+                }
+            }
+            Console.WriteLine("Count: " + List.Count);
         }
 
     }

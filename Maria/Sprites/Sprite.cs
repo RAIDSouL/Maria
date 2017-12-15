@@ -39,6 +39,8 @@ namespace Maria.Sprites
 
         public bool ishit;
 
+        public bool visible = true; 
+
         #endregion
 
         #region Propoties
@@ -67,22 +69,45 @@ namespace Maria.Sprites
 
         public Color Color = Color.White;
 
-        public Rectangle Rectangle
+
+
+        #endregion
+
+        #region Overload
+
+        public Sprite(Texture2D texture)
         {
-            get
-            { 
-                if (animations != null)
-                   return new Rectangle((int)Position.X, (int)Position.Y, animations.ElementAt(0).Value.Texture.Width / animations.ElementAt(0).Value.FrameCount, animations.ElementAt(0).Value.Texture.Height / animations.ElementAt(0).Value.FrameCount);
-                return new Rectangle((int)Position.X, (int)Position.Y, _texture.Width, _texture.Height);
-                
-
-            }
-
+            _texture = texture;
+            gravity = 0;
         }
+
+        public Sprite(Dictionary<string, Animation> animation)
+        {
+            animations = animation;
+            animationManager = new AnimationManager(animations.First().Value);
+        }
+
+        public Sprite(Dictionary<string, Animation> _animation, float _gravity)
+        {
+            animations = _animation;
+            animationManager = new AnimationManager(animations.First().Value);
+            gravity = _gravity;
+        }
+
 
         #endregion
 
         #region Method
+
+        public virtual Rectangle Rectangle ()
+        {
+            if (animations != null)
+              return new Rectangle((int)Position.X, (int)Position.Y, animations.ElementAt(0).Value.Texture.Width / animations.ElementAt(0).Value.FrameCount, animations.ElementAt(0).Value.Texture.Height / animations.ElementAt(0).Value.FrameCount);
+            if (crop)
+             return new Rectangle((int)Position.X, (int)Position.Y, cropTexture.Width, cropTexture.Height);
+             
+            return new Rectangle((int)Position.X, (int)Position.Y, _texture.Width, _texture.Height);
+        }
 
         public virtual void Draw(SpriteBatch spriteBatch)
         {
@@ -108,24 +133,6 @@ namespace Maria.Sprites
                 animationManager.Play(animations["bunny"]);
         }
 
-        public Sprite(Dictionary<string, Animation> animation)
-        {
-            animations = animation;
-            animationManager = new AnimationManager(animations.First().Value);
-        }
-
-        public Sprite(Dictionary<string, Animation> _animation, float _gravity)
-        {
-            animations = _animation;
-            animationManager = new AnimationManager(animations.First().Value);
-            gravity = _gravity;
-        }
-
-        public Sprite(Texture2D texture)
-        {
-            _texture = texture;
-            gravity = 0;
-        }
 
         public virtual void Update(GameTime gameTime, List<Sprite> sprites)
         {
@@ -135,9 +142,13 @@ namespace Maria.Sprites
             if (animations != null)
                 animationManager.Update(gameTime);
 
-            Position += Velocity + gravityVelocity + translation;
+            // Physics
+            Physics(sprites);
 
-            // Gravity
+        }
+
+        public virtual void Physics (List<Sprite> sprites)
+        {
             if (physicsType == EPhysics.Dynamic)
             {
                 if (jumpForce > 0)
@@ -146,18 +157,20 @@ namespace Maria.Sprites
                     jumpForce -= gravity / 60;
                 }
 
-                if (grounded && jumpForce <= 0)
+                // On ground remove gravity
+                if (grounded)
                 {
-                    if (Velocity.Y > 0)
-                        Velocity.Y = 0;
-                    gravityVelocity.Y = 0;
+                    if (jumpForce <= 0)
+                        gravityVelocity.Y = 0;
                 }
                 else
                 {
-                    if (jumpForce <= 0)
-                        gravityVelocity.Y += gravity / 60;
+                    gravityVelocity.Y += gravity / 60;
                 }
-                grounded = false;
+
+                Position += Velocity + gravityVelocity + translation;
+
+                int groundCount = 0;
                 ishit = false;
                 foreach (var sprite in sprites)
                 {
@@ -165,55 +178,79 @@ namespace Maria.Sprites
                     {
                         if (IsTouchingTop(sprite))
                         {
-                            grounded = true;
+                            groundCount++;
+                            // FIX: sprite fall into the block
+                            if (this.Position.Y + this.Velocity.Y + this.gravityVelocity.Y > sprite.Rectangle().Top - 2)
+                                this.Position = new Vector2(this.Position.X, sprite.Rectangle().Top - 2);
                         }
-                        if (IsTouchingLeft(sprite))
+                        if (IsTouchingLeft(sprite) || Position.Y > 1000)
                         {
                             ishit = true;
                         }
-                        
+
                     }
                 }
+                if (groundCount > 0)
+                {
+                    grounded = true;
+                }
+                else grounded = false;
             }
-
         }
+
+        public virtual void Jump()
+        {
+            Jump(jumpForce);
+        }
+
+        public virtual void Jump(float force)
+        {
+            Console.WriteLine(jumpForce);
+            if (force < jumpForce || jumpForce > 0) return;
+            if (grounded)
+            {
+                if (jumpForce <= 0)
+                    Game1.Instance.soundeffects[0].Play();
+                jumpForce = force;
+                grounded = false;
+            }
+        }
+
 
         #endregion
 
         #region Collision
-        
+
         protected bool IsTouchingLeft(Sprite sprite)
         {
-
-            return  this.Rectangle.Right + this.Velocity.X > sprite.Rectangle.Left &&
-                    this.Rectangle.Left < sprite.Rectangle.Left &&
-                    this.Rectangle.Bottom > sprite.Rectangle.Top &&
-                    this.Rectangle.Top < sprite.Rectangle.Bottom;
+            return  this.Rectangle().Right + this.Velocity.X > sprite.Rectangle().Left &&
+                    this.Rectangle().Left < sprite.Rectangle().Left &&
+                    this.Rectangle().Bottom > sprite.Rectangle().Top &&
+                    this.Rectangle().Top < sprite.Rectangle().Bottom;
         }
 
         protected bool IsTouchingRight(Sprite sprite)
         {
-            return this.Rectangle.Left + this.Velocity.X < sprite.Rectangle.Right &&
-                    this.Rectangle.Right > sprite.Rectangle.Right &&
-                    this.Rectangle.Bottom > sprite.Rectangle.Top &&
-                    this.Rectangle.Top < sprite.Rectangle.Bottom;
+            return this.Rectangle().Left + this.Velocity.X < sprite.Rectangle().Right &&
+                    this.Rectangle().Right > sprite.Rectangle().Right &&
+                    this.Rectangle().Bottom > sprite.Rectangle().Top &&
+                    this.Rectangle().Top < sprite.Rectangle().Bottom;
         }
 
         protected bool IsTouchingTop(Sprite sprite)
         {
-            return this.Rectangle.Bottom + this.Velocity.Y + this.gravityVelocity.Y > sprite.Rectangle.Top - sprite.Rectangle.Height &&
-                   this.Rectangle.Top < sprite.Rectangle.Top &&
-                   this.Rectangle.Right > sprite.Rectangle.Left &&
-                   this.Rectangle.Left < sprite.Rectangle.Right;
-
+            return this.Rectangle().Bottom + this.Velocity.Y + this.gravityVelocity.Y > sprite.Rectangle().Top - 2 &&
+                   this.Rectangle().Top < sprite.Rectangle().Top &&
+                   this.Rectangle().Right > sprite.Rectangle().Left &&
+                   this.Rectangle().Left < sprite.Rectangle().Right;
         }
 
         protected bool IsTouchingBottom(Sprite sprite)
         {
-            return this.Rectangle.Top + this.Velocity.Y > sprite.Rectangle.Bottom &&
-                    this.Rectangle.Bottom > sprite.Rectangle.Bottom &&
-                    this.Rectangle.Right > sprite.Rectangle.Left &&
-                    this.Rectangle.Left < sprite.Rectangle.Right;
+            return this.Rectangle().Top + this.Velocity.Y > sprite.Rectangle().Bottom &&
+                    this.Rectangle().Bottom > sprite.Rectangle().Bottom &&
+                    this.Rectangle().Right > sprite.Rectangle().Left &&
+                    this.Rectangle().Left < sprite.Rectangle().Right;
         }
 
         #endregion

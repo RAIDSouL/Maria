@@ -15,6 +15,11 @@ namespace Maria.Sprites
     {
         public float Speed = 1f;
 
+        public override Rectangle Rectangle()
+        {
+            return new Rectangle((int)Position.X + 4, (int)Position.Y, (animations.ElementAt(0).Value.Texture.Width / animations.ElementAt(0).Value.FrameCount) - 4, animations.ElementAt(0).Value.Texture.Height);
+        }
+
         public Player(Dictionary<string, Animation> _animation, float _gravity)
            : base(_animation, _gravity)
         {
@@ -33,7 +38,6 @@ namespace Maria.Sprites
         {
 
             base.Update(gameTime, sprites);
-
             
             if (Keyboard.GetState().IsKeyDown(Input.Right))
                 translation.X = Speed;   
@@ -43,12 +47,13 @@ namespace Maria.Sprites
             // translation.X = Speed;
             if (ishit)
             {
-                translation.X = -Speed;
+                Game1.Instance.soundeffects[1].Play();
+                Position = Vector2.Zero;
+
             }
 
             if (Keyboard.GetState().IsKeyDown(Input.Jump) && grounded)
-                jumpForce = 1f;
-            Console.WriteLine(jumpForce);
+                Jump(1.4f);
 
             foreach (var sprite in sprites)
             {
@@ -56,13 +61,13 @@ namespace Maria.Sprites
                 if (sprite == this)
                     continue;
                 //collide with box
-
+                /*
                 if (this.Velocity.X > 0 && this.IsTouchingLeft(sprite) || this.Velocity.X > 0 && this.IsTouchingRight(sprite))
                     this.Velocity.X = 0;
 
                 if (this.Velocity.Y > 0 && this.IsTouchingTop(sprite) || this.Velocity.Y > 0 && this.IsTouchingBottom(sprite))
                     this.Velocity.Y = 0;
-                    
+                    */
             }
             Position += Velocity;
             Velocity = Vector2.Zero;
