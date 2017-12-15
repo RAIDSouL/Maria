@@ -8,6 +8,7 @@ using Maria.Models;
 using Maria.Managers;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
+using Maria.Enum;
 
 namespace Maria.Sprites
 {
@@ -15,6 +16,8 @@ namespace Maria.Sprites
     {
         
         public float Speed = 1f;
+        public EBlock blockType;
+
         private Vector2 gravityVelocity = new Vector2(0, 0);
 
         public override Rectangle Rectangle()
@@ -45,7 +48,7 @@ namespace Maria.Sprites
                 translation.X = Speed;   
             else if (Keyboard.GetState().IsKeyDown(Input.Left)) translation.X = -Speed;
             else translation.X = 0;
-
+            Changeblock();
             // translation.X = Speed;
             if (ishit)
             {
@@ -73,57 +76,76 @@ namespace Maria.Sprites
             Position += Velocity;
             Velocity = Vector2.Zero;
 
-        }/*
+        }
+
         public override void Physics(List<Sprite> sprites)
         {
-            
             if (physicsType == EPhysics.Dynamic)
             {
-                if (jumpForce > 0)
-                {
-                    gravityVelocity.Y -= jumpForce;
-                    jumpForce -= gravity / 60;
-                }
+                 if (jumpForce > 0)
+                 {
+                     gravityVelocity.Y -= jumpForce;
+                     jumpForce -= gravity / 60;
+                 }
 
-                // On ground remove gravity
-                if (grounded)
-                {
-                    if (jumpForce <= 0)
-                        gravityVelocity.Y = 0;
-                }
-                else
-                {
-                    gravityVelocity.Y += gravity / 60;
-                }
+                 // On ground remove gravity
+                 if (grounded)
+                 {
+                     if (jumpForce <= 0)
+                         gravityVelocity.Y = 0;
+                 }
+                 else
+                 {
+                     gravityVelocity.Y += gravity / 60;
+                 }
 
-                Position += Velocity + gravityVelocity + translation;
+                 Position += Velocity + gravityVelocity + translation;
 
-                int groundCount = 0;
-                ishit = false;
-                foreach (var sprite in sprites)
-                {
-                    if (sprite != this) // Not check self
-                    {
-                        if (IsTouchingTop(sprite))
-                        {
-                            groundCount++;
-                            // FIX: sprite fall into the block
-                            if (this.Position.Y + this.Velocity.Y + this.gravityVelocity.Y > sprite.Rectangle().Top - 2)
-                                this.Position = new Vector2(this.Position.X, sprite.Rectangle().Top - 2);
-                        }
-                        if (IsTouchingLeft(sprite) || Position.Y > 1000)
-                        {
-                            ishit = true;
-                        }
+                 int groundCount = 0;
+                 ishit = false;
+                 foreach (var sprite in sprites)
+                 {
+                     if (sprite != this) // Not check self
+                     {
+                         if (IsTouchingTop(sprite))
+                         {
+                             groundCount++;
+                             // FIX: sprite fall into the block
+                             if (this.Position.Y + this.Velocity.Y + this.gravityVelocity.Y > sprite.Rectangle().Top - 2)
+                                 this.Position = new Vector2(this.Position.X, sprite.Rectangle().Top - 2);
+                         }
+                         if (IsTouchingLeft(sprite) || Position.Y > 1000)
+                         {
+                             ishit = true;
+                         }
 
-                    }
-                }
-                if (groundCount > 0)
-                {
-                    grounded = true;
-                }
-                else grounded = false;
+                     }
+                 }
+                 if (groundCount > 0)
+                 {
+                     grounded = true;
+                 }
+                 else grounded = false;
             }
-        }*/
+        }
+        public void Changeblock()
+        {
+            if(Keyboard.GetState().IsKeyDown(Input.ChangeBlock) && blockType == EBlock.A)
+            {
+                blockType = EBlock.B;
+                Game1.Instance.soundeffects[3].Play();
+            }
+            if (Keyboard.GetState().IsKeyDown(Input.ChangeBlock) && blockType == EBlock.B)
+            {
+                blockType = EBlock.C;
+                Game1.Instance.soundeffects[3].Play();
+            }
+            if (Keyboard.GetState().IsKeyDown(Input.ChangeBlock) && blockType == EBlock.C)
+            {
+                blockType = EBlock.A;
+                Game1.Instance.soundeffects[3].Play();
+            }
+            
+        }
     }
 }
