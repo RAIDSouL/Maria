@@ -130,7 +130,6 @@ namespace Maria
         public void LoadSong (string songName)
         {
             song = Content.Load<Song>(Path.Combine("Music/" + songName));
-            System.Console.WriteLine(song);
         }
 
         public void LoadSfx(string sfxName)

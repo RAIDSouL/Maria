@@ -1,11 +1,9 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-VisualStudioVersion = 15.0.26430.16
+VisualStudioVersion = 15.0.26730.8
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Maria", "Maria\Maria.csproj", "{D7BB47CF-04F8-4F31-A849-F18EFE572E4D}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Game3", "..\..\..\Documents\Visual Studio 2017\Projects\Game3\Game3\Game3.csproj", "{5DBEDCA7-29B5-49A7-A8A5-CEA44D7CFC3A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -17,10 +15,6 @@ Global
 		{D7BB47CF-04F8-4F31-A849-F18EFE572E4D}.Debug|x86.Build.0 = Debug|x86
 		{D7BB47CF-04F8-4F31-A849-F18EFE572E4D}.Release|x86.ActiveCfg = Release|x86
 		{D7BB47CF-04F8-4F31-A849-F18EFE572E4D}.Release|x86.Build.0 = Release|x86
-		{5DBEDCA7-29B5-49A7-A8A5-CEA44D7CFC3A}.Debug|x86.ActiveCfg = Debug|x86
-		{5DBEDCA7-29B5-49A7-A8A5-CEA44D7CFC3A}.Debug|x86.Build.0 = Debug|x86
-		{5DBEDCA7-29B5-49A7-A8A5-CEA44D7CFC3A}.Release|x86.ActiveCfg = Release|x86
-		{5DBEDCA7-29B5-49A7-A8A5-CEA44D7CFC3A}.Release|x86.Build.0 = Release|x86
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
