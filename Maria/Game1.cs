@@ -129,7 +129,7 @@ namespace Maria
         
         public void LoadSong (string songName)
         {
-            //song = Content.Load<Song>(Path.Combine("Music/" + songName));
+            song = Content.Load<Song>(Path.Combine("Music/" + songName));
         }
 
         public void LoadSfx(string sfxName)
@@ -144,6 +144,7 @@ namespace Maria
             LoadSfx("hit");
             LoadSfx("crystal");
             LoadSfx("changeblock");
+            LoadSfx("levelselect");
 
             //map
             //LoadMap("level1");
