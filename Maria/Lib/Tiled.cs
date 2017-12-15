@@ -617,6 +617,14 @@ namespace Squared.Tiled
                                 physicsType = EPhysics.Static
                             };
                             SpriteManager.Instance.AddSprite(coin);
+                        }  else if (_layer.Name == "bomb")
+                        {
+                            Bomb bomb = new Bomb(info.Texture)
+                            {
+                                Position = destPos - viewPos,
+                                physicsType = EPhysics.Static
+                            };
+                            SpriteManager.Instance.AddSprite(bomb);
                         } else { 
                             Block block = new Block(info.Texture, index)
                             {
@@ -1013,6 +1021,7 @@ namespace Squared.Tiled
                 if (ObjectGroups["point"].Objects.ContainsKey("start"))
                 {
                     Game1.Instance.player.Position = new Vector2(ObjectGroups["point"].Objects["start"].X, ObjectGroups["point"].Objects["start"].Y);
+                    Game1.Instance.spawnPoint = new Vector2(ObjectGroups["point"].Objects["start"].X, ObjectGroups["point"].Objects["start"].Y);
                 }
                 if (ObjectGroups["point"].Objects.ContainsKey("end"))
                 {

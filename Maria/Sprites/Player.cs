@@ -99,7 +99,7 @@ namespace Maria.Sprites
         public void Die ()
         {
             Game1.Instance.soundeffects[1].Play();
-            Position = Vector2.Zero;
+            Position = Game1.Instance.spawnPoint;
             blockType = EBlock.A;
         }
 
@@ -108,15 +108,22 @@ namespace Maria.Sprites
          */
         public override void OnTouchingLeft(Sprite sprite) {
             if (sprite.GetType() == typeof(Block) && ((Block)sprite).blockType == blockType) Die();
+            if (sprite.GetType() == typeof(Bomb)) Die();
+            if (sprite.GetType() == typeof(Coin)) ((Coin)sprite).Collect();
         }
         public override void OnTouchingRight(Sprite sprite) {
             if (sprite.GetType() == typeof(Block) && ((Block)sprite).blockType == blockType) Die();
+            if (sprite.GetType() == typeof(Bomb)) Die();
+            if (sprite.GetType() == typeof(Coin)) ((Coin)sprite).Collect();
         }
         public override void OnTouchingTop(Sprite sprite) {
             if (sprite.GetType() == typeof(Block) && ((Block)sprite).blockType == blockType) Die();
+            if (sprite.GetType() == typeof(Bomb)) Die();
+            if (sprite.GetType() == typeof(Coin)) ((Coin)sprite).Collect();
         }
         public override void OnTouchingBottom(Sprite sprite) {
-
+            if (sprite.GetType() == typeof(Bomb)) Die();
+            if (sprite.GetType() == typeof(Coin)) ((Coin)sprite).Collect();
         }
 
         protected virtual bool IsTouchingLeft(Sprite sprite)

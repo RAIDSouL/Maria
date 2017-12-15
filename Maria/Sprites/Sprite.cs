@@ -171,8 +171,9 @@ namespace Maria.Sprites
                 Position += Velocity + gravityVelocity + translation;
 
                 int groundCount = 0;
-                foreach (var sprite in sprites)
+                for (int i = sprites.Count - 1; i >= 0; i--)
                 {
+                    Sprite sprite = sprites[i];
                     if (sprite != this) // Not check self
                     {
                         if (IsTouchingTop(sprite))
@@ -218,6 +219,11 @@ namespace Maria.Sprites
         public virtual void OnTouchingTop(Sprite sprite) { }
         public virtual void OnTouchingBottom(Sprite sprite) { }
 
+
+        public void Destroy ()
+        {
+            SpriteManager.Instance.Destroy(this);
+        }
 
         #endregion
 
