@@ -184,6 +184,7 @@ namespace Maria.Sprites
         
         protected bool IsTouchingLeft(Sprite sprite)
         {
+
             return  this.Rectangle.Right + this.Velocity.X > sprite.Rectangle.Left &&
                     this.Rectangle.Left < sprite.Rectangle.Left &&
                     this.Rectangle.Bottom > sprite.Rectangle.Top &&
@@ -204,6 +205,7 @@ namespace Maria.Sprites
                    this.Rectangle.Top < sprite.Rectangle.Top &&
                    this.Rectangle.Right > sprite.Rectangle.Left &&
                    this.Rectangle.Left < sprite.Rectangle.Right;
+
         }
 
         protected bool IsTouchingBottom(Sprite sprite)
