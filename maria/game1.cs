@@ -28,6 +28,7 @@ namespace Maria
        // Vector2 viewportPosition;
         Song song;
         public List<SoundEffect> soundeffects;
+        public List<Texture2D> bg;
         Texture2D block;
 
         public Player player;
@@ -59,6 +60,7 @@ namespace Maria
             graphics.ApplyChanges();
             soundeffects = new List<SoundEffect>();
             mainmenu = new MainMenu();
+            bg = new List<Texture2D>();
         }
 
         /// <summary>
@@ -147,6 +149,11 @@ namespace Maria
         {
            soundeffects.Add(Content.Load<SoundEffect>(Path.Combine("sfx/" + sfxName)));
         }
+
+        public void LoadBg(string bgName)
+        {
+            bg.Add(Content.Load<Texture2D>(Path.Combine("bg/" + bgName)));
+        }
         
         public void LoadObj()
         {
@@ -163,6 +170,13 @@ namespace Maria
 
             //block
             block = Content.Load<Texture2D>(Path.Combine("tiled/blocks"));
+
+            //bg
+            LoadBg("bg");
+            LoadBg("bg1");
+            LoadBg("bg2");
+            LoadBg("bg3");
+            LoadBg("bg4");
         }
 
         public void PlayLevel (int index)
@@ -209,11 +223,8 @@ namespace Maria
         /// </summary>
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Draw(GameTime gameTime)
-            
         {
-          
 
-           
             GraphicsDevice.Clear(Color.CornflowerBlue);
 
             // TODO: Add your drawing code here
@@ -225,23 +236,35 @@ namespace Maria
 
             if (mainmenu.Active)
             {
-
                 spriteBatch.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend);
                     mainmenu.Draw(gameTime, spriteBatch);
                 spriteBatch.End();
             } else {
+                /*
+                spriteBatch.Begin();
+                {
+                    spriteBatch.Draw(top, new Rectangle(0, 0, top.Width * 2, top.Height * 2), Color.White);
+                    spriteBatch.Draw(mid, new Rectangle(0, 0, mid.Width * 2, mid.Height * 2), Color.White);
+                    spriteBatch.Draw(btm, new Rectangle(0, 0, btm.Width * 2, btm.Height * 2), Color.White);
+                }
+                spriteBatch.End();
+                */
                 spriteBatch.Begin(SpriteSortMode.Deferred,
                     BlendState.AlphaBlend,
                     null, null, null, null,
                     camera.tranform
                     );
+
                 spriteManager.Draw(gameTime, spriteBatch);
 
                 spriteBatch.End();
+
                 spriteBatch.Begin();
 
                 spriteBatch.DrawString(File, "Score: " + player.score, new Vector2(550, 0), Color.Black);
-                spriteBatch.Draw(block, new Rectangle(10, 10, block.Width, block.Height), Color.White);
+                spriteBatch.Draw(block, new Rectangle(10, 10, 100, 100), 
+                    new Rectangle( (int)player.blockType * block.Height, 0, block.Height, block.Height), Color.White);
+                
                 spriteBatch.End();
 
             }
