@@ -72,18 +72,23 @@ namespace Maria.Sprites
         {
             if(Keyboard.GetState().IsKeyDown(Input.ChangeBlockA))
             {
+                if (blockType != EBlock.A)
+                    Game1.Instance.soundeffects[3].Play();
                 blockType = EBlock.A;
-                Game1.Instance.soundeffects[3].Play();
+                
             }
             if (Keyboard.GetState().IsKeyDown(Input.ChangeBlockB))
             {
+                if (blockType != EBlock.B)
+                    Game1.Instance.soundeffects[3].Play();
                 blockType = EBlock.B;
-                Game1.Instance.soundeffects[3].Play();
+                
             }
             if (Keyboard.GetState().IsKeyDown(Input.ChangeBlockC))
             {
+                if (blockType != EBlock.C)
+                    Game1.Instance.soundeffects[3].Play();
                 blockType = EBlock.C;
-                Game1.Instance.soundeffects[3].Play();
             }
             
         }
