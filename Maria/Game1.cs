@@ -30,6 +30,7 @@ namespace Maria
         public List<SoundEffect> soundeffects;
         public List<Texture2D> bg;
         Texture2D block;
+        
 
 
         public Player player;
@@ -52,6 +53,7 @@ namespace Maria
 
         public Game1()
         {
+            var fps = 1;
             Instance = this;
             graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
@@ -61,7 +63,7 @@ namespace Maria
             soundeffects = new List<SoundEffect>();
             mainmenu = new MainMenu();
             bg = new List<Texture2D>();
-            this.Activated += (sender, args) => { this.Window.Title = "Maria Jumpu"; };
+            this.Activated += (sender, args) => { this.Window.Title = "Maria Jumpu "; };
             this.Deactivated += (sender, args) => { this.Window.Title = "Maria Jumpu (unactive)"; };
         }
 
@@ -231,8 +233,8 @@ namespace Maria
         {
 
             GraphicsDevice.Clear(Color.CornflowerBlue);
-            /*var fps = 1 / gameTime.ElapsedGameTime.TotalSeconds;
-            Window.Title += fps.ToString();*/
+            
+            
             // TODO: Add your drawing code here
             // Render map
 
