@@ -3,18 +3,18 @@
  <tileset firstgid="1" name="blocks" tilewidth="32" tileheight="32" tilecount="3" columns="3">
   <image source="../tiled/blocks.png" width="96" height="32"/>
  </tileset>
- <tileset firstgid="4" name="bat" tilewidth="84" tileheight="32" tilecount="3" columns="3">
-  <image source="../tiled/bat.png" width="252" height="32"/>
- </tileset>
- <tileset firstgid="7" name="coin" tilewidth="32" tileheight="32" tilecount="7" columns="7">
+ <tileset firstgid="4" name="coin" tilewidth="32" tileheight="32" tilecount="7" columns="7">
   <image source="../tiled/coins.png" width="224" height="32"/>
+ </tileset>
+ <tileset firstgid="11" name="bomb" tilewidth="32" tileheight="32" tilecount="4" columns="4">
+  <image source="../../../../../../Desktop/src_project/spikes.png" width="128" height="32"/>
  </tileset>
  <layer name="red" width="53" height="8">
   <data encoding="base64" compression="gzip">
    H4sIAAAAAAAAC2NgIB0wkoiHAiDVT0PRj+iAUj8PhTAjZCc93UbvcBiOfqIWGKzplRIwHP0EAI06pdOgBgAA
   </data>
  </layer>
- <layer name="bat" width="53" height="8">
+ <layer name="bomb" width="53" height="8">
   <data encoding="base64" compression="gzip">
    H4sIAAAAAAAAC2NgGAWjYBSMglEwCgYfAABZ26znoAYAAA==
   </data>
