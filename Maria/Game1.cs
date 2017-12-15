@@ -96,9 +96,6 @@ namespace Maria
 
             spriteManager.DebugBox.Add(Content.Load<Texture2D>("debugbox"));
             
-            spriteManager.AddSprite(new Sprite(Content.Load<Texture2D>("tiled/blocks")) {
-                Position = new Vector2(0, 100)
-            });
             player = spriteManager.List[0];
             // TODO: use this.Content to load your game content here
             
@@ -129,7 +126,6 @@ namespace Maria
         
         public void LoadSong (string songName)
         {
-            System.Console.WriteLine(Path.Combine("Music/" + songName));
             //song = Content.Load<Song>(Path.Combine("Music/" + songName));
         }
 

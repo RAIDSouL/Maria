@@ -19,6 +19,6 @@
   </data>
  </layer>
  <objectgroup name="point">
-  <object id="28" name="start" x="-1" y="126" width="32" height="32"/>
+  <object id="28" name="start" x="0" y="160" width="32" height="32"/>
  </objectgroup>
 </map>
