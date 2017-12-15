@@ -7,7 +7,7 @@
   <image source="../tiled/coins.png" width="224" height="32"/>
  </tileset>
  <tileset firstgid="11" name="bomb" tilewidth="32" tileheight="32" tilecount="4" columns="4">
-  <image source="../../../../../../Desktop/src_project/spikes.png" width="128" height="32"/>
+  <image source="../tiled/spikes.png" width="128" height="32"/>
  </tileset>
  <layer name="red" width="51" height="8">
   <data encoding="base64" compression="gzip">
@@ -41,7 +41,7 @@
    <ellipse/>
   </object>
  </objectgroup>
- <objectgroup name="spikes">
+ <objectgroup name="spikes" visible="0">
   <object id="6" x="242" y="144">
    <ellipse/>
   </object>
@@ -63,7 +63,7 @@
  </objectgroup>
  <layer name="bomb" width="51" height="8">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAC2NgoB7gJoCHEhj1yygYBaNgFFAGAAkJSDpgBgAA
+   H4sIAAAAAAAAC2NgGAXDGfAMtAOoCAa7X7C5jweP+CgYBcMdAAAdOzaNYAYAAA==
   </data>
  </layer>
  <objectgroup name="point">
@@ -72,7 +72,7 @@
  </objectgroup>
  <layer name="coin" width="51" height="8">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAC2NgGAWjYBSMglEwCqgPAD56KvlgBgAA
+   H4sIAAAAAAAAC2NgGAW0AKwD7YBRMOQAK8PISTcjxZ8jHQAAZ60gi2AGAAA=
   </data>
  </layer>
 </map>

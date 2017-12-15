@@ -9,9 +9,12 @@
  <tileset firstgid="7" name="coin" tilewidth="32" tileheight="32" tilecount="7" columns="7">
   <image source="../tiled/coins.png" width="224" height="32"/>
  </tileset>
+ <tileset firstgid="14" name="bomb" tilewidth="32" tileheight="32" tilecount="4" columns="4">
+  <image source="../tiled/spikes.png" width="128" height="32"/>
+ </tileset>
  <layer name="red" width="53" height="8">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAC2NgIB0wkoiHAiDVT5T6kYNITEtAqZ/pHWbkAEJ20tNt9A6H4egnaoHBml4pAcPRTwBpllphoAYAAA==
+   H4sIAAAAAAAAC2NgIB0wkoiHAiDVT5T6kYNITEtAqZ/pHWbkAEJ20tNt9A4HXPbw42Hj4xNjx1DJ84M1vVIChqOfAMtT1ACgBgAA
   </data>
  </layer>
  <layer name="bat" width="53" height="8">
