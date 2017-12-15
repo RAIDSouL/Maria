@@ -9,44 +9,40 @@ using System.Threading.Tasks;
 
 namespace Maria.Mainmenu
 {
-    public class TitleScene
+    public class HowToPlay
     {
-        Texture2D bg;
-        Texture2D character;
-        Texture2D logo;
-        Texture2D start;
         Texture2D mouse;
+        Texture2D bg3;
+        Texture2D HT;
+        Texture2D next;
+        Rectangle nextb;
+        Rectangle mouseB;
+
         Vector2 baseScreen = new Vector2(1000, 1000);
 
-        private Rectangle howtoB;
-        private Rectangle mouseB;
-
-        public TitleScene()
+        public HowToPlay ()
         {
-            bg = Game1.Instance.Content.Load<Texture2D>("mainmenu/Bg");
-            logo = Game1.Instance.Content.Load<Texture2D>("mainmenu/Logo");
-            character = Game1.Instance.Content.Load<Texture2D>("mainmenu/Bg1");
-            start = Game1.Instance.Content.Load<Texture2D>("mainmenu/start");
+            bg3 = Game1.Instance.Content.Load<Texture2D>("mainmenu/Bg3");
+            HT = Game1.Instance.Content.Load<Texture2D>("mainmenu/HT");
             mouse = Game1.Instance.Content.Load<Texture2D>("mainmenu/m");
+            next = Game1.Instance.Content.Load<Texture2D>("mainmenu/nextb");
         }
 
         public void Update (GameTime gameTime)
         {
-            howtoB = PortRectangle(550, 275, 350, 300);
+            nextb = PortRectangle(700, 800, 300, 200);
             mouseB = new Rectangle(Mouse.GetState().X, Mouse.GetState().Y, 30, 30);
-            if (mouseB.Intersects(howtoB) && Mouse.GetState().LeftButton == ButtonState.Pressed)
+            if (mouseB.Intersects(nextb) && Mouse.GetState().LeftButton == ButtonState.Pressed)
             {
-                MainMenu.Instance.ChangeStage(1);
+                MainMenu.Instance.ChangeStage(5); // Play
             }
         }
 
         public void Draw (GameTime gameTime, SpriteBatch spriteBatch)
         {
-            spriteBatch.Draw(bg, new Rectangle(0, 0, Game1.Instance.GraphicsDevice.Viewport.Width, Game1.Instance.GraphicsDevice.Viewport.Height), Color.White);
-            spriteBatch.Draw(character, PortRectangle(80, 100, 450, 600), Color.White);
-            spriteBatch.Draw(logo, PortRectangle(550, 10, 400, 230), Color.White);
-
-            spriteBatch.Draw(start, howtoB, Color.White);
+            spriteBatch.Draw(bg3, PortRectangle(0, 0, 1200, 1000), Color.White);
+            spriteBatch.Draw(HT, PortRectangle(100, 100, 800, 700), Color.White);
+            spriteBatch.Draw(next, nextb, Color.White);
             spriteBatch.Draw(mouse, mouseB, Color.White);
         }
 
@@ -55,7 +51,7 @@ namespace Maria.Mainmenu
             return PortRectangle(new Rectangle(x, y, width, height));
         }
 
-        private Rectangle PortRectangle (Rectangle baseRectangle)
+        private Rectangle PortRectangle(Rectangle baseRectangle)
         {
             return new Rectangle(
                 baseRectangle.X * Game1.Instance.GraphicsDevice.Viewport.Width / (int)baseScreen.X,
