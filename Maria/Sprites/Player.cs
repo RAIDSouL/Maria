@@ -41,13 +41,17 @@ namespace Maria.Sprites
 
         public override void Update(GameTime gameTime, List<Sprite> sprites)
         {
+            SetAnimation();
+            if (animations != null)
+                animationManager.Update(gameTime);
 
-            base.Update(gameTime, sprites);
-            
+            Physics(sprites);
+
             if (Keyboard.GetState().IsKeyDown(Input.Right))
                 translation.X = Speed;   
             else if (Keyboard.GetState().IsKeyDown(Input.Left)) translation.X = -Speed;
             else translation.X = 0;
+
             Changeblock();
             // translation.X = Speed;
             if (ishit)
@@ -58,94 +62,55 @@ namespace Maria.Sprites
 
             if (Keyboard.GetState().IsKeyDown(Input.Jump) && grounded)
                 Jump(1.4f);
-
-            foreach (var sprite in sprites)
-            {
-                if (sprite == this)
-                    continue;
-
-                //collide with box
-                /*
-                if (this.Velocity.X > 0 && this.IsTouchingLeft(sprite) || this.Velocity.X > 0 && this.IsTouchingRight(sprite))
-                    this.Velocity.X = 0;
-
-                if (this.Velocity.Y > 0 && this.IsTouchingTop(sprite) || this.Velocity.Y > 0 && this.IsTouchingBottom(sprite))
-                    this.Velocity.Y = 0;
-                    */
-            }
-            Position += Velocity;
-            Velocity = Vector2.Zero;
-
+         
         }
 
-        public override void Physics(List<Sprite> sprites)
-        {
-            if (physicsType == EPhysics.Dynamic)
-            {
-                 if (jumpForce > 0)
-                 {
-                     gravityVelocity.Y -= jumpForce;
-                     jumpForce -= gravity / 60;
-                 }
-
-                 // On ground remove gravity
-                 if (grounded)
-                 {
-                     if (jumpForce <= 0)
-                         gravityVelocity.Y = 0;
-                 }
-                 else
-                 {
-                     gravityVelocity.Y += gravity / 60;
-                 }
-
-                 Position += Velocity + gravityVelocity + translation;
-
-                 int groundCount = 0;
-                 ishit = false;
-                 foreach (var sprite in sprites)
-                 {
-                     if (sprite != this) // Not check self
-                     {
-                         if (IsTouchingTop(sprite))
-                         {
-                             groundCount++;
-                             // FIX: sprite fall into the block
-                             if (this.Position.Y + this.Velocity.Y + this.gravityVelocity.Y > sprite.Rectangle().Top - 2)
-                                 this.Position = new Vector2(this.Position.X, sprite.Rectangle().Top - 2);
-                         }
-                         if (IsTouchingLeft(sprite) || Position.Y > 1000)
-                         {
-                             ishit = true;
-                         }
-
-                     }
-                 }
-                 if (groundCount > 0)
-                 {
-                     grounded = true;
-                 }
-                 else grounded = false;
-            }
-        }
         public void Changeblock()
         {
-            if(Keyboard.GetState().IsKeyDown(Input.ChangeBlock) && blockType == EBlock.A)
-            {
-                blockType = EBlock.B;
-                Game1.Instance.soundeffects[3].Play();
-            }
-            if (Keyboard.GetState().IsKeyDown(Input.ChangeBlock) && blockType == EBlock.B)
-            {
-                blockType = EBlock.C;
-                Game1.Instance.soundeffects[3].Play();
-            }
-            if (Keyboard.GetState().IsKeyDown(Input.ChangeBlock) && blockType == EBlock.C)
+            if(Keyboard.GetState().IsKeyDown(Input.ChangeBlockA))
             {
                 blockType = EBlock.A;
                 Game1.Instance.soundeffects[3].Play();
             }
+            if (Keyboard.GetState().IsKeyDown(Input.ChangeBlockB))
+            {
+                blockType = EBlock.B;
+                Game1.Instance.soundeffects[3].Play();
+            }
+            if (Keyboard.GetState().IsKeyDown(Input.ChangeBlockC))
+            {
+                blockType = EBlock.C;
+                Game1.Instance.soundeffects[3].Play();
+            }
             
         }
+
+        protected virtual bool IsTouchingLeft(Sprite sprite)
+        {
+            if (sprite.GetType() == typeof(Block) && ((Block)sprite).blockType != blockType) return false;
+            return IsTouchingLeft(sprite);
+        }
+
+        protected virtual bool IsTouchingRight(Sprite sprite)
+        {
+            if (sprite.GetType() == typeof(Block) && ((Block)sprite).blockType != blockType) return false;
+
+            return IsTouchingRight(sprite);
+        }
+
+        protected override bool IsTouchingTop(Sprite sprite)
+        {
+            if (sprite.GetType() == typeof(Block) && ((Block)sprite).blockType != blockType) return false;
+
+            return base.IsTouchingTop(sprite);
+        }
+
+        protected override bool IsTouchingBottom(Sprite sprite)
+        {
+            if (sprite.GetType() == typeof(Block) && ((Block)sprite).blockType != blockType) return false;
+
+            return base.IsTouchingBottom(sprite);
+        }
+
     }
 }

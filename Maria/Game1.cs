@@ -91,10 +91,12 @@ namespace Maria
                 Position = new Vector2(0, 100),
                 Input = new Input()
                 {
-                    Jump = Keys.X,
-                    Left = Keys.A,
-                    Right = Keys.D,
-                    ChangeBlock = Keys.Z,
+                    Jump = Keys.Space,
+                    Left = Keys.Left,
+                    Right = Keys.Right,
+                    ChangeBlockA = Keys.A,
+                    ChangeBlockB = Keys.S,
+                    ChangeBlockC = Keys.D
                 },
             });
 
@@ -130,7 +132,7 @@ namespace Maria
         
         public void LoadSong (string songName)
         {
-            song = Content.Load<Song>(Path.Combine("Music/" + songName));
+            //song = Content.Load<Song>(Path.Combine("Music/" + songName));
         }
 
         public void LoadSfx(string sfxName)
