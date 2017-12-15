@@ -323,9 +323,9 @@
 #begin maps/level5.tmx
 /copy:maps/level5.tmx
 
-#begin Music/bbnsong.wav
-/importer:WavImporter
-/processor:SoundEffectProcessor
+#begin Music/0.mp3
+/importer:Mp3Importer
+/processor:SongProcessor
 /processorParam:Quality=Best
-/build:Music/bbnsong.wav
+/build:Music/0.mp3
 
