@@ -63,8 +63,10 @@ namespace Maria
         public void Play (int level)
         {
             ChangeStage(5);
+            LevelList.Resetp();
             LevelList.list[level].pmap = true;
             Game1.Instance.PlayLevel(level);
+            
             
         }
     }
