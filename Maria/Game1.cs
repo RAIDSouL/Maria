@@ -23,6 +23,7 @@ namespace Maria
 
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
+        public SpriteFont File;
         Map map;
         Vector2 viewportPosition;
         Song song;
@@ -79,6 +80,7 @@ namespace Maria
         /// </summary>
         protected override void LoadContent()
         {
+            File = Content.Load<SpriteFont>("File");
             // Create a new SpriteBatch, which can be used to draw textures.
             spriteBatch = new SpriteBatch(GraphicsDevice);
 
@@ -121,6 +123,7 @@ namespace Maria
         /// </summary>
         protected override void UnloadContent()
         {
+            File = null;
             // TODO: Unload any non ContentManager content here
         }
 
@@ -197,10 +200,9 @@ namespace Maria
         protected override void Draw(GameTime gameTime)
             
         {
-     
+          
 
-
-            
+           
             GraphicsDevice.Clear(Color.CornflowerBlue);
 
             // TODO: Add your drawing code here
@@ -223,11 +225,19 @@ namespace Maria
                     camera.tranform
                     );
                 spriteManager.Draw(gameTime, spriteBatch);
+
                 spriteBatch.End();
+                spriteBatch.Begin();
+
+                spriteBatch.DrawString(File, "score", new Vector2(550, 0), Color.Black);
+
+                spriteBatch.End();
+
             }
 
-
+           
             base.Draw(gameTime);
+
         }
     }
 }

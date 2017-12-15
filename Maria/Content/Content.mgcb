@@ -341,3 +341,10 @@
 /processorParam:TextureFormat=Color
 /build:tiled/coins.png
 
+#begin File.spritefont
+/importer:FontDescriptionImporter
+/processor:FontDescriptionProcessor
+/processorParam:PremultiplyAlpha=True
+/processorParam:TextureFormat=Compressed
+/build:File.spritefont
+
