@@ -38,12 +38,20 @@ namespace Maria.Managers
         {
             foreach (var sprite in List)
             {
-                if (sprite.visible)
+                if (sprite.visible && sprite.GetType() != typeof(Player))
                 {
                     sprite.Draw(spriteBatch);
 
                     spriteBatch.Draw(DebugBox[0], sprite.Rectangle(), Color.White);
                 }
+            }
+
+            if (Game1.Instance.player.visible)
+            {
+                Game1.Instance.player.Draw(spriteBatch);
+
+                spriteBatch.Draw(DebugBox[0], Game1.Instance.player.Rectangle(), Color.White);
+
             }
         }
 
