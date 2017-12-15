@@ -30,14 +30,18 @@ namespace Maria.Managers
 
         public void Update (GameTime gameTime)
         {
-            foreach (var sprite in List)
+            for (int i = List.Count - 1; i >= 0; i--)
+            {
+                Sprite sprite = List[i];
                 sprite.Update(gameTime, List);
+            }
         }
 
         public void Draw (GameTime gameTime, SpriteBatch spriteBatch)
         {
-            foreach (var sprite in List)
+            for (int i = List.Count - 1; i >= 0; i--)
             {
+                Sprite sprite = List[i];
                 if (sprite.visible && sprite.GetType() != typeof(Player))
                 {
                     sprite.Draw(spriteBatch);
@@ -53,6 +57,12 @@ namespace Maria.Managers
                 spriteBatch.Draw(DebugBox[0], Game1.Instance.player.Rectangle(), Color.White);
 
             }
+        }
+
+        public void Destroy (Sprite _sprite)
+        {
+            List.Remove(_sprite);
+            _sprite = null;
         }
 
         public void DestroyMap ()

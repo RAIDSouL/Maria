@@ -235,7 +235,7 @@ namespace Maria
                 spriteBatch.End();
                 spriteBatch.Begin();
 
-                spriteBatch.DrawString(File, "score", new Vector2(550, 0), Color.Black);
+                spriteBatch.DrawString(File, "Score: " + player.score, new Vector2(550, 0), Color.Black);
 
                 spriteBatch.End();
 
