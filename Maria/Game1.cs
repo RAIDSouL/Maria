@@ -26,7 +26,7 @@ namespace Maria
         Song song;
         public List<SoundEffect> soundeffects;
 
-        public Sprite player;
+        public Player player;
 
         #region Camera
         // Camera
@@ -92,8 +92,6 @@ namespace Maria
                 Input = new Input()
                 {
                     Jump = Keys.Space,
-                    //Left = Keys.Left,
-                    //Right = Keys.Right,
                     ChangeBlockA = Keys.A,
                     ChangeBlockB = Keys.S,
                     ChangeBlockC = Keys.D
@@ -102,7 +100,7 @@ namespace Maria
 
             spriteManager.DebugBox.Add(Content.Load<Texture2D>("debugbox"));
             
-            player = spriteManager.List[0];
+            player = (Player)spriteManager.List[0];
             // TODO: use this.Content to load your game content here
             
             LoadObj();
@@ -124,10 +122,12 @@ namespace Maria
 
         public void LoadMap (string mapName)
         {
-            SpriteManager.Instance.DestroyAllBlock();
+            SpriteManager.Instance.DestroyMap();
             map = Map.Load(Path.Combine(Content.RootDirectory, "maps/" + mapName + ".tmx"), Content);
+            player.Reset();
             map.SetupSprite();
             map.SetPlayerLocation();
+            
         }
         
         public void LoadSong (string songName)
@@ -169,7 +169,13 @@ namespace Maria
         protected override void Update(GameTime gameTime)
         {
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
-                Exit();
+            {
+                if (!mainmenu.Active)
+                { 
+                    mainmenu.Active = true;
+                    mainmenu.ChangeStage(2);
+                }
+            }
 
             if (mainmenu.Active)
             {

@@ -14,7 +14,7 @@ namespace Maria
     {
         public static MainMenu Instance { get; private set; }
 
-        public bool Active { get; private set; }
+        public bool Active { get; set; }
 
         ContentManager content;
 

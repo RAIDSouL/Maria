@@ -61,6 +61,13 @@ namespace Maria.Sprites
                 Die();
         }
 
+        public void Reset ()
+        {
+            blockType = EBlock.A;
+            gravityVelocity = Vector2.Zero;
+            jumpForce = 0;
+        }
+
         public void Changeblock()
         {
             if(Keyboard.GetState().IsKeyDown(Input.ChangeBlockA))
