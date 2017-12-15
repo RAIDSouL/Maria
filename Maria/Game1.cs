@@ -135,7 +135,7 @@ namespace Maria
 
         public void LoadSfx(string sfxName)
         {
-            soundeffects.Add(Content.Load<SoundEffect>(Path.Combine("sfx/" + sfxName)));
+           soundeffects.Add(Content.Load<SoundEffect>(Path.Combine("sfx/" + sfxName)));
         }
         
         public void LoadObj()
@@ -148,10 +148,15 @@ namespace Maria
             LoadSfx("levelselect");
 
             //map
-            LoadMap("level1");
+            //LoadMap("level1");
 
             //song
             LoadSong("0");
+        }
+
+        public void PlayLevel (int index)
+        {
+            LoadMap(LevelList.list[index].map);
         }
 
         /// <summary>
@@ -186,7 +191,11 @@ namespace Maria
         /// </summary>
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Draw(GameTime gameTime)
+            
         {
+            
+
+            
             GraphicsDevice.Clear(Color.CornflowerBlue);
 
             // TODO: Add your drawing code here

@@ -35,7 +35,7 @@ namespace Maria.Mainmenu
             if (mouseB.Intersects(nextb) && Mouse.GetState().LeftButton == ButtonState.Pressed)
             {
                 Game1.Instance.soundeffects[2].Play();
-                MainMenu.Instance.ChangeStage(5); // Play
+                MainMenu.Instance.ChangeStage(2);
             }
         }
 

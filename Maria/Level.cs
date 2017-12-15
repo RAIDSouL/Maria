@@ -10,4 +10,16 @@ namespace Maria
     {
         public string map;
     }
+
+    public static class LevelList
+    {
+        public readonly static Level[] list =
+        {
+            new Level { map = "level1" },
+            new Level { map = "level2" },
+            new Level { map = "level3" },
+            new Level { map = "level4" },
+            new Level { map = "level5" },
+        };
+    }
 }
