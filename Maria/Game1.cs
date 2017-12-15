@@ -149,7 +149,7 @@ namespace Maria
             LoadMap("level1");
 
             //song
-            LoadSong("bbsong");
+            LoadSong("0");
         }
 
         /// <summary>
