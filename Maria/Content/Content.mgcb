@@ -164,3 +164,6 @@
 /processorParam:TextureFormat=Color
 /build:bg/top.png
 
+#begin maps/test1.tmx
+/copy:maps/test1.tmx
+

@@ -70,7 +70,7 @@
     <Compile Include="Sprites\Block.cs" />
     <Compile Include="Sprites\Player.cs" />
     <Compile Include="Sprites\Sprite.cs" />
-    <Compile Include="Tiled.cs" />
+    <Compile Include="Lib\Tiled.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="MonoGame.Framework">

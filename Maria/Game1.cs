@@ -37,7 +37,7 @@ namespace Maria
         #endregion
 
         public SpriteManager spriteManager;
-
+        private float timer = 0;
 
         public Game1()
         {
@@ -107,7 +107,7 @@ namespace Maria
             MediaPlayer.IsRepeating = true;
             MediaPlayer.Play(song);
 
-            map.SetupSprite(new Rectangle(0, 0, GraphicsDevice.Viewport.Width, GraphicsDevice.Viewport.Height), viewportPosition);
+            
         }
 
         /// <summary>
@@ -121,7 +121,9 @@ namespace Maria
 
         public void LoadMap (string mapName)
         {
+            SpriteManager.Instance.DestroyAllBlock();
             map = Map.Load(Path.Combine(Content.RootDirectory, "maps/" + mapName + ".tmx"), Content);
+            map.SetupSprite(new Rectangle(0, 0, GraphicsDevice.Viewport.Width, GraphicsDevice.Viewport.Height), viewportPosition);
         }
         
         public void LoadSong (string songName)
@@ -144,7 +146,7 @@ namespace Maria
             LoadSfx("changeblock");
 
             //map
-            LoadMap("level1");
+            LoadMap("test1");
 
             //song
             LoadSong("bbsong");
@@ -166,7 +168,7 @@ namespace Maria
                 spriteRectangle = new Rectangle((int)player.Position.X, (int)player.Position.Y,
                                    player.Texture.Width, player.Texture.Height);
 
-            camera.Update(gameTime, this);
+                camera.Update(gameTime, this);
 
             base.Update(gameTime);
         }
