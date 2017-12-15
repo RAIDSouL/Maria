@@ -79,7 +79,7 @@ namespace Maria
 
             var animations = new Dictionary<string, Animation>()
             {
-                { "bunny", new Animation(Content.Load<Texture2D>("Player/bunny"), 4) },
+                { "bunny", new Animation(Content.Load<Texture2D>("Player/bunnyjung"), 3) },
             };
 
             spriteManager.AddSprite(new Player(animations, 10f)
