@@ -215,6 +215,11 @@ namespace Maria.Sprites
             }
         }
 
+        public virtual void OnTouchingOther (Sprite sprite)
+        {
+
+        }
+
 
         #endregion
 
