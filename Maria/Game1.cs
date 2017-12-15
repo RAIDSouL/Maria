@@ -154,8 +154,6 @@ namespace Maria
             LoadSfx("changeblock");
             LoadSfx("levelselect");
 
-            //map
-            //LoadMap("level1");
 
             //song
             LoadSong("0");
@@ -236,7 +234,6 @@ namespace Maria
                 spriteBatch.Begin();
 
                 spriteBatch.DrawString(File, "score", new Vector2(550, 0), Color.Black);
-
                 spriteBatch.End();
 
             }
