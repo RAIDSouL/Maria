@@ -92,8 +92,8 @@ namespace Maria
                 Input = new Input()
                 {
                     Jump = Keys.Space,
-                    Left = Keys.Left,
-                    Right = Keys.Right,
+                    //Left = Keys.Left,
+                    //Right = Keys.Right,
                     ChangeBlockA = Keys.A,
                     ChangeBlockB = Keys.S,
                     ChangeBlockC = Keys.D

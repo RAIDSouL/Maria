@@ -23,7 +23,7 @@ namespace Maria
 
         public void Update(GameTime gameTime, Game1 game)
         {
-            centre = new Vector2(game.player.Position.X + (game.spriteRectangle.Width / 2 - 320)/zoom , game.player.Position.Y + (game.spriteRectangle.Height / 2 - 240)/zoom );
+            centre = new Vector2(game.player.Position.X + (game.spriteRectangle.Width / 2 - 320)/zoom + 50 , 0);
             
             tranform = Matrix.CreateScale(new Vector3(1 * zoom, 1 * zoom, 0)) *
                 Matrix.CreateTranslation(new Vector3(zoom * -centre.X, zoom * -centre.Y, 0)) ; 
