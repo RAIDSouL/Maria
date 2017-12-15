@@ -10,10 +10,7 @@ namespace Maria
     public struct Level
     {
         public string map;
-        public bool playing_1;
-        public bool playing_2;
-        public bool playing_3;
-        public bool playing_4;
+
     }
 
     public static class LevelList
