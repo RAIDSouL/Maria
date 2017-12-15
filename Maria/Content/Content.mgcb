@@ -179,7 +179,6 @@
 /processorParam:TextureFormat=Color
 /build:Player/bunnyjung.png
 
-
 #begin mainmenu/Bg.jpg
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -311,6 +310,7 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:mainmenu/nextb.png
+
 #begin maps/level2.tmx
 /copy:maps/level2.tmx
 
@@ -322,4 +322,10 @@
 
 #begin maps/level5.tmx
 /copy:maps/level5.tmx
+
+#begin Music/0.mp3
+/importer:Mp3Importer
+/processor:SongProcessor
+/processorParam:Quality=Best
+/build:Music/0.mp3
 
