@@ -181,6 +181,7 @@ namespace Maria
             LoadBg("bg2");
             LoadBg("bg3");
             LoadBg("bg4");
+            LoadBg("bg5");
         }
 
         public void PlayLevel (int index)
@@ -258,6 +259,8 @@ namespace Maria
                         spriteBatch.Draw(bg[3], new Rectangle(0, 0, 640, 480), Color.White);
                     if (LevelList.list[3].pmap)
                         spriteBatch.Draw(bg[4], new Rectangle(0, 0, 640, 480), Color.White);
+                    if (LevelList.list[4].pmap)
+                        spriteBatch.Draw(bg[5], new Rectangle(0, 0, 640, 480), Color.White);
                 }
                 spriteBatch.End();
                 
