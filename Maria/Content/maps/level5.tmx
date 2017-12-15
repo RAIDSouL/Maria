@@ -11,17 +11,17 @@
  </tileset>
  <layer name="red" width="53" height="8">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAC2NgIB0wkoiHAiDVT5T6kZVITEtAqZ/pHWbkAEJ20tNt9A4HXPbw4GHj4xNjx1DJ84M1vVIChqOfAGs0MA+gBgAA
+   H4sIAAAAAAAAC2NgIB0wkoiHAiDVT0PRj+iAUj8PhTAjZCc93UbvcBiOfqIWGKzplRIwHP0EAI06pdOgBgAA
   </data>
  </layer>
  <layer name="bat" width="53" height="8">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAC2NgGAWjYBSMglEwCgYfAABZ26znoAYAAA==
+   H4sIAAAAAAAAC2NgGAWjYBSMJMCNh42PPwroD7DFwVCOF2xpD1d6BAEAMF5HF6AGAAA=
   </data>
  </layer>
  <layer name="coin" width="53" height="8">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAC2NgGAWjYBSMglEwCgYfAABZ26znoAYAAA==
+   H4sIAAAAAAAAC2NgGBqABQeNzh7sANn9xGBkPaNgFIyCUTCSAAAD5NMaoAYAAA==
   </data>
  </layer>
  <layer name="green" width="53" height="8">
