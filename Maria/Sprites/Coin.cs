@@ -31,6 +31,7 @@ namespace Maria.Sprites
                 collected = true;
                 Game1.Instance.player.score += 10;
                 Destroy();
+                Game1.Instance.soundeffects[2].Play();
             }
         }
 
