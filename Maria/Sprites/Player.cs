@@ -57,7 +57,7 @@ namespace Maria.Sprites
 
             if (Keyboard.GetState().IsKeyDown(Input.Jump) && grounded)
                 Jump(1.4f);
-            if (Position.Y > 1000)
+            if (Position.Y > 500)
                 Die();
         }
 

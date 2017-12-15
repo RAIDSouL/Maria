@@ -26,7 +26,7 @@
  </layer>
  <layer name="bomb" width="51" height="8">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAC2NgGAXDGfAMtAOoCAa7X7C5jweP+CgYBcMdAAAdOzaNYAYAAA==
+   H4sIAAAAAAAAC2NgGAXDGfAMtAOoCAa7X7C5D5ebB7tfRsEooAYAAC2XK/BgBgAA
   </data>
  </layer>
  <objectgroup name="point">
