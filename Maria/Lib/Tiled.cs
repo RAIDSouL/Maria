@@ -990,7 +990,7 @@ namespace Squared.Tiled
             return result;
         }
 
-        public void SetupSprite(Rectangle rectangle, Vector2 viewportPosition)
+        public void SetupSprite()
         {
             foreach (Layer layers in Layers.Values)
             {

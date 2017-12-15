@@ -123,7 +123,7 @@ namespace Maria
         {
             SpriteManager.Instance.DestroyAllBlock();
             map = Map.Load(Path.Combine(Content.RootDirectory, "maps/" + mapName + ".tmx"), Content);
-            map.SetupSprite(new Rectangle(0, 0, GraphicsDevice.Viewport.Width, GraphicsDevice.Viewport.Height), viewportPosition);
+            map.SetupSprite();
         }
         
         public void LoadSong (string songName)
