@@ -135,7 +135,7 @@ namespace Maria
 
         public void LoadSfx(string sfxName)
         {
-            soundeffects.Add(Content.Load<SoundEffect>(Path.Combine("sfx/" + sfxName)));
+           soundeffects.Add(Content.Load<SoundEffect>(Path.Combine("sfx/" + sfxName)));
         }
         
         public void LoadObj()
@@ -185,7 +185,9 @@ namespace Maria
         /// </summary>
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Draw(GameTime gameTime)
-        {   
+            
+        {
+            
 
             
             GraphicsDevice.Clear(Color.CornflowerBlue);
