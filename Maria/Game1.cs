@@ -25,7 +25,7 @@ namespace Maria
         SpriteBatch spriteBatch;
         public SpriteFont File;
         Map map;
-        Vector2 viewportPosition;
+       // Vector2 viewportPosition;
         Song song;
         public List<SoundEffect> soundeffects;
         Texture2D block;
