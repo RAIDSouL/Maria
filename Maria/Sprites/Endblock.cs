@@ -16,11 +16,17 @@ namespace Maria.Sprites
         {
             _texture = texture;
             gravity = 0;
+            visible = false;
         }
 
         public override void Draw(SpriteBatch spriteBatch)
         {
             
+        }
+
+        public override Rectangle Rectangle()
+        {
+            return area;
         }
     }
 }

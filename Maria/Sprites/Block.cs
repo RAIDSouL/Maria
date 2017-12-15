@@ -13,8 +13,6 @@ namespace Maria.Sprites
     {
         public EBlock blockType;
 
-        public Rectangle area;
-
         public Block(Texture2D texture, int _blockType) : base(texture)
         {
             _texture = texture;
@@ -23,9 +21,5 @@ namespace Maria.Sprites
             blockType = (EBlock)_blockType;
         }
 
-        public override Rectangle Rectangle()
-        {
-            return 
-        }
     }
 }

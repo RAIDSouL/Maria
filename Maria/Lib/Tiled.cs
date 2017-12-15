@@ -1008,12 +1008,11 @@ namespace Squared.Tiled
                 }
                 if (ObjectGroups["point"].Objects.ContainsKey("end"))
                 {
-                    /*
                     SpriteManager.Instance.AddSprite(new Endblock(null)
                     {
-                        area = new Rectangle()
+                        area = new Rectangle(ObjectGroups["point"].Objects["end"].X, ObjectGroups["point"].Objects["end"].Y, ObjectGroups["point"].Objects["end"].Width, ObjectGroups["point"].Objects["end"].Height)
                     });
-                    */
+                    
                 }
             }
         }

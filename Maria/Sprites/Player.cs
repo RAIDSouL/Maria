@@ -51,7 +51,6 @@ namespace Maria.Sprites
             {
                 Game1.Instance.soundeffects[1].Play();
                 Position = Vector2.Zero;
-
             }
 
             if (Keyboard.GetState().IsKeyDown(Input.Jump) && grounded)
@@ -75,6 +74,7 @@ namespace Maria.Sprites
             Velocity = Vector2.Zero;
 
         }
+        /*
         public override void Physics(List<Sprite> sprites)
         {
             
@@ -125,6 +125,6 @@ namespace Maria.Sprites
                 }
                 else grounded = false;
             }
-        }
+        }*/
     }
 }
