@@ -6,15 +6,15 @@
  <tileset firstgid="4" name="coin" tilewidth="32" tileheight="32" tilecount="7" columns="7">
   <image source="../tiled/coins.png" width="224" height="32"/>
  </tileset>
- <tileset firstgid="11" name="bomb" tilewidth="32" tileheight="32" tilecount="4" columns="4">
-  <image source="../../../../../../Desktop/src_project/spikes.png" width="128" height="32"/>
+ <tileset firstgid="11" name="bat" tilewidth="84" tileheight="32" tilecount="3" columns="3">
+  <image source="../tiled/bat.png" width="252" height="32"/>
  </tileset>
  <layer name="red" width="65" height="8">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAC2NgGAWjYBSMguEBGKF4FFAHMDKQF6aMWDCx6kbjb/AAALy0/EsgCAAA
+   H4sIAAAAAAAAC2NgGJyAdaAdgAfQw22saPQoGFgw0PGBz150t43kNMMIxdQEtA5PVjrYQS5gZCAvTBmxYGLVUTv+RgH5AAAAzDG3IAgAAA==
   </data>
  </layer>
- <layer name="bomb" width="65" height="8">
+ <layer name="bat" width="65" height="8">
   <data encoding="base64" compression="gzip">
    H4sIAAAAAAAAC2NgGAWjYBSMglEwCkbBKEAFAHVv4YEgCAAA
   </data>

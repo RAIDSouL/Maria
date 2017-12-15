@@ -6,8 +6,8 @@
  <tileset firstgid="4" name="coin" tilewidth="32" tileheight="32" tilecount="7" columns="7">
   <image source="../tiled/coins.png" width="224" height="32"/>
  </tileset>
- <tileset firstgid="11" name="bomb" tilewidth="32" tileheight="32" tilecount="4" columns="4">
-  <image source="../../../../../../Desktop/src_project/spikes.png" width="128" height="32"/>
+ <tileset firstgid="11" name="bat" tilewidth="84" tileheight="32" tilecount="3" columns="3">
+  <image source="../tiled/bat.png" width="252" height="32"/>
  </tileset>
  <layer name="red" width="51" height="8">
   <data encoding="base64" compression="gzip">
@@ -61,7 +61,7 @@
    <ellipse/>
   </object>
  </objectgroup>
- <layer name="bonb" width="51" height="8">
+ <layer name="bat" width="51" height="8">
   <data encoding="base64" compression="gzip">
    H4sIAAAAAAAAC2NgGAWjYBSMglEwCqgPAD56KvlgBgAA
   </data>
@@ -72,7 +72,7 @@
  </objectgroup>
  <layer name="coin" width="51" height="8">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAC2NgGAWjYBSMglEwCqgPAD56KvlgBgAA
+   H4sIAAAAAAAAC2NgGAW0AKwD7QAoGCzuGAWEASvDyImvkeLPkQ4ABnEOYmAGAAA=
   </data>
  </layer>
 </map>
