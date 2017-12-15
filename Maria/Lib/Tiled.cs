@@ -518,8 +518,10 @@ namespace Squared.Tiled
             Vector2 destPos = new Vector2(rectangle.Left, rectangle.Top);
             Vector2 viewPos = viewportPosition;
 
-            int minX = (int)Math.Floor(viewportPosition.X / tileWidth);
-            int minY = (int)Math.Floor(viewportPosition.Y / tileHeight);
+            //int minX = (int)Math.Floor(viewportPosition.X / tileWidth);
+            //int minY = (int)Math.Floor(viewportPosition.Y / tileHeight);
+            int minX = 0;
+            int minY = 0;
             int maxX = (int)Math.Ceiling((rectangle.Width + viewportPosition.X) / tileWidth);
             int maxY = (int)Math.Ceiling((rectangle.Height + viewportPosition.Y) / tileHeight);
 
@@ -983,27 +985,38 @@ namespace Squared.Tiled
                         );
                     }
                 }
-            }
-
-     
+            }            
 
             return result;
         }
 
-        public void SetupSprite(Rectangle rectangle, Vector2 viewportPosition)
+        public void SetupSprite()
         {
             foreach (Layer layers in Layers.Values)
             {
                 layers.SetupPhysics(Tilesets.Values, new Rectangle(0, 0, layers.Width * TileWidth, layers.Height * TileHeight), new Vector2(layers.Width, layers.Height), TileWidth, TileHeight);
+            }            
+        }
+
+        public void SetPlayerLocation ()
+        {
+            if (ObjectGroups.ContainsKey("point"))
+            {
+                if (ObjectGroups["point"].Objects.ContainsKey("start"))
+                {
+                    Game1.Instance.player.Position = new Vector2(ObjectGroups["point"].Objects["start"].X, ObjectGroups["point"].Objects["start"].Y);
+                }
             }
         }
 
-            public void Draw(SpriteBatch batch, Rectangle rectangle, Vector2 viewportPosition)
+        public void Draw(SpriteBatch batch, Rectangle rectangle, Vector2 viewportPosition)
         {
             foreach (Layer layers in Layers.Values)
             {
                 layers.Draw(batch, Tilesets.Values, rectangle, viewportPosition, TileWidth, TileHeight);
             }
+
+            
 
             foreach (var objectgroups in ObjectGroups.Values)
             {

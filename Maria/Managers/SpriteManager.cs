@@ -51,11 +51,11 @@ namespace Maria.Managers
                 Sprite sprite = List[i];
                 if (sprite.GetType() == typeof(Block))
                 {
-                    sprite = null;
+                    List[i] = null;
                     List.RemoveAt(i);
-                    i = List.Count - 1;
                 }
             }
+            Console.WriteLine("Count: " + List.Count);
         }
 
     }
