@@ -171,7 +171,7 @@ namespace Maria.Sprites
                 Position += Velocity + gravityVelocity + translation;
 
                 int groundCount = 0;
-                ishit = false;
+                int hitCount = 0;
                 foreach (var sprite in sprites)
                 {
                     if (sprite != this) // Not check self
@@ -180,21 +180,20 @@ namespace Maria.Sprites
                         {
                             groundCount++;
                             // FIX: sprite fall into the block
-                            if (this.Position.Y + this.Velocity.Y + this.gravityVelocity.Y > sprite.Rectangle().Top - 2)
-                                this.Position = new Vector2(this.Position.X, sprite.Rectangle().Top - 2);
+                            if (Position.Y + Velocity.Y + gravityVelocity.Y > sprite.Rectangle().Top - 2)
+                                Position = new Vector2(Position.X, sprite.Rectangle().Top - 2);
                         }
-                        if (IsTouchingLeft(sprite) || Position.Y > 1000)
+                        if (IsTouchingLeft(sprite))
                         {
-                            ishit = true;
+                            hitCount++;
                         }
-
                     }
                 }
-                if (groundCount > 0)
-                {
-                    grounded = true;
-                }
+                if (groundCount > 0) grounded = true;
                 else grounded = false;
+
+                if (hitCount > 0 || Position.Y > 1000) ishit = true;
+                else ishit = false;
             }
         }
 
@@ -221,7 +220,7 @@ namespace Maria.Sprites
 
         #region Collision
 
-        protected bool IsTouchingLeft(Sprite sprite)
+        protected virtual bool IsTouchingLeft(Sprite sprite)
         {
             return  this.Rectangle().Right + this.Velocity.X > sprite.Rectangle().Left &&
                     this.Rectangle().Left < sprite.Rectangle().Left &&
@@ -229,7 +228,7 @@ namespace Maria.Sprites
                     this.Rectangle().Top < sprite.Rectangle().Bottom;
         }
 
-        protected bool IsTouchingRight(Sprite sprite)
+        protected virtual bool IsTouchingRight(Sprite sprite)
         {
             return this.Rectangle().Left + this.Velocity.X < sprite.Rectangle().Right &&
                     this.Rectangle().Right > sprite.Rectangle().Right &&
@@ -237,7 +236,7 @@ namespace Maria.Sprites
                     this.Rectangle().Top < sprite.Rectangle().Bottom;
         }
 
-        protected bool IsTouchingTop(Sprite sprite)
+        protected virtual bool IsTouchingTop(Sprite sprite)
         {
             return this.Rectangle().Bottom + this.Velocity.Y + this.gravityVelocity.Y > sprite.Rectangle().Top - 2 &&
                    this.Rectangle().Top < sprite.Rectangle().Top &&
@@ -245,7 +244,7 @@ namespace Maria.Sprites
                    this.Rectangle().Left < sprite.Rectangle().Right;
         }
 
-        protected bool IsTouchingBottom(Sprite sprite)
+        protected virtual bool IsTouchingBottom(Sprite sprite)
         {
             return this.Rectangle().Top + this.Velocity.Y > sprite.Rectangle().Bottom &&
                     this.Rectangle().Bottom > sprite.Rectangle().Bottom &&
