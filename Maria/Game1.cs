@@ -231,7 +231,6 @@ namespace Maria
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Draw(GameTime gameTime)
         {
-
             GraphicsDevice.Clear(Color.CornflowerBlue);
             
             
@@ -248,15 +247,17 @@ namespace Maria
                     mainmenu.Draw(gameTime, spriteBatch);
                 spriteBatch.End();
             } else {
-                /*
                 spriteBatch.Begin();
                 {
-                    spriteBatch.Draw(top, new Rectangle(0, 0, top.Width * 2, top.Height * 2), Color.White);
-                    spriteBatch.Draw(mid, new Rectangle(0, 0, mid.Width * 2, mid.Height * 2), Color.White);
-                    spriteBatch.Draw(btm, new Rectangle(0, 0, btm.Width * 2, btm.Height * 2), Color.White);
+                    spriteBatch.Draw(bg[1], new Rectangle(0, 0, 640, 480), Color.White);
+                    /*
+                    spriteBatch.Draw(bg[2], new Rectangle(0, 0, 640, 480), Color.White);
+                    spriteBatch.Draw(bg[3], new Rectangle(0, 0, 640, 480), Color.White);
+                    spriteBatch.Draw(bg[4], new Rectangle(0, 0, 640, 480), Color.White);
+                    */
                 }
                 spriteBatch.End();
-                */
+                
                 spriteBatch.Begin(SpriteSortMode.Deferred,
                     BlendState.AlphaBlend,
                     null, null, null, null,
