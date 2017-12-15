@@ -86,12 +86,6 @@
 /processorParam:Quality=Best
 /build:sfx/crystal.wav
 
-#begin sfx/hit.wav
-/importer:WavImporter
-/processor:SoundEffectProcessor
-/processorParam:Quality=Best
-/build:sfx/hit.wav
-
 #begin sfx/jump.wav
 /importer:WavImporter
 /processor:SoundEffectProcessor
@@ -328,4 +322,10 @@
 /processor:SongProcessor
 /processorParam:Quality=Best
 /build:Music/0.mp3
+
+#begin sfx/hit.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:sfx/hit.wav
 
