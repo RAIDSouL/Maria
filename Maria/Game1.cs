@@ -32,6 +32,9 @@ namespace Maria
         // Camera
         Camera camera;
 
+        // Mainmenu
+        MainMenu mainmenu;
+
         public Rectangle spriteRectangle;
 
         #endregion
@@ -49,7 +52,7 @@ namespace Maria
             graphics.PreferredBackBufferHeight = 240*2;
             graphics.ApplyChanges();
             soundeffects = new List<SoundEffect>();
-
+            mainmenu = new MainMenu();
         }
 
         /// <summary>
@@ -72,8 +75,6 @@ namespace Maria
         /// LoadContent will be called once per game and is the place to load
         /// all of your content.
         /// </summary>
-        /// 
-
         protected override void LoadContent()
         {
             // Create a new SpriteBatch, which can be used to draw textures.
@@ -129,6 +130,7 @@ namespace Maria
         public void LoadSong (string songName)
         {
             song = Content.Load<Song>(Path.Combine("Music/" + songName));
+            System.Console.WriteLine(song);
         }
 
         public void LoadSfx(string sfxName)
@@ -148,7 +150,7 @@ namespace Maria
             LoadMap("level1");
 
             //song
-            LoadSong("0");
+            LoadSong("bbsong");
         }
 
         /// <summary>
@@ -178,7 +180,6 @@ namespace Maria
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Draw(GameTime gameTime)
         {
-               
             GraphicsDevice.Clear(Color.CornflowerBlue);
 
             // TODO: Add your drawing code here
@@ -188,13 +189,17 @@ namespace Maria
                 camera.tranform
                 );
             // Render map
-                        
+
             //map.Draw(spriteBatch, new Rectangle(0, 0, GraphicsDevice.Viewport.Width, GraphicsDevice.Viewport.Height), viewportPosition);
             //map.Draw(spriteBatch, new Rectangle(0, 0, 200, 100), viewportPosition);
             // Render sprite
 
-            spriteManager.Draw(gameTime, spriteBatch);
-            
+            if (mainmenu.Active)
+            {
+                mainmenu.Draw(gameTime, spriteBatch);
+            } else { 
+                spriteManager.Draw(gameTime, spriteBatch);
+            }
 
             spriteBatch.End();
 

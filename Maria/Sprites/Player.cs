@@ -59,9 +59,9 @@ namespace Maria.Sprites
 
             foreach (var sprite in sprites)
             {
-
                 if (sprite == this)
                     continue;
+
                 //collide with box
                 /*
                 if (this.Velocity.X > 0 && this.IsTouchingLeft(sprite) || this.Velocity.X > 0 && this.IsTouchingRight(sprite))
