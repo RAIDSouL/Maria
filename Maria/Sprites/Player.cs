@@ -13,7 +13,9 @@ namespace Maria.Sprites
 {
     public class Player : Sprite
     {
+        
         public float Speed = 1f;
+        private Vector2 gravityVelocity = new Vector2(0, 0);
 
         public override Rectangle Rectangle()
         {
@@ -72,6 +74,57 @@ namespace Maria.Sprites
             Position += Velocity;
             Velocity = Vector2.Zero;
 
+        }
+        public override void Physics(List<Sprite> sprites)
+        {
+            
+            if (physicsType == EPhysics.Dynamic)
+            {
+                if (jumpForce > 0)
+                {
+                    gravityVelocity.Y -= jumpForce;
+                    jumpForce -= gravity / 60;
+                }
+
+                // On ground remove gravity
+                if (grounded)
+                {
+                    if (jumpForce <= 0)
+                        gravityVelocity.Y = 0;
+                }
+                else
+                {
+                    gravityVelocity.Y += gravity / 60;
+                }
+
+                Position += Velocity + gravityVelocity + translation;
+
+                int groundCount = 0;
+                ishit = false;
+                foreach (var sprite in sprites)
+                {
+                    if (sprite != this) // Not check self
+                    {
+                        if (IsTouchingTop(sprite))
+                        {
+                            groundCount++;
+                            // FIX: sprite fall into the block
+                            if (this.Position.Y + this.Velocity.Y + this.gravityVelocity.Y > sprite.Rectangle().Top - 2)
+                                this.Position = new Vector2(this.Position.X, sprite.Rectangle().Top - 2);
+                        }
+                        if (IsTouchingLeft(sprite) || Position.Y > 1000)
+                        {
+                            ishit = true;
+                        }
+
+                    }
+                }
+                if (groundCount > 0)
+                {
+                    grounded = true;
+                }
+                else grounded = false;
+            }
         }
     }
 }
