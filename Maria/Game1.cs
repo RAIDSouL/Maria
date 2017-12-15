@@ -124,6 +124,7 @@ namespace Maria
             SpriteManager.Instance.DestroyAllBlock();
             map = Map.Load(Path.Combine(Content.RootDirectory, "maps/" + mapName + ".tmx"), Content);
             map.SetupSprite();
+            map.SetPlayerLocation();
         }
         
         public void LoadSong (string songName)
