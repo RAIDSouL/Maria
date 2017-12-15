@@ -16,7 +16,7 @@ namespace Maria.Sprites
         {
             _texture = texture;
             gravity = 0;
-            visible = false;
+            visible = true;
         }
 
         public override void Draw(SpriteBatch spriteBatch)

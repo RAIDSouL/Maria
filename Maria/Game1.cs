@@ -167,7 +167,8 @@ namespace Maria
 
         public void PlayLevel (int index)
         {
-            LoadMap(LevelList.list[index].map);
+            player.Reset();
+            LoadMap(LevelList.list[index].map);            
         }
 
         /// <summary>
