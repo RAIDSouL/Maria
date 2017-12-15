@@ -93,7 +93,6 @@ namespace Maria.Sprites
                     Game1.Instance.soundeffects[3].Play();
                 blockType = EBlock.C;
             }
-            
         }
 
         public void Die ()
