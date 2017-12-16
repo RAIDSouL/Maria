@@ -55,6 +55,7 @@ namespace Maria.Managers
             if (Game1.Instance.player.visible)
             {
                 Game1.Instance.player.Draw(spriteBatch);
+
                 //spriteBatch.Draw(DebugBox[0], Game1.Instance.player.Rectangle(), Color.White);
             }
         }
